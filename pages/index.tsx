@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { client } from "@/libs/client";
 import type { BlogPost } from "@/types/blog";
 
 export default function Home({ blog }: { blog: BlogPost[] }) {
