@@ -1,24 +1,25 @@
 import Link from "next/link";
-import type { BlogPost } from "@/types/blog";
+import Layout from "./layout";
+import Image from "next/image";
 
-export default function Home({ blog }: { blog: BlogPost[] }) {
+export default function Home() {
   return (
-    <div>
-      <ul className="list-disc">
-        <li>
-          <Link href="/blog">blog</Link>
-        </li>
-        <li>
-          <Link href="/product">product</Link>
-        </li>
-        <li>
-          <Link href="/about">about</Link>
-        </li>
-        <li>
-          <Link href="/work">work</Link>
-        </li>
-      </ul>
-    </div>
+    <Layout>
+      <h1 className="font-bold text-2xl">Home</h1>
+      <div>
+        <Image
+          src="/profile.jpg"
+          alt="profile"
+          width={200}
+          height={200}
+        />
+        <p className="text-lg">金城翔太郎</p>
+        <p>kinjo shotaro</p>
+      </div>
+      <p>
+        プロダクトを作って、ユーザーに価値を届けることが好きです。そのために、プログラミングなどを活用して、色んなことを学んでいきたいと思っています。
+      </p>
+    </Layout>
   );
 }
 

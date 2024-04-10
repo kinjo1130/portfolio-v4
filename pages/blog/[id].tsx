@@ -1,9 +1,10 @@
 import { BlogPost } from "@/types/blog";
 import { client } from "@/libs/client";
+import Layout from "../layout";
 
 export default function BlogId({ blog }: { blog: BlogPost }) {
   return (
-    <main>
+    <Layout>
       <h1>{blog.title}</h1>
       <p>{blog.publishedAt}</p>
       <div
@@ -11,7 +12,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
           __html: `${blog.body}`,
         }}
       />
-    </main>
+    </Layout>
   );
 }
 

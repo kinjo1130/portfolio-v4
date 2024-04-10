@@ -1,9 +1,10 @@
 import { client } from "@/libs/client";
 import { BlogPost } from "@/types/blog";
 import Link from "next/link";
+import Layout from "../layout";
 export default function Blog({ blog }: { blog: BlogPost[] }) {
   return (
-    <div>
+    <Layout>
       <ul className="list-disc">
         {blog.map((blog) => (
           <li key={blog.id}>
@@ -11,7 +12,7 @@ export default function Blog({ blog }: { blog: BlogPost[] }) {
           </li>
         ))}
       </ul>
-    </div>
+    </Layout>
   );
 }
 // データをテンプレートに受け渡す部分の処理を記述します

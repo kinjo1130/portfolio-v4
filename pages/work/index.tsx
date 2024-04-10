@@ -1,7 +1,9 @@
+import Layout from "../layout";
+
 export default function Work() {
   return (
-    <div>
+    <Layout>
       <h1>Work</h1>
-    </div>
+    </Layout>
   );
 }
