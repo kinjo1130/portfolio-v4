@@ -4,8 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <Layout>
-      <h1 className="font-bold text-2xl">Home</h1>
+    <Layout title="Home">
       <div>
         <Image
           src="/profile.jpg"

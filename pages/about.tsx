@@ -1,7 +1,9 @@
+import Layout from "./layout";
+
 export default function About() {
   return (
-    <div>
-      <h1>About</h1>
-    </div>
+    <Layout title="About">
+      <h1>Coming soon</h1>
+    </Layout>
   );
 }
