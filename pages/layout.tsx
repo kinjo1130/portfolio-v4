@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-type Title = "Home" | "About" | "Product" | "Work" | "Blog";
+type Title = string | undefined;
 
 // title を props として追加します
 export default function Layout({ children, title }: { children: React.ReactNode; title?: Title}) {
