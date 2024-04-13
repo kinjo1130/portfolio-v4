@@ -6,6 +6,7 @@ export interface BlogPost {
   revisedAt: string;
   title: string;
   body: string;
+  description: string;
   heroImage: {
     url: string;
     height: number;
