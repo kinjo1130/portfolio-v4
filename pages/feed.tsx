@@ -18,7 +18,7 @@ async function generateFeedXml() {
       title: post.title,
       description: post.description,
       date: new Date(post.createdAt),
-      url: `${process.env.URL}/${post.id}`,
+      url: `${process.env.URL}/blog/${post.id}`,
     });
   })
   
