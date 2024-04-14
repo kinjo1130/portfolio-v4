@@ -78,24 +78,24 @@ export const getStaticProps = async () => {
   const blogs = await client.get({ endpoint: "blogs" });
   // apiRouteで作成したエンドポイントを指定してデータを取得します
   const apiBaseUrl = process.env.API_URL;
-  const qiita = await fetch(`${apiBaseUrl}/api/qiita`);
-  const zenn = await fetch(`${apiBaseUrl}/api/zenn`);
-  const data = await blogs.contents.concat(
-    await qiita.json(),
-    await zenn.json()
-  );
-  const sortedData = data.sort(
-    (
-      a: BlogPost | QiitaPost | ZennPost,
-      b: BlogPost | QiitaPost | ZennPost
-    ) => {
-      return getPublishedDate(b).getTime() - getPublishedDate(a).getTime();
-    }
-  );
+  // const qiita = await fetch(`${apiBaseUrl}/api/qiita`);
+  // const zenn = await fetch(`${apiBaseUrl}/api/zenn`);
+  // const data = await blogs.contents.concat(
+  //   await qiita.json(),
+  //   await zenn.json()
+  // );
+  // const sortedData = data.sort(
+  //   (
+  //     a: BlogPost | QiitaPost | ZennPost,
+  //     b: BlogPost | QiitaPost | ZennPost
+  //   ) => {
+  //     return getPublishedDate(b).getTime() - getPublishedDate(a).getTime();
+  //   }
+  // );
   // console.log(data);
   return {
     props: {
-      blog: sortedData,
+      blog: blogs.contents,
     },
   };
 };
