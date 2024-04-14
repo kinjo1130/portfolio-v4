@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
-    <header className="p-6 mx-10 flex items-center gap-4">
+    <header className="p-6 flex items-center gap-4">
       <Link href="/">
         <p>home</p>
       </Link>

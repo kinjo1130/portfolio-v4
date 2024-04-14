@@ -2,28 +2,72 @@ import { client } from "@/libs/client";
 import { BlogPost } from "@/types/blog";
 import Link from "next/link";
 import Layout from "../layout";
-export default function Blog({ blog }: { blog: BlogPost[] }) {
+import { QiitaPost } from "@/types/Qiita";
+import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/commom";
+
+// BlogPost型のオブジェクトであるかどうかをチェックする関数
+function isBlogPost(post: BlogPost | QiitaPost | ZennPost): post is BlogPost {
+  return (post as BlogPost).heroImage !== undefined;
+}
+// QiitaPostの型ガード関数
+function isQiitaPost(post: BlogPost | QiitaPost | ZennPost): post is QiitaPost {
+  if (isBlogPost(post)) return false;
+  return (post as QiitaPost).user.id === "abcshotaro616";
+}
+
+// ZennPostの型ガード関数
+function isZennPost(post: BlogPost | QiitaPost | ZennPost): post is ZennPost {
+  if (isBlogPost(post)) return false;
+  return (post as ZennPost).user.username === "kinjyo";
+}
+
+export default function Blog({
+  blog,
+}: {
+  blog: (BlogPost | QiitaPost | ZennPost)[];
+}) {
   return (
     <Layout title="Blog">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {blog.map((blog) => (
-          <div
-            key={blog.id}
-            className="max-w-sm rounded overflow-hidden shadow-lg"
+        {blog.map((post) => (
+          <Link
+            key={post.id}
+            className="rounded overflow-hidden shadow-lg hover:border-gray-400 border-2"
+            href={
+              isPostWithUrl(post)
+                ? post.url
+                : isPostWithPath(post)
+                ? `https://zenn.dev/${post.path}`
+                : `/blog/${post.id}`
+            }
+            passHref
+            target={isPostWithUrl(post) || isPostWithPath(post) ? "_blank" : ""}
           >
-            <img className="w-full" src={blog.heroImage.url} alt="Blog image" />
+            {/* microCMSから取得してきたサムネイルを表示 */}
+            {isBlogPost(post) && post.heroImage && (
+              <img
+                className="w-full"
+                src={post.heroImage.url}
+                alt="Blog image"
+              />
+            )}
+            {/* Qiitaから取得してきたサムネイルを表示 */}
+            {isQiitaPost(post) && (
+              <img className="w-full" src="/qiita.png" alt="Qiita image" />
+            )}
+            {/* Zennから取得してきたサムネイルを表示 */}
+            {isZennPost(post) && (
+              <p className="text-8xl text-center align-middle my-9">
+                {post.emoji}
+              </p>
+            )}
             <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{blog.title}</div>
-              <p className="text-gray-700 text-base">{blog.description}</p>
+              <div className="font-bold text-xl mb-2">{post.title}</div>
+              <p className="font-semibold text-gray-400">
+                {getPublishedDate(post).toLocaleDateString()}
+              </p>
             </div>
-            <div className="px-6 pt-4 pb-2">
-              <Link href={`/blog/${blog.id}`}>
-                <p className="inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
-                  Read More
-                </p>
-              </Link>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </Layout>
@@ -33,13 +77,25 @@ export default function Blog({ blog }: { blog: BlogPost[] }) {
 export const getStaticProps = async () => {
   const blogs = await client.get({ endpoint: "blogs" });
   // apiRouteで作成したエンドポイントを指定してデータを取得します
-  // const apiBaseUrl = process.env.API_URL;
-  // const qiita = await fetch(`${apiBaseUrl}/api/qiita`);
-  // const data = blogs.contents.concat(await qiita.json());
+  const apiBaseUrl = process.env.API_URL;
+  const qiita = await fetch(`${apiBaseUrl}/api/qiita`);
+  const zenn = await fetch(`${apiBaseUrl}/api/zenn`);
+  const data = await blogs.contents.concat(
+    await qiita.json(),
+    await zenn.json()
+  );
+  const sortedData = data.sort(
+    (
+      a: BlogPost | QiitaPost | ZennPost,
+      b: BlogPost | QiitaPost | ZennPost
+    ) => {
+      return getPublishedDate(b).getTime() - getPublishedDate(a).getTime();
+    }
+  );
   // console.log(data);
   return {
     props: {
-      blog: blogs.contents,
+      blog: sortedData,
     },
   };
 };
