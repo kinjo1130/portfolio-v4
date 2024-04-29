@@ -29,10 +29,8 @@ export default function Blog({
 }) {
   return (
     <>
-      <SeoHead
-        title="Blog"
-      ></SeoHead>
-      <Layout title="Blog">
+      <SeoHead title="Blog"></SeoHead>
+      <Layout title="Blog" tooltipText="ブログページ一覧です">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {blog.map((post) => (
             <Link
