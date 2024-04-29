@@ -1,5 +1,6 @@
 import Image from "next/image";
 export default function SNS() {
+  const ICON_SIZE = 100;
   return (
     <div className="mt-10">
       <h3 className="font-bold text-2xl">SNS</h3>
@@ -13,8 +14,8 @@ export default function SNS() {
             <Image
               src="/sns/twitter.png"
               alt="twitter"
-              width={40}
-              height={40}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           </a>
         </li>
@@ -24,7 +25,7 @@ export default function SNS() {
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/github.png" alt="github" width={40} height={40} />
+            <Image src="/sns/github.png" alt="github" width={ICON_SIZE} height={ICON_SIZE} />
           </a>
         </li>
         <li>
@@ -36,8 +37,8 @@ export default function SNS() {
             <Image
               src="/sns/instagram.png"
               alt="instagram"
-              width={40}
-              height={40}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           </a>
         </li>
@@ -47,7 +48,7 @@ export default function SNS() {
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/qiita.png" alt="qiita" width={40} height={40} />
+            <Image src="/sns/qiita.png" alt="qiita" width={ICON_SIZE} height={ICON_SIZE} />
           </a>
         </li>
         <li>
@@ -56,7 +57,7 @@ export default function SNS() {
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/zenn.svg" alt="zenn" width={40} height={40} />
+            <Image src="/sns/zenn.svg" alt="zenn" width={ICON_SIZE} height={ICON_SIZE} />
           </a>
         </li>
         <li>
@@ -68,8 +69,8 @@ export default function SNS() {
             <Image
               src="/sns/speakerdeck.png"
               alt="speakerdeck"
-              width={40}
-              height={40}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           </a>
         </li>
@@ -82,8 +83,8 @@ export default function SNS() {
             <Image
               src="/sns/scrapbox.png"
               alt="scrapbox"
-              width={40}
-              height={40}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           </a>
         </li>

@@ -15,7 +15,7 @@ export default function Layout({ children, title, tooltipText }: Props) {
       <div className="flex justify-center">
         <Header />
       </div>
-      <div className="mx-20 mt-10">
+      <div className="mx-10 mt-10">
         {/* props から受け取った title を使用します */}
         {title && (
           <div className="flex items-center mb-5 gap-2">

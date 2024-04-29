@@ -9,7 +9,7 @@ export default function Product({ products }: { products: Products }) {
     <>
       <SeoHead title="Products" titleTemplate="" description="This is a product page." imgUrl="/favicon.ico"></SeoHead>
       <Layout title="Products">
-        <ul className="ml-5 grid grid-cols-3 gap-4 ">
+        <ul className="ml-5 grid md:grid-cols-3 gap-4 ">
           {products.map((product) => (
             <li
               key={product.id}
