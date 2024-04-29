@@ -1,6 +1,6 @@
 import Image from "next/image";
 export default function SNS() {
-  const ICON_SIZE = 100;
+  const ICON_SIZE = 60;
   return (
     <div className="mt-10">
       <h3 className="font-bold text-2xl">SNS</h3>
