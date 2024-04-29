@@ -3,19 +3,15 @@ import Layout from "./layout";
 export default function About() {
   return (
     <Layout title="About">
-      <h1>Coming soon</h1>
-      <div>
-        <h4 className="text-xl font-bold">SNS</h4>
-        <ul>
-          <li>Twitter</li>
-          <li>GitHub</li>
-          <li>instagram</li>
-          <li>Qiita</li>
-          <li>Zenn</li>
-          <li>SpeakerDeck</li>
-          
-        </ul>
-      </div>
+      <p>名前: 金城翔太郎</p>
+      <p>生年月日: 2002-11-30</p>
+      <p>
+        小学校から高校までは運動が大好きな少年でした。そのときは、プログラミングのプの字も知らないような少年でした。
+        ましては、自分が機械に触るなんて思ってもなかったです。
+        そんな時の転機は、高校三年生の頃に、席が隣だった友達が、まさに自分のプログラミングの師匠になる人だったのです。
+        受験も早く終わって、暇を持て余していたら、PCを買って、プログラミングでもしてみたら？っていう勧めがあって、フットワークの軽かった自分は、すぐに大学で使うからと言って、親にPCを少し早いけど、お願いをして、買ってもらいました。
+        買ってもらってからは、友達に教えてもらって、LINEbotを作る日々を過ごしていました。
+      </p>
     </Layout>
   );
 }

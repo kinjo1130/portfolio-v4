@@ -1,13 +1,17 @@
 import { BlogPost } from "@/types/blog";
 import { client } from "@/libs/client";
 import Layout from "../layout";
+import { formatDate } from "@/libs/commom";
 
 export default function BlogId({ blog }: { blog: BlogPost }) {
   return (
-    <Layout>
-      <h1>{blog.title}</h1>
-      <p>{blog.publishedAt}</p>
+    <Layout title={blog.title}>
+      <div className="mb-2">
+        <p>公開日: {formatDate(blog.createdAt)}</p>
+        <p>更新日: {formatDate(blog.updatedAt)}</p>
+      </div>
       <div
+        className="mt-10"
         dangerouslySetInnerHTML={{
           __html: `${blog.body}`,
         }}

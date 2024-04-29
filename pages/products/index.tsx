@@ -8,7 +8,10 @@ export default function Product({ products }: { products: Products }) {
     <Layout title="Products">
       <ul className="ml-5 grid grid-cols-3 gap-4 ">
         {products.map((product) => (
-          <li key={product.id} className="py-1 border ">
+          <li
+            key={product.id}
+            className="py-1 border-2 hover:border-gray-400 rounded overflow-hidden shadow-lg"
+          >
             <Link href={`/products/${product.id}`}>
               <Image
                 src={product.image.url}
