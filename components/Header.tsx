@@ -4,7 +4,7 @@ import Tooltip from "./Tooltip";
 export const Header: React.FC = () => {
   return (
     <header className="p-6 flex items-center gap-4">
-      <Link href="/" className="underline">
+      <Link href="/" className="underline hover:no-underline">
         <p>home</p>
       </Link>
       {/* <Tooltip text="blogページです">
@@ -12,17 +12,17 @@ export const Header: React.FC = () => {
           <p>blog</p>
         </Link>
       </Tooltip> */}
-      <Link href="/blog" className="underline">
+      <Link href="/blog" className="underline hover:no-underline">
         <p>blog</p>
       </Link>
 
-      <Link href="/products" className="underline">
+      <Link href="/products" className="underline hover:no-underline">
         <p>products</p>
       </Link>
-      <Link href="/work" className="underline">
+      <Link href="/work" className="underline hover:no-underline">
         <p>work</p>
       </Link>
-      <Link href="/about" className="underline">
+      <Link href="/about" className="underline hover:no-underline">
         <p>about</p>
       </Link>
     </header>

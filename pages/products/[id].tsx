@@ -3,27 +3,36 @@ import Layout from "../layout";
 import { Product } from "@/types/product";
 import Image from "next/image";
 import { formatDate } from "@/libs/commom";
+import { SeoHead } from "@/components/SeoHead";
 
 export default function ProductId({ product }: { product: Product }) {
   return (
-    <Layout title={product.title}>
-      <div className="mb-2">
-        <p>公開日: {formatDate(product.createdAt)}</p>
-        <p>更新日: {formatDate(product.updatedAt)}</p>
-      </div>
-      <Image
-        src={product.image.url + "?fit=fill&fill-color=d3d3d3&w=500&h=300"}
-        alt="product image"
-        width={product.image.width}
-        height={500}
-        className="w-full"
-        objectFit="contain"
-      />
-      <div className="mt-10">
-        <p>{product.description}</p>
-      </div>
-      {/* ここの表示する内容を考える */}
-    </Layout>
+    <>
+      <SeoHead
+        title="Products"
+        titleTemplate={product.title}
+        description={product.description}
+        imgUrl={product.image.url}
+      ></SeoHead>
+      <Layout title={product.title}>
+        <div className="mb-2">
+          <p>公開日: {formatDate(product.createdAt)}</p>
+          <p>更新日: {formatDate(product.updatedAt)}</p>
+        </div>
+        <Image
+          src={product.image.url + "?fit=fill&fill-color=d3d3d3&w=500&h=300"}
+          alt="product image"
+          width={product.image.width}
+          height={500}
+          className="w-full"
+          objectFit="contain"
+        />
+        <div className="mt-10">
+          <p>{product.description}</p>
+        </div>
+        {/* ここの表示する内容を考える */}
+      </Layout>
+    </>
   );
 }
 

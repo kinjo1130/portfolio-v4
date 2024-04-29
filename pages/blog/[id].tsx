@@ -2,21 +2,28 @@ import { BlogPost } from "@/types/blog";
 import { client } from "@/libs/client";
 import Layout from "../layout";
 import { formatDate } from "@/libs/commom";
-
+import { SeoHead } from "@/components/SeoHead";
 export default function BlogId({ blog }: { blog: BlogPost }) {
   return (
-    <Layout title={blog.title}>
-      <div className="mb-2">
-        <p>公開日: {formatDate(blog.createdAt)}</p>
-        <p>更新日: {formatDate(blog.updatedAt)}</p>
-      </div>
-      <div
-        className="mt-10"
-        dangerouslySetInnerHTML={{
-          __html: `${blog.body}`,
-        }}
-      />
-    </Layout>
+    <>
+      <SeoHead
+        title="Blog"
+        titleTemplate={blog.title}
+        description={blog.description}
+      ></SeoHead>
+      <Layout title={blog.title}>
+        <div className="mb-2">
+          <p>公開日: {formatDate(blog.createdAt)}</p>
+          <p>更新日: {formatDate(blog.updatedAt)}</p>
+        </div>
+        <div
+          className="mt-10"
+          dangerouslySetInnerHTML={{
+            __html: `${blog.body}`,
+          }}
+        />
+      </Layout>
+    </>
   );
 }
 
