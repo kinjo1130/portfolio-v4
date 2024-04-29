@@ -9,8 +9,8 @@ export const Header: React.FC = () => {
       <Link href="/blog">
         <p>blog</p>
       </Link>
-      <Link href="/product">
-        <p>product</p>
+      <Link href="/products">
+        <p>products</p>
       </Link>
       <Link href="/work">
         <p>work</p>

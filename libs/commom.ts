@@ -18,3 +18,13 @@ export const isPostWithUrl = (post: BlogPost | QiitaPost | ZennPost): post is Qi
 export const isPostWithPath = (post: BlogPost | QiitaPost | ZennPost): post is QiitaPost | ZennPost => {
   return 'path' in post;
 }
+
+export const formatDate = (dateString: string) => {
+
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).replace(/\//g, '-');
+}

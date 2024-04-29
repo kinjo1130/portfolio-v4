@@ -11,7 +11,7 @@ export default function Layout({
   title?: Title;
 }) {
   return (
-    <div>
+    <div className="bg-gray-50">
       <div className="flex justify-center">
         <Header />
       </div>
