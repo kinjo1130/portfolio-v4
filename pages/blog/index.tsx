@@ -57,15 +57,15 @@ export default function Blog({
                 />
               )}
               {/* Qiitaから取得してきたサムネイルを表示 */}
-              {isQiitaPost(post) && (
+              {/* {isQiitaPost(post) && (
                 <img className="w-full" src="/qiita.png" alt="Qiita image" />
-              )}
+              )} */}
               {/* Zennから取得してきたサムネイルを表示 */}
-              {isZennPost(post) && (
+              {/* {isZennPost(post) && (
                 <p className="text-8xl text-center align-middle my-9">
                   {post.emoji}
                 </p>
-              )}
+              )} */}
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{post.title}</div>
                 <p className="font-semibold text-gray-400">
