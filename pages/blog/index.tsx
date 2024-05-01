@@ -30,7 +30,7 @@ export default function Blog({
 }) {
   const router = useRouter();
   const routeFeed = () => {
-    router.push("/feed");
+    router.push("/api/feed");
   };
   return (
     <>
