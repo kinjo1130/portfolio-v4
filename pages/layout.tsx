@@ -2,6 +2,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Tooltip from "@/components/Tooltip";
 import { Info } from "lucide-react";
+import { useEffect, useState } from "react";
 type Props = {
   children: React.ReactNode;
   title?: string;
@@ -10,8 +11,15 @@ type Props = {
 
 // title を props として追加します
 export default function Layout({ children, title, tooltipText }: Props) {
+  const [pageClass, setPageClass] = useState("");
+  useEffect(() => {
+    setPageClass("page-enter");
+    return () => {
+      setPageClass("");
+    }
+  },[]);
   return (
-    <div className="bg-gray-50">
+    <div className={`bg-gray-50 ${pageClass}`}>
       <div className="flex justify-center">
         <Header />
       </div>

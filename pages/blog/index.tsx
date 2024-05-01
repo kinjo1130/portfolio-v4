@@ -32,6 +32,7 @@ export default function Blog({
   const routeFeed = () => {
     router.push("/api/feed");
   };
+
   return (
     <>
       <SeoHead title="Blog"></SeoHead>
