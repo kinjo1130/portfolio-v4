@@ -6,6 +6,7 @@ import { QiitaPost } from "@/types/Qiita";
 import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/commom";
 import { SeoHead } from "@/components/SeoHead";
 import { useRouter } from "next/router";
+import { Rss } from "lucide-react";
 
 // BlogPost型のオブジェクトであるかどうかをチェックする関数
 function isBlogPost(post: BlogPost | QiitaPost | ZennPost): post is BlogPost {
@@ -85,9 +86,10 @@ export default function Blog({
         <div className="flex justify-center mt-20">
           <button
             type="button"
-            className="hover:bg-slate-200 px-3 py-2 rounded-2xl"
+            className="hover:bg-slate-200 px-3 py-2 rounded-2xl flex items-center gap-2"
             onClick={() => routeFeed()}
           >
+            <Rss size={20} />
             RSS
           </button>
         </div>
