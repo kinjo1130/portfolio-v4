@@ -22,6 +22,7 @@ export default function Home() {
         </p>
         {/* SNS一覧 */}
         <SNS />
+        {/*  */}
       </Layout>
     </>
   );

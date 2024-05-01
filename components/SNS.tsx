@@ -25,7 +25,12 @@ export default function SNS() {
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/github.png" alt="github" width={ICON_SIZE} height={ICON_SIZE} />
+            <Image
+              src="/sns/github.png"
+              alt="github"
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+            />
           </a>
         </li>
         <li>
@@ -44,25 +49,35 @@ export default function SNS() {
         </li>
         <li>
           <a
-            href="https://qiita.com/kinjo1130"
+            href="https://qiita.com/abcshotaro616"
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/qiita.png" alt="qiita" width={ICON_SIZE} height={ICON_SIZE} />
+            <Image
+              src="/sns/qiita.png"
+              alt="qiita"
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+            />
           </a>
         </li>
         <li>
           <a
-            href="https://zenn.dev/kinjo1130"
+            href="https://zenn.dev/kinjyo"
             target="_black"
             rel="noopener noreferrer"
           >
-            <Image src="/sns/zenn.svg" alt="zenn" width={ICON_SIZE} height={ICON_SIZE} />
+            <Image
+              src="/sns/zenn.svg"
+              alt="zenn"
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+            />
           </a>
         </li>
         <li>
           <a
-            href="https://speakerdeck.com/kinjo1130"
+            href="https://speakerdeck.com/kinjyo"
             target="_black"
             rel="noopener noreferrer"
           >
