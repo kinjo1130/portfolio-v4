@@ -14,16 +14,16 @@ export default function Layout({ children, title, tooltipText }: Props) {
   const [pageClass, setPageClass] = useState("");
   useEffect(() => {
     setPageClass("page-enter");
-    return () => {
-      setPageClass("");
-    }
+    // return () => {
+    //   setPageClass("");
+    // }
   },[]);
   return (
-    <div className={`bg-gray-50 ${pageClass}`}>
+    <div className={`bg-gray-50`}>
       <div className="flex justify-center">
         <Header />
       </div>
-      <div className="mx-10 mt-10">
+      <div className={`mx-10 mt-10 ${pageClass}`}>
         {/* props から受け取った title を使用します */}
         {title && (
           <div className="flex items-center mb-5 gap-2">
