@@ -5,7 +5,14 @@ import { useRouter } from "next/router";
 export const Header: React.FC = () => {
   const router = useRouter();
   const isActive = (href: string) => {
-    return href === router.pathname ? "bg-slate-200 rounded-2xl py-2 px-4 no-underline" : "";
+    // ルートパスの場合は、pathnameが正確に'/'であることを確認
+    if (href === "/") {
+      return router.pathname === "/" ? "bg-slate-200 rounded-2xl py-2 px-4 no-underline" : "";
+    }
+    // それ以外のパスの場合は、サブパスを含むかどうかをチェック
+    return router.pathname.startsWith(href + '/') || router.pathname === href
+      ? "bg-slate-200 rounded-2xl py-2 px-4 no-underline"
+      : "";
   };
   return (
     <header className="p-6 flex items-center gap-4">
