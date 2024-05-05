@@ -30,7 +30,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
         <div className="md:grid md:grid-cols-12">
           <TableOfContents toc={toc} className="col-span-2 mb-10 md:mb-0" />
           <div
-            className="prose min-w-full col-span-10"
+            className=" min-w-full col-span-10"
             dangerouslySetInnerHTML={{
               __html: `${blog.body}`,
             }}

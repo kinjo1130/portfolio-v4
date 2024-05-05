@@ -5,7 +5,6 @@ import Layout from "../layout";
 import { QiitaPost } from "@/types/Qiita";
 import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/commom";
 import { SeoHead } from "@/components/SeoHead";
-import { useRouter } from "next/router";
 
 // BlogPost型のオブジェクトであるかどうかをチェックする関数
 function isBlogPost(post: BlogPost | QiitaPost | ZennPost): post is BlogPost {
