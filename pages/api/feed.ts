@@ -19,6 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
   })
   res.statusCode = 200
-  res.setHeader('Content-Type', 'text/xml')
+  res.setHeader('Content-Type', 'application/rss+xml charset=utf-8')
   res.end(feed.xml())
 }
