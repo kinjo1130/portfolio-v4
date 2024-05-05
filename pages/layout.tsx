@@ -7,10 +7,11 @@ type Props = {
   children: React.ReactNode;
   title?: string;
   tooltipText?: string;
+  className?: string;
 };
 
 // title を props として追加します
-export default function Layout({ children, title, tooltipText }: Props) {
+export default function Layout({ children, title, tooltipText, className }: Props) {
   const [pageClass, setPageClass] = useState("");
   useEffect(() => {
     setPageClass("page-enter");
@@ -19,7 +20,7 @@ export default function Layout({ children, title, tooltipText }: Props) {
     // }
   },[]);
   return (
-    <div className={`bg-gray-50`}>
+    <div className={`bg-gray-50 ${className}`}>
       <div className="flex justify-center">
         <Header />
       </div>
