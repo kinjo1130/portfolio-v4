@@ -24,6 +24,7 @@ export default function Layout({
   const routeFeed = () => {
     router.push("/api/feed");
   };
+  const isBlogPath = router.pathname === "/blog";
   useEffect(() => {
     setPageClass("page-enter");
     // return () => {
@@ -48,16 +49,18 @@ export default function Layout({
               )}
             </div>
             {/* RSS */}
-            <div className="flex justify-center">
-              <button
-                type="button"
-                className="hover:bg-slate-200 px-3 py-2 rounded-2xl flex items-center gap-2"
-                onClick={() => routeFeed()}
-              >
-                <Rss size={20} />
-                RSS
-              </button>
-            </div>
+            {isBlogPath && (
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  className="hover:bg-slate-200 px-3 py-2 rounded-2xl flex items-center gap-2"
+                  onClick={() => routeFeed()}
+                >
+                  <Rss size={20} />
+                  RSS
+                </button>
+              </div>
+            )}
           </div>
         )}
 
