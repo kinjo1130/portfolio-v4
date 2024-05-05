@@ -1,3 +1,4 @@
+import Heading from "@/components/Heading";
 import Layout from "./layout";
 
 export default function About() {
@@ -14,7 +15,8 @@ export default function About() {
       </p>
       <h3 className="font-semibold my-3">大学入学</h3>
 
-      <p>高校生のことからプログラミングなどを使っていたけど、それ以前に大学は情報系に進むと決まっていた。<br></br></p>
+      <p>高校生のことからプログラミングなどを使っていたけど、それ以前に大学は情報系に進むと決まっていた。</p>
+      <Heading level={3}>大学1年生</Heading>
     </Layout>
   );
 }

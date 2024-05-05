@@ -2,7 +2,14 @@ type Toc = {
   text: string;
   id: string;
 };
-export const TableOfContents = ({ toc }: { toc: Toc[] }) => {
+
+export const TableOfContents = ({
+  toc,
+  className,
+}: {
+  toc: Toc[];
+  className: string;
+}) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute("href")?.slice(1);
@@ -14,12 +21,14 @@ export const TableOfContents = ({ toc }: { toc: Toc[] }) => {
     }
   };
   return (
-    <div>
+    <div className={`${className}`}>
       <p className="TableOfContentsHead">目次</p>
       <ul className="list-disc ml-5">
         {toc.map((data) => (
           <li key={data.id}>
-            <a href={`#${data.id}`} onClick={handleClick} className="underline">{data.text}</a>
+            <a href={`#${data.id}`} onClick={handleClick} className="underline">
+              {data.text}
+            </a>
           </li>
         ))}
       </ul>

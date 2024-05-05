@@ -22,19 +22,21 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
         titleTemplate={blog.title}
         description={blog.description}
       />
-      <Layout title={blog.title}>
-        <div className="mb-2">
+      <Layout title={blog.title} className=" md:px-20">
+        <div className="mb-10">
           <p>公開日: {formatDate(blog.createdAt)}</p>
           <p>更新日: {formatDate(blog.updatedAt)}</p>
         </div>
-        <TableOfContents toc={toc} />
-        <div
-          className="mt-10 prose min-w-full"
-          dangerouslySetInnerHTML={{
-            __html: `${blog.body}`,
-          }}
-        />
-        <div className="flex justify-center">
+        <div className="md:grid md:grid-cols-12">
+          <TableOfContents toc={toc} className="col-span-2 mb-10 md:mb-0" />
+          <div
+            className="prose min-w-full col-span-10"
+            dangerouslySetInnerHTML={{
+              __html: `${blog.body}`,
+            }}
+          />
+        </div>
+        <div className="flex justify-center mt-20">
           <Button>
             <Link href="/blog">ブログ一覧に戻る</Link>
           </Button>
