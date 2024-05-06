@@ -42,7 +42,7 @@ export default async function handler(
         <div
         style={{
           position: "absolute",
-          bottom: 10,
+          bottom: 50,
           right: 10,
           display: "flex",
           alignItems: "center",
