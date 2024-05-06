@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const feed = new RSS({
     title: "kinjo shotaroのブログ",
     description: "kinjo shotaroのブログ",
-    site_url: "https://kinjo.me",
+    site_url: process.env.URL || "",
     feed_url: "フィードページのURL",
     language: 'ja',
   })
@@ -19,6 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
   })
   res.statusCode = 200
-  res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8')
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8')
   res.end(feed.xml())
 }
