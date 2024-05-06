@@ -18,7 +18,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
         title="Blog"
         titleTemplate={blog.title}
         description={blog.description}
-        imgUrl="https://localhost:3000/api/ogp"
+        imgUrl="https://kinjo.me/api/ogp"
       />
       <Layout title={blog.title} className=" md:px-20">
         <div className="mb-10">
