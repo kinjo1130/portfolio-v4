@@ -5,6 +5,9 @@ export const config = {
   runtime: "edge",
 };
 
+// デザインの調整はここがおすすめ
+// https://og-playground.vercel.app/
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -37,26 +40,27 @@ export default async function handler(
         {title}
 
         <div
+        style={{
+          position: "absolute",
+          bottom: 10,
+          right: 10,
+          display: "flex",
+          alignItems: "center",
+          margin: '20px'
+        }}
+      >
+        <img
+          src="https://kinjo.me/profile.jpg"
+          alt="アイコン"
           style={{
-            position: "absolute",
-            bottom: 10,
-            right: 10,
-            display: "flex",
-            alignItems: "center",
+            width: 60,  // 明示的に幅を指定
+            height: 60,  // 明示的に高さを指定
+            marginRight: 5,
+            borderRadius: '50%',
           }}
-        >
-          <img
-            src="https://kinjo.me/profile.jpg"
-            alt="アイコン"
-            style={{
-              width: 30, // アイコンの幅
-              height: 30, // アイコンの高さ
-              marginRight: 5,
-              borderRadius: "50%", // 画像を円形にする
-            }}
-          />
-          <span style={{ fontSize: 16 }}>kinjo shotaro</span>
-        </div>
+        />
+        <span style={{ fontSize: 32 }}>kinjo shotaro</span>
+      </div>
       </div>
     ),
     {
