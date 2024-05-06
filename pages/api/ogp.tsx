@@ -1,10 +1,15 @@
 import { ImageResponse } from "@vercel/og";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   runtime: "edge",
 };
 
-export default async function handler() {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const title = req.query.title as string;
   return new ImageResponse(
     (
       <div
@@ -18,9 +23,33 @@ export default async function handler() {
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          position: "relative",
         }}
       >
-        👋 Hello 你好 नमस्ते こんにちは สวัสดีค่ะ 안녕 добрий день Hallá
+        {title}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 10,
+            right: 10,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src="https://kinjo.me/profile.jpg"
+            alt="アイコン"
+            style={{
+              width: 30, // アイコンの幅
+              height: 30, // アイコンの高さ
+              marginRight: 5,
+              borderRadius: "50%", // 画像を円形にする
+            }}
+          />
+          <span style={{ fontSize: 16 }}>kinjo shotaro</span>
+        </div>
       </div>
     ),
     {
