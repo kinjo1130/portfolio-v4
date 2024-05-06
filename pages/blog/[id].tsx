@@ -12,13 +12,14 @@ import Link from "next/link";
 
 export default function BlogId({ blog }: { blog: BlogPost }) {
   const toc = renderToc(blog.body);
+  const isDevImageUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://kinjo.me";
   return (
     <>
       <SeoHead
         title="Blog"
         titleTemplate={blog.title}
         description={blog.description}
-        imgUrl={`https://kinjo.me/api/ogp?title=${blog.title}`}
+        imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}`}
       />
       <Layout title={blog.title} className=" md:px-20">
         <div className="mb-10">

@@ -9,7 +9,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const title = req.query.title as string;
+  const { searchParams } = new URL(req.url || "", "http://localhost");
+  const hasTitle = searchParams.has("title");
+  const title = hasTitle
+    ? searchParams.get("title")?.slice(0, 100)
+    : "My default title";
+  // const title = req.query.title as string;
+  // console.log(title);
   return new ImageResponse(
     (
       <div
@@ -29,6 +35,7 @@ export default async function handler(
         }}
       >
         {title}
+
         <div
           style={{
             position: "absolute",
