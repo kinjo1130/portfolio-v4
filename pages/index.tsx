@@ -25,6 +25,7 @@ export default function Home() {
             </p>
           </div>
           <div className="col-span-5">
+            {/* コンポーネントにする */}
             <div className="mb-10">
               <Heading level={2}>受賞歴</Heading>
               <ul className="list-disc ml-5">
@@ -49,6 +50,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="my-10">
+              {/* コンポーネントにする */}
               <Heading level={2}>所属</Heading>
               <ul className="list-disc ml-5">
                 <li>

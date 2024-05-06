@@ -4,7 +4,8 @@ import Layout from "./layout";
 export default function About() {
   return (
     <Layout title="About">
-      <p>名前: 金城翔太郎</p>
+      <p>Coming soon...</p>
+      {/* <p>名前: 金城翔太郎</p>
       <p>生年月日: 2002-11-30</p>
       <p>
         小学校から高校までは運動が大好きな少年でした。そのときは、プログラミングのプの字も知らないような少年でした。
@@ -16,7 +17,7 @@ export default function About() {
       <h3 className="font-semibold my-3">大学入学</h3>
 
       <p>高校生のことからプログラミングなどを使っていたけど、それ以前に大学は情報系に進むと決まっていた。</p>
-      <Heading level={3}>大学1年生</Heading>
+      <Heading level={3}>大学1年生</Heading> */}
     </Layout>
   );
 }
