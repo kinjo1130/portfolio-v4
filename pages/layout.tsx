@@ -36,7 +36,7 @@ export default function Layout({
       <div className="flex justify-center">
         <Header />
       </div>
-      <div className={`mx-10 mt-10 ${pageClass}`}>
+      <div className={`mx-10 lg:mx-auto mt-10 max-w-screen-md ${pageClass} `}>
         {/* tooltip */}
         {title && (
           <div className="flex items-center mb-5 justify-between gap-2">

@@ -6,7 +6,7 @@ interface HeadingProps {
   className?: string;
 }
 
-const defaultClasses = "font-bold my-5";
+const defaultClasses = "font-bold my-3";
 const sizeClasses = {
   1: "text-2xl",
   2: "text-xl",
