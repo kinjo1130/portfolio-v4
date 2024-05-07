@@ -3,7 +3,7 @@ import { BlogPost } from "@/types/blog";
 import Link from "next/link";
 import Layout from "../layout";
 import { QiitaPost } from "@/types/Qiita";
-import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/commom";
+import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/common";
 import { SeoHead } from "@/components/SeoHead";
 
 // BlogPost型のオブジェクトであるかどうかをチェックする関数
@@ -29,7 +29,12 @@ export default function Blog({
 }) {
   return (
     <>
-      <SeoHead title="Blog" titleTemplate="Top"  description="Blogの一覧ページです" imgUrl="/favicon.ico"></SeoHead>
+      <SeoHead
+        title="Blog"
+        titleTemplate="Top"
+        description="Blogの一覧ページです"
+        imgUrl="/favicon.ico"
+      ></SeoHead>
       <Layout title="Blog" tooltipText="ブログページ一覧です">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {blog.map((post) => (

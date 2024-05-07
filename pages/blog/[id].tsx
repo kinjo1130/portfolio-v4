@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BlogPost } from "@/types/blog";
 import { client } from "@/libs/client";
 import Layout from "../layout";
-import { formatDate } from "@/libs/commom";
+import { formatDate } from "@/libs/common";
 import { renderToc } from "@/libs/renderDoc";
 import { SeoHead } from "@/components/SeoHead";
 
@@ -12,14 +12,19 @@ import Link from "next/link";
 
 export default function BlogId({ blog }: { blog: BlogPost }) {
   const toc = renderToc(blog.body);
-  const isDevImageUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://kinjo.me";
+  const isDevImageUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://kinjo.me";
   return (
     <>
       <SeoHead
         title="Blog"
         titleTemplate={blog.title}
         description={blog.description}
-        imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}`}
+        imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(
+          blog.title
+        )}`}
       />
       <Layout title={blog.title} className=" md:px-20">
         <div className="mb-10">

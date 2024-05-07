@@ -8,7 +8,15 @@ export type Work = {
   fromAt: string;
   toAt: string;
   description: string;
+  position: string;
   link: string;
 };
 
 export type Works = Work[];
+
+export type WorkApiResponse = {
+  contents: Works;
+  totalCount: number;
+  offset: number;
+  limit: number;
+};

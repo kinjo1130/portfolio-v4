@@ -15,7 +15,7 @@ export default function Achievement() {
       <Heading level={2}>受賞歴</Heading>
       <ul className="list-disc ml-5">
         {ACHIEVEMENTS.map((achievement) => (
-          <li key={achievement.title}>
+          <li key={achievement.title} className="my-2">
             <a href={achievement.url} target="_blank" className="underline">
               {achievement.title}
             </a>

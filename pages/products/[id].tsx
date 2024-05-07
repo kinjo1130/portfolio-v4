@@ -2,7 +2,7 @@ import { client } from "@/libs/client";
 import Layout from "../layout";
 import { Product } from "@/types/product";
 import Image from "next/image";
-import { formatDate } from "@/libs/commom";
+import { formatDate } from "@/libs/common";
 import { SeoHead } from "@/components/SeoHead";
 
 export default function ProductId({ product }: { product: Product }) {

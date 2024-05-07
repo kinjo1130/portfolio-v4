@@ -1,5 +1,9 @@
 import { BlogPost } from "@/types/blog";
 import { QiitaPost } from "@/types/Qiita";
+import { client } from "@/libs/client";
+import { WorkApiResponse, Work, Works } from "@/types/work";
+import { title } from "process";
+import { link } from "fs";
 
 export const getPublishedDate = (post: ZennPost | BlogPost | QiitaPost): Date => {
   if ('created_at' in post) {
@@ -27,4 +31,18 @@ export const formatDate = (dateString: string) => {
     month: '2-digit',
     day: '2-digit'
   }).replace(/\//g, '-');
+}
+// 現在勤務しているかどうかを判定する関数
+export const currentWorkList = async () => {
+  const workList: WorkApiResponse = await client.get({ endpoint: "work" });
+  const currentWork: Works = workList.contents.filter((work) => {
+    return work.toAt === null;
+  });
+
+  return currentWork.map((work) => {
+    return {
+      title: work.title,
+      link: work.link,
+    }
+  });
 }
