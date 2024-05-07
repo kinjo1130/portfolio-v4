@@ -5,7 +5,7 @@ export default function SNS() {
   return (
     <div className="mt-10">
       <h3 className="font-bold text-2xl">SNS</h3>
-      <ul className="flex gap-4">
+      <ul className="flex break-words gap-4 overflow-x-auto">
         <li>
           <a
             href="https://twitter.com/kinjyo1130"
@@ -62,6 +62,7 @@ export default function SNS() {
               alt="qiita"
               width={ICON_SIZE}
               height={ICON_SIZE}
+              className="min-w-16"
             />
           </a>
         </li>
@@ -76,6 +77,7 @@ export default function SNS() {
               alt="zenn"
               width={ICON_SIZE}
               height={ICON_SIZE}
+              className="min-w-16"
             />
           </a>
         </li>
@@ -115,6 +117,7 @@ export default function SNS() {
               alt="scrapbox"
               width={ICON_SIZE}
               height={ICON_SIZE}
+              className="min-w-16"
             />
           </a>
         </li>
