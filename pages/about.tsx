@@ -1,9 +1,16 @@
 import Heading from "@/components/Heading";
+import { SeoHead } from "@/components/SeoHead";
 import Layout from "./layout";
 
 export default function About() {
   return (
     <Layout title="About">
+      <SeoHead
+        title="About"
+        titleTemplate="About"
+        description="About me"
+        imgUrl="/favicon.ico"
+      ></SeoHead>
       <p>名前: 金城翔太郎</p>
       <p>生年月日: 2002-11-30</p>
       <p>出身地: 大阪生まれ、滋賀育ち</p>
@@ -20,7 +27,9 @@ export default function About() {
         高校生のことからプログラミングなどを使っていたけど、それ以前に大学は情報系に進むと決まっていた。
       </p>
       <Heading level={3}>大学1-2年生</Heading>
-      <p>この頃は、プログラミングに明け暮れていました。せっかくなら、大学生らしいこともしようと思って、サークルとかにも参加してみましたが、どうにも合わなかったので、趣味でいろんな開発をしたり、インターンに行って、技術を磨いていました。今と思うと、もう少し大学生らしいことをできたらなぁって思ったのですが、それは今、考えても仕方ないことだと割り切っています。</p>
+      <p>
+        この頃は、プログラミングに明け暮れていました。せっかくなら、大学生らしいこともしようと思って、サークルとかにも参加してみましたが、どうにも合わなかったので、趣味でいろんな開発をしたり、インターンに行って、技術を磨いていました。今と思うと、もう少し大学生らしいことをできたらなぁって思ったのですが、それは今、考えても仕方ないことだと割り切っています。
+      </p>
       <Heading level={3}>大学3年生</Heading>
       <p>Coming soon...</p>
     </Layout>

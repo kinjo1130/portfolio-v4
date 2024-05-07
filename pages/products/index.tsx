@@ -7,7 +7,7 @@ import { SeoHead } from "@/components/SeoHead";
 export default function Product({ products }: { products: Products }) {
   return (
     <>
-      <SeoHead title="Products" titleTemplate="" description="This is a product page." imgUrl="/favicon.ico"></SeoHead>
+      <SeoHead title="Products" titleTemplate="プロダクト一覧" description="Products List" imgUrl="/favicon.ico"></SeoHead>
       <Layout title="Products">
         <ul className="ml-5 grid md:grid-cols-3 gap-4 ">
           {products.map((product) => (

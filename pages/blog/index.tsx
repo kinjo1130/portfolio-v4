@@ -29,7 +29,7 @@ export default function Blog({
 }) {
   return (
     <>
-      <SeoHead title="Blog"></SeoHead>
+      <SeoHead title="Blog" titleTemplate="Top"  description="Blogの一覧ページです" imgUrl="/favicon.ico"></SeoHead>
       <Layout title="Blog" tooltipText="ブログページ一覧です">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {blog.map((post) => (

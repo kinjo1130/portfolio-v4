@@ -2,10 +2,12 @@ import { client } from "@/libs/client";
 import Layout from "../layout";
 import { Works } from "@/types/work";
 import { formatDate } from "@/libs/commom";
+import { SeoHead } from "@/components/SeoHead";
 
 export default function Work({ works }: { works: Works }) {
   return (
     <Layout title="Work" tooltipText="インターンや業務委託の経験をまとめたもの">
+      <SeoHead title="Work" titleTemplate="Work" description="Work List" imgUrl="/favicon.ico"></SeoHead>
       <ul>
         {works.map((work) => (
           <li key={work.id} className="my-10">

@@ -4,10 +4,12 @@ import Image from "next/image";
 import SNS from "@/components/SNS";
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
+import { SeoHead } from "@/components/SeoHead";
 export default function Home() {
   return (
     <>
       <Layout title="Welcome!!">
+        <SeoHead title="Home" titleTemplate="Welcome!!" description="Welcome to my portfolio site" imgUrl="/favicon.ico"></SeoHead>
         <div className="lg:grid lg:grid-cols-10">
           <div className="col-span-5">
             <Image
