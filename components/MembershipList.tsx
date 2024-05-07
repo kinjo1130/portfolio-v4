@@ -1,5 +1,4 @@
 import Heading from "./Heading";
-import { currentWorkList } from "@/libs/common";
 const MEMBERSHIPS = [
   {
     title: "関西大学 総合情報学部 総合情報学科",
@@ -16,8 +15,6 @@ const MEMBERSHIPS = [
   },
 ];
 export default function MembershipList() {
-  const workList = currentWorkList();
-  console.log(workList);
   return (
     <div className="mb-10">
       <Heading level={2}>所属</Heading>
