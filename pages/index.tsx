@@ -3,13 +3,19 @@ import Layout from "./layout";
 import Image from "next/image";
 import SNS from "@/components/SNS";
 import Button from "@/components/Button";
-import Heading from "@/components/Heading";
 import { SeoHead } from "@/components/SeoHead";
+import Achievement from "@/components/Achievement";
+import MembershipList from "@/components/MembershipList";
 export default function Home() {
   return (
     <>
       <Layout title="Welcome!!">
-        <SeoHead title="Home" titleTemplate="Welcome!!" description="Welcome to my portfolio site" imgUrl="/favicon.ico"></SeoHead>
+        <SeoHead
+          title="Home"
+          titleTemplate="Welcome!!"
+          description="Welcome to my portfolio site"
+          imgUrl="/favicon.ico"
+        ></SeoHead>
         <div className="lg:grid lg:grid-cols-10">
           <div className="col-span-5">
             <Image
@@ -27,50 +33,9 @@ export default function Home() {
             </p>
           </div>
           <div className="col-span-5">
-            {/* コンポーネントにする */}
-            <div className="mb-10">
-              <Heading level={2}>受賞歴</Heading>
-              <ul className="list-disc ml-5">
-                <li>
-                  <a
-                    href="https://ccc2021.code4japan.org/"
-                    target="_blank"
-                    className="underline"
-                  >
-                    Civictech Challenge Cup u-21 Code for japan賞
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://hackz.team/news/28VSpLaigPOw6KcqbgbVZT"
-                    target="_blank"
-                    className="underline"
-                  >
-                    ハックツハッカソン ツマジロカップ studist賞
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Achievement />
             <div className="my-10">
-              {/* コンポーネントにする */}
-              <Heading level={2}>所属</Heading>
-              <ul className="list-disc ml-5">
-                <li>
-                  <a href="" target="_blank" className="underline">
-                    関西大学 総合情報学部 総合情報学科
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.kansai-u.ac.jp/Fc_inf/fm/staff/yonezawa.html"
-                    target="_blank"
-                    className="underline"
-                  >
-                    米澤ゼミ
-                  </a>
-                  所属
-                </li>
-              </ul>
+              <MembershipList />
             </div>
             <Button className="mt-10">
               <Link href="/about">詳細なプロフィール</Link>
