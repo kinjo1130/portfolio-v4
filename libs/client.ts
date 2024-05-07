@@ -2,8 +2,8 @@ import { BlogPost, BlogPosts } from '@/types/blog';
 import { createClient } from 'microcms-js-sdk';
 
 export const client = createClient({
-  serviceDomain: process.env.SERVICE_DOMAIN as string,
-  apiKey: process.env.API_KEY as string,
+  serviceDomain: process.env.NEXT_PUBLIC_SERVICE_DOMAIN as string,
+  apiKey: process.env.NEXT_PUBLIC_API_KEY as string,
 });
 
 // getPosts 関数を追加

@@ -8,11 +8,6 @@ const MEMBERSHIPS = [
     title: "米澤ゼミ",
     url: "https://www.kansai-u.ac.jp/Fc_inf/fm/staff/yonezawa.html",
   },
-  // ここの所属をworkから取得してきたい、それで自動でリンクを貼る
-  {
-    title: "株式会社ohmygod ソフトウェアエンジニア",
-    url: "https://ohmygod.jp/",
-  },
 ];
 export default function MembershipList() {
   return (
