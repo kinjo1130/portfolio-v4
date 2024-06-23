@@ -29,13 +29,15 @@ export default function BlogId({
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://kinjo.me";
-  const [likeCount, setLikeCount] = useState(likeData.likes);
   // apiRouteからIDを取得していいね数を取得する
-  const { postBlogLike } = useBlogLike();
+  const { postBlogLike, getBlogLike, setLikeCount, likeCount } = useBlogLike();
   const handleClickBlogPostLike = async () => {
     const res = await postBlogLike(blog.id);
     setLikeCount(res.likes);
   };
+  useEffect(() => {
+    getBlogLike(blog.id);
+  }, []);
   return (
     <>
       <SeoHead
@@ -91,19 +93,9 @@ export const getStaticProps = async (context: any) => {
   const id = context.params.id;
   const data = await client.get({ endpoint: "blogs", contentId: id });
 
-  // いいねをAPI routeから取得する
-  const likeData = await fetch(`${isDev}/api/mongo/blog/getLike?id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const likeDataJson: BlogLike = await likeData.json();
-
   return {
     props: {
       blog: data,
-      likeData: likeDataJson,
     },
   };
 };
