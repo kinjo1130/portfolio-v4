@@ -16,7 +16,7 @@ const nextConfig = {
           {
             key: "Access-Control-Allow-Origin",
             value:
-              "https://portfolio-v4-gtcnj8gln-afuro1130s-projects.vercel.app", // 必要に応じてオリジンを変更
+              "portfolio-v4-git-feat-blog-like-ui-afuro1130s-projects.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
