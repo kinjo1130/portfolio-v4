@@ -46,3 +46,7 @@ export const currentWorkList = async () => {
     }
   });
 }
+export const isDev =
+process.env.NODE_ENV === "development"
+  ? "http://localhost:3000"
+  : "https://kinjo.me";
