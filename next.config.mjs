@@ -1,5 +1,5 @@
-// next.config.js
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -15,7 +15,7 @@ module.exports = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",  // または、必要なオリジンを設定
+            value: "*", // または、必要なオリジンを設定
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -30,3 +30,5 @@ module.exports = {
     ];
   },
 };
+
+export default nextConfig;
