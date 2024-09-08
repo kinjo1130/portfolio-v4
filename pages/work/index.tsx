@@ -40,7 +40,7 @@ export default function Work({ works }: { works: Works }) {
 export const getStaticProps = async () => {
   const data = await client.get({
     endpoint: "work",
-    queries: { orders: "-fromAt" },
+    queries: { orders: "toAt" },
   });
   return {
     props: {
