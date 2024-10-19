@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vercel/og": "^0.6.2",
+    "embla-carousel-react": "^8.3.0",
     "lucide-react": "^0.376.0",
     "microcms-js-sdk": "^3.1.0",
     "mongodb": "^6.7.0",
