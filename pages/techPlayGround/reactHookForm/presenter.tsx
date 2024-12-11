@@ -17,6 +17,7 @@ type Props = {
 };
 
 const FormPresenter: React.FC<Props> = ({ control, onSubmit }) => {
+	if(!control) return null;
 	return (
 		<form onSubmit={onSubmit} className="m-24">
 			<div>

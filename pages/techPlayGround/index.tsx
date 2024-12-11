@@ -16,7 +16,7 @@ const TechPlayground: React.FC = () => {
 			<Layout title="Tech PlayGround List">
 				<Button className="mt-10">
 					<Link href="/techPlayGround/reactHookForm">
-						reactHookFormを試したみた
+						ReactHookFormを試したみた
 					</Link>
 				</Button>
 			</Layout>
