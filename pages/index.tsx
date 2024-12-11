@@ -1,11 +1,12 @@
 import Achievement from "@/components/Achievement";
-import Button from "@/components/Button";
+import { Button } from "@/components/Button";
 import MembershipList from "@/components/MembershipList";
 import SNS from "@/components/SNS";
 import { SeoHead } from "@/components/SeoHead";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "./layout";
+import TechPlayground from "./techPlayGround";
 export default function Home() {
 	return (
 		<>
@@ -37,9 +38,14 @@ export default function Home() {
 						<div className="my-10">
 							<MembershipList />
 						</div>
-						<Button className="mt-10">
-							<Link href="/about">詳細なプロフィール</Link>
-						</Button>
+						<div className="flex flex-col">
+							<Button className="mt-10">
+								<Link href="/techPlayGround/">技術的な遊び場へ</Link>
+							</Button>
+							<Button className="mt-10">
+								<Link href="/about">詳細なプロフィール</Link>
+							</Button>
+						</div>
 					</div>
 				</div>
 
