@@ -37,9 +37,9 @@ export default function Home() {
 						<div className="my-10">
 							{/* <MembershipList /> */}
 						</div>
-						<Button className="mt-10">
-							<Link href="/about">詳細なプロフィール</Link>
-						</Button>
+						{/* <Button className="mt-10">
+							<Link href="/work">詳細なプロフィール</Link>
+						</Button> */}
 					</div>
 				</div>
 
