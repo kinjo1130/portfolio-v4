@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
 				: "";
 		}
 		// それ以外のパスの場合は、サブパスを含むかどうかをチェック
-		return router.pathname.startsWith(href + "/") || router.pathname === href
+		return router.pathname.startsWith(`${href}/`) || router.pathname === href
 			? "bg-slate-200 rounded-2xl py-2 px-4 no-underline"
 			: "";
 	};
@@ -48,12 +48,12 @@ export const Header: React.FC = () => {
 			>
 				<p>work</p>
 			</Link>
-			<Link
+			{/* <Link
 				href="/about"
 				className={`underline hover:no-underline ${isActive("/about")}`}
 			>
 				<p>about</p>
-			</Link>
+			</Link> */}
 		</header>
 	);
 };

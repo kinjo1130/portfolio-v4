@@ -12,5 +12,7 @@ export type Product = {
     width: number;
   };
   URL: string;
+  // 中身はHTML
+  content: string;
 };
 export type Products = Product[];
