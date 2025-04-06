@@ -35,7 +35,7 @@ export default function Home() {
 					<div className="col-span-5">
 						<Achievement />
 						<div className="my-10">
-							<MembershipList />
+							{/* <MembershipList /> */}
 						</div>
 						<Button className="mt-10">
 							<Link href="/about">詳細なプロフィール</Link>
