@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@prisma/adapter-libsql": "^6.17.1",
+    "@prisma/client": "^6.17.1",
     "@vercel/og": "^0.6.2",
     "lucide-react": "^0.376.0",
     "microcms-js-sdk": "^3.1.0",
