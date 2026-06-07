@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { BlogPost } from "@/types/blog";
-import { client } from "@/libs/client";
-import Layout from "../layout";
-import { formatDate, isDev } from "@/libs/common";
-import { renderToc } from "@/libs/renderDoc";
-import { SeoHead } from "@/components/SeoHead";
-
-import { TableOfContents } from "@/components/TableOfContents";
 import Button from "@/components/Button";
-import Link from "next/link";
+import { SeoHead } from "@/components/SeoHead";
+import { TableOfContents } from "@/components/TableOfContents";
 import useBlogLike from "@/hooks/useBlogLike";
+import { formatDate } from "@/libs/common";
+import { getBlog, getBlogs } from "@/libs/content";
+import { renderToc } from "@/libs/renderDoc";
+import type { BlogPost } from "@/types/blog";
+import Link from "next/link";
+import { useEffect } from "react";
+import Layout from "../layout";
 
 interface BlogLike {
   likes: number;
@@ -19,7 +18,6 @@ interface BlogLike {
 
 export default function BlogId({
   blog,
-  likeData,
 }: {
   blog: BlogPost;
   likeData: BlogLike;
@@ -29,7 +27,6 @@ export default function BlogId({
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://kinjo.me";
-  // apiRouteからIDを取得していいね数を取得する
   const { postBlogLike, getBlogLike, setLikeCount, likeCount } = useBlogLike();
   const handleClickBlogPostLike = async () => {
     const res = await postBlogLike(blog.id);
@@ -62,7 +59,6 @@ export default function BlogId({
             }}
           />
         </div>
-        {/* いいねbuttonと数値表示 */}
         <div className="flex justify-center mt-20">
           <Button className="" handleClick={handleClickBlogPostLike}>
             いいね！
@@ -80,22 +76,21 @@ export default function BlogId({
   );
 }
 
-// 静的生成のためのパスを指定します
 export const getStaticPaths = async () => {
-  const data = await client.get({ endpoint: "blogs" });
-
-  const paths = data.contents.map((content: BlogPost) => `/blog/${content.id}`);
+  const paths = getBlogs().map((post) => `/blog/${post.id}`);
   return { paths, fallback: false };
 };
 
-// データをテンプレートに受け渡す部分の処理を記述します
-export const getStaticProps = async (context: any) => {
-  const id = context.params.id;
-  const data = await client.get({ endpoint: "blogs", contentId: id });
-
+export const getStaticProps = async (context: {
+  params: { id: string };
+}) => {
+  const blog = getBlog(context.params.id);
+  if (!blog) {
+    return { notFound: true as const };
+  }
   return {
     props: {
-      blog: data,
+      blog,
     },
   };
 };
