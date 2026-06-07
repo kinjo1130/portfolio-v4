@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "id": "aoemqsecvo1",
+    "createdAt": "2024-09-08T07:26:40.244Z",
+    "updatedAt": "2024-09-08T07:38:46.285Z",
+    "publishedAt": "2024-09-08T07:38:46.285Z",
+    "revisedAt": "2024-09-08T07:38:46.285Z",
+    "title": "2024年8月の振り返り",
+    "body": "<p>久しぶりにブログというか、振り返り記事を書いてみようと思います。<br></p><h2 id=\"h82f72d58f4\">学生編</h2><p>大学は中間テストや卒論の中間発表などがあって、それが終わり次第夏休みになりました。自分は四回生なので、人生最後の夏休みなんだということをこの記事を書いていて、改めて認識しました！w<br>無事いい感じに卒論の中間発表を終えたので、秋学期からは、実験や分析や卒論の執筆が始まり、忙しくなると思いますが、頑張っていこうと思います！！<br><br></p><h2 id=\"he20eb0bb53\">お仕事編</h2><p>前提、他にもお仕事させてもらっているのですが、大きめなものに絞って、書いていこうと思います。大きくは二つぐらいあります<br>一つ目は、フロントエンドを担当していたCMS開発とコーポレート開発の案件が完了したことです。<br><br>これは4月ぐらいから始まって、約半年近い期間開発をしていて、それがやっと完了したので、ほっと一安心です。初めて、こんなに長い期間開発をしたことがなかったので、最初はどうしよう？という不安ありましたし、他にも、実装がスプリントの締切に間に合わない時とかは寝る間も惜しんで、頑張ったりとかしていたので、それも含めていい経験ができたなって思っています。一方、技術的な学びとしてもCMSを開発にするにあたって、wysiwygのブロックエディタが要件としてあったので、それをどう実装しようか？みたいなところから、　デザイナーが作ったFigmaのUIと同じように調整したり、APIにはどのようなスキーマで投げるのかをバックエンド側の人と話し合ったりして、進めました。ライブラリとしては、<a href=\"https://tiptap.dev/\" target=\"_blank\" rel=\"noopener noreferrer\">TipTap</a>を使うことで実装できました。そこまで複雑なエディタを作る必要がなかったので、ライブラリのドキュメント通りの実装でできました。コーポレートサイトの方は、静的なHTMLとCSSとJSがあったので、それをNext.js(SSR)に書き換えるという感じのことをしていました。静的サイトでは、クライアントサイドでしか動作しないライブラリとかがあったりしたため、モジュールに切り出して、クライアントサイド側だけで呼び出すようにしたり、hydration Errorとかが出ないようにしたりなどをしていました。一つ感動したのは、先ほどのCMSで作成した記事をコーポレートサイトの方で表示できたときは、感動しましたね！エディタから作って、そこにコンテンツを入稿して、サイト側に出てくるみたいな感じを体験できたのはよかったですね〜！<br><br><br>二つ目は、バイト先で結構むずかしめのバグ修正などができて、成長を感じたこと<br><br>今、Helpfeel社のGyazoとプロダクトでバイトとして、お手伝いさせてもらっているのですが、8月はPR数は7月よりも少なかったのですが、その代わりに実装難易度が高いものにアサインしてもらい、それをうまく修正できたのは成長を感じました。また、プロダクトにきちんとコミットできた達成感もあり、いい経験となりました。<br><br></p><h2 id=\"h87e65a7f0f\">プライベート編</h2><h3 id=\"ha38d0c5bdd\">イベント関連</h3><p>Helpfeel Tech conf 2024に参加してきました。普段はGyazoのことしか知らなかったので、他のチームの話を聞くことができたのは、とても楽しかったのと、同時に学びもあってよかったです。普段はフルリモートなので、初めて会う人ばっかり、オフラインで会って、会話できるのは新鮮でよかったです！！<br>当日の勉強メモは<a href=\"https://scrapbox.io/kinjo1130/Helpfeel_Conf_2024_%E5%8F%82%E5%8A%A0%E3%83%A1%E3%83%A2\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br></p><h3 id=\"h08efe6d895\">個人開発</h3><p>友達を新規プロダクトを作っていました！<br><a href=\"https://newchat.jp\" target=\"_blank\" rel=\"noopener noreferrer\">newChat</a><br><br>上記のプロダクトのコンセプトは、<span style=\"color:#000000\">スマホとPCでLINEが繋がっていないから写真を送れない？そんな問題を解消！ Web上で合言葉を設定してチャットを開始！写真やPDFを自由に送りあえるwebアプリです！</span>大学のPCとかはSNSなどが繋がっていなくて、スマホで調べたURLを大学のPCに手打ちした経験はないですか？webなので、ブラウザに<span style=\"color:#ffffff;background-color:#38a5c3\">newchat</span>と打つだけで簡単にアクセスできて、ログインとかもなしで使えるので、<a href=\"https://x.com/Gan_tonanoru\" target=\"_blank\" rel=\"noopener noreferrer\">友達</a>(<a href=\"https://x.com/Gan_tonanoru\" target=\"_blank\" rel=\"noopener noreferrer\">https://x.com/Gan_tonanoru</a>)が不便だっていうアイデアを持ってきたのがきっかけで、プロトタイプを素早く作り、いい感じだったので、そのまま継続して開発しています！！まだ、開発中なので、破壊的な変更があるのはご容赦してください。<br></p><h3 id=\"hf83e1a046e\">旅行</h3><p>バイクで長野県に旅行に行ってきました！自分がサマーウォーズが好きなので、聖地巡りをしたいのと、長野県なら涼しいなっていうのがきっかけです。<br><a href=\"https://scrapbox.io/kinjo1130/%E9%95%B7%E9%87%8E%E7%9C%8C%E3%80%80%E3%83%90%E3%82%A4%E3%82%AF%E3%80%80%E6%97%85%E8%A1%8C\" target=\"_blank\" rel=\"noopener noreferrer\">長野県　バイク　旅行</a><br><a href=\"https://scrapbox.io/kinjo1130/%E9%95%B7%E9%87%8E%E3%80%80%E3%83%84%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%80%80%E6%97%85%E8%A1%8C%E3%80%80%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8A%E3%80%802024%2F8%2F12\" target=\"_blank\" rel=\"noopener noreferrer\">長野　ツーリング　旅行　振り返り　2024/8/12</a><br><br><img src=\"/images/blogs/aoemqsecvo1/inline-00.jpg\" alt=\"\"><br>Gyazoの社員さんのお家にお邪魔して、一緒にBBQ!!!<br><br><br><img src=\"/images/blogs/aoemqsecvo1/inline-01.jpg\" alt=\"\"><br><img src=\"/images/blogs/aoemqsecvo1/inline-02.jpg\" alt=\"\"><br><br>色々あった8月でした！<br><br>9月も技術力磨きつつ、時間と体力のある限りいろんなことをしていきます！！<br><br></p>",
+    "heroImage": {
+      "url": "/images/blogs/aoemqsecvo1/cover.jpg",
+      "width": 552,
+      "height": 310
+    },
+    "description": "2024年の8月の振り返り"
+  },
+  {
+    "id": "3hhag_3ugr",
+    "createdAt": "2024-05-23T15:40:36.578Z",
+    "updatedAt": "2024-05-23T15:55:15.452Z",
+    "publishedAt": "2024-05-23T15:43:45.917Z",
+    "revisedAt": "2024-05-23T15:55:15.452Z",
+    "title": "Ruby3.1.5がインストールできなかったのを解決した",
+    "body": "<h1 id=\"he0a12c032b\">Ruby 3.1.5をmacOSにインストールする方法</h1><p><br>Rubyのインストールで苦戦したことはありませんか？私も最近、Ruby 3.1.5をインストールする際にいくつかの問題に直面しましたが、最終的に成功しました。この記事では、その手順と注意点を共有します。<br></p><h2 id=\"hdbf98b940f\">前提条件</h2><p><br></p><ul><li>macOS（今回はmacOS Ventura 13.4を使用）</li><li>Homebrewがインストールされていること</li><li>rbenvがインストールされていること</li></ul><p><br></p><h2 id=\"h046876a126\">手順</h2><p><br></p><ol><li> <strong>Homebrewと関連パッケージのアップデート</strong></li></ol><p><br><strong>&nbsp;&nbsp;</strong>まず、Homebrewを最新の状態にアップデートします。また、必要なパッケージもインストールまたは再インストールします。<br></p><pre><code>&nbsp;&nbsp;brew update\n&nbsp;&nbsp;brew upgrade\n&nbsp;&nbsp;brew reinstall openssl@3 readline libyaml gmp</code></pre><p><br> 2. <strong>必要な環境変数の設定</strong><br><br>&nbsp;&nbsp;OpenSSLや他のライブラリが正しくリンクされるように環境変数を設定します。<br></p><pre><code>&nbsp;&nbsp;export LDFLAGS=\"-L/usr/local/opt/openssl@3/lib\"\n&nbsp;&nbsp;export CPPFLAGS=\"-I/usr/local/opt/openssl@3/include\"\n&nbsp;&nbsp;export PKG_CONFIG_PATH=\"/usr/local/opt/openssl@3/lib/pkgconfig\"</code></pre><p><br> 3. <strong>rbenvとruby-buildのアップデート</strong><br><br>&nbsp;&nbsp;rbenvとruby-buildを最新の状態にアップデートします。<br></p><pre><code>&nbsp;&nbsp;brew upgrade rbenv ruby-build</code></pre><p><br><br> 4. <strong>Rubyのインストール</strong><br><br>&nbsp;&nbsp;ここが最も重要なステップです。ruby-buildに必要な設定オプションを渡して、Ruby 3.1.5をインストールします。<br></p><pre><code>&nbsp;&nbsp;CONFIGURE_OPTS=\"--with-readline-dir=$('/opt/homebrew/bin/brew' --prefix readline) --with-openssl-dir=$('/opt/homebrew/bin/brew' --prefix openssl@3)\" rbenv install 3.1.5</code></pre><p><br> 5. <strong>インストールの確認</strong><br><br>&nbsp;&nbsp;インストールが完了したら、Rubyのバージョンを確認します。<br></p><pre><code>&nbsp;&nbsp;rbenv versions\n&nbsp;&nbsp;rbenv global 3.1.5\n&nbsp;&nbsp;ruby -v</code></pre><p><br></p><h2 id=\"hb50223be1d\">トラブルシューティング</h2><p><br>私が直面したいくつかのエラーについても触れておきます。<br><br> 1. <strong>readlineの問題</strong><br><br>&nbsp;&nbsp;ローカルのreadlineが使用されてしまう問題がありました。これを解決するために、Homebrewのreadlineを明示的に指定しました。<br></p><pre><code>&nbsp;&nbsp;CONFIGURE_OPTS=\"--with-readline-dir=$('/opt/homebrew/bin/brew' --prefix readline)\" rbenv install 3.1.5</code></pre><p><br> 2. <strong>OpenSSLの問題</strong><br><br>&nbsp;&nbsp;OpenSSLのライブラリが見つからないエラーが発生しました。これも同様に、HomebrewのOpenSSLを指定することで解決しました。<br><br></p><pre><code>&nbsp;&nbsp;CONFIGURE_OPTS=\"--with-openssl-dir=$('/opt/homebrew/bin/brew' --prefix openssl@3)\" rbenv install 3.1.5</code></pre><p><br></p><h2 id=\"hcb9dacb773\">結論</h2><p><br>これらの手順を踏むことで、無事にRuby 3.1.5をインストールすることができました。同じような問題に直面している方の助けになれば幸いです。<br><br>もし問題が解決しない場合は、以下のコマンドで詳細なログを確認することも有効です。<br></p><pre><code>tail -f /var/log/install.log</code></pre><p><br></p>",
+    "heroImage": {
+      "url": "/images/blogs/3hhag_3ugr/cover.webp",
+      "width": 1024,
+      "height": 1024
+    },
+    "description": "Ruby3.1.5をm1のmacOSインストールする方法"
+  },
+  {
+    "id": "kl6gzvxw3j1m",
+    "createdAt": "2024-05-09T02:27:30.217Z",
+    "updatedAt": "2024-05-09T04:53:45.083Z",
+    "publishedAt": "2024-05-09T02:42:27.486Z",
+    "revisedAt": "2024-05-09T04:53:45.083Z",
+    "title": "振り返りというものをちゃんとできているのか？それは日記になっていないか？",
+    "body": "<h2 id=\"h9cdac531f2\">振り返りとは？</h2><p>自分の考えだけど、仮説を立てて、それに対するFBをすること<br><br>自分は月末になるとScrapboxというサービスで振り返りをしているのだが、今月も書いてて、ふと思った。<br>これは振り返りなのか？これはやったことやあったことを羅列しているだけで、振り返りではない？と。日記に近い感じだった<br></p><h2 id=\"h0cf243e12a\">それからこんなふうに考えた</h2><p>そこで振り返りをすることに意味があるのかなって思ってきた</p><ul><li>そこまで意味があるように思えないのがある</li></ul><p>これはおそらく日記になっている気がする<br>&nbsp;- 振り返りをするためには、やる前に仮説を立てることが大事<br>&nbsp;- 仮説に対して、どうだったかを書くのが振り返り<br>&nbsp;- ただ感想ややったことを書くのは日記でいいはず<br>例<br>xxxx/mm/dd</p><ul><li>やること</li><li>仕事の実装<ul><li>yyyyyのissueの実装を進めて、PRのmergeまでする</li></ul></li><li>大学のゼミ\t<ul><li>論文を読む</li><li>読んだ論文をまとめる</li></ul></li><li>振り返り</li><li>仕事の実装<ul><li>yyyyのタスクの50%まではいけたけど、目標はPRのmergeまでだったけどダメだった</li><li>なぜできなかったのか？<ul><li>見積もりが甘かったのはそうだけど、yyyyyを実装する前に、aaaという実装の方法に沼ってしまった</li><li>そこでの仮説がbbbbにしていたが、原因は、ccccだった</li></ul></li></ul></li><li>大学のゼミ<ul><li>目標としてた、論文は読めたし、まとめれたので、目標通りだった</li></ul></li></ul><p><br><br>こんな感じでやる前にどんなことをやるのか？それから、やったあとに、それはどうだったのか？達成できたのか？達成できなかったのか？を吟味する。決して、達成できなかったことは悪いことではない。次どうしたら、達成できるのかを考えたらいいだけ。そのために、何ができなかった要因なのかを洗い出す。ここが、しんどい部分になるけど、ここをちゃんとできると、自分自身の成長になると思っているので、頑張るのみ。<br></p>",
+    "heroImage": {
+      "url": "/images/blogs/kl6gzvxw3j1m/cover.jpg",
+      "width": 2048,
+      "height": 2048
+    },
+    "description": "ちゃんと振り返りができているのかを再度振り返ってみた"
+  },
+  {
+    "id": "ncxe7buax4b",
+    "createdAt": "2024-05-01T17:41:42.552Z",
+    "updatedAt": "2024-05-05T02:06:03.743Z",
+    "publishedAt": "2024-05-01T17:43:07.488Z",
+    "revisedAt": "2024-05-05T02:06:03.743Z",
+    "title": "自分なりのこだわりを持つことは完全に捨てることはしない方がいいかもしれないという気づき",
+    "body": "<h2 id=\"hd92040d0df\">きっかけ</h2><p><br>プログラミングをしている中で、やりたいことというのが、始めた頃と比べて、少なくなっているなっていうを実感したのがきっかけです。<br><br>最近まではこだわりなんて、持っていても、我の衝突になってしまって、対人関係の摩擦にしかならないと思っていたし、今でも思う。<br><br>けれど、プログラミングやデザイナーや写真家などクリエイターをやっている人のSNSや友人たちを見ると、自分が表現したことや自己表現したいなにかを持っていることが多いなっていうのを感じました。<br>こだわりを持っていない人と、こだわりを持っている人を比較すると、その人の色などがアウトプットに滲み出ているような気がします。<br></p><h2 id=\"hcb9dacb773\">結論</h2><p>前面に自分はこうだ！これしか認めない！という外部の意見を意味もなく、取り入れないのは良くないと思う。だが、自分のうちに密かに持っていて、自分の表現をするときには、存分に我をオープンにしていくという方向性で生きていたいなっていうことを考えたりしていました。<br><br></p>",
+    "heroImage": {
+      "url": "/images/blogs/ncxe7buax4b/cover.webp",
+      "width": 1024,
+      "height": 1024
+    },
+    "description": "自分なりのこだわりを持つことは完全に捨てることはしない方がいいかもしれないという気づき"
+  },
+  {
+    "id": "mq7e9gok_67",
+    "createdAt": "2022-07-03T06:41:28.058Z",
+    "updatedAt": "2024-04-13T16:37:33.547Z",
+    "publishedAt": "2022-07-03T06:41:28.058Z",
+    "revisedAt": "2024-04-13T16:37:33.547Z",
+    "title": "PythonでAPIを作成してみた",
+    "body": "<h3 id=\"h8e3c8a0459\">今回はPythonでAPIサーバーを立ててみました。</h3><p>ライブラリにFlaskを用いました。</p><blockquote>pip install Flask</blockquote><pre><code>from flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef hello():\n  return \"Hello World\"\nif __name__ == '_main_':\n  app.run()</code></pre><p>自分が気になったのは</p><blockquote>app = Flask(name)</blockquote><p>この部分でした。<br>結論からいうと、<strong>Flask(__name__)</strong>&nbsp;という行は、&nbsp;<strong>Flask</strong>&nbsp;クラスのインスタンスを作って、 app という変数に代入しています。 ... <strong>name</strong> というのは、自動的に定義される変数で、現在のファイルのモジュール名が入ります。<br>要は、Flaskのインスタスの中に、自分の環境のファイルの名前が入るだけ！<br>他には、</p><blockquote>@app.route(\"/\")</blockquote><p>これはルーティングを設定してるいるだけ。<br>この部分を増やすと、URLに応じたAPIができる<br>最後に、</p><blockquote>&nbsp;if name == '<em>main</em>'</blockquote><p>これは、Pythonファイルが「<strong>python ファイル名.py</strong>&nbsp;というふうに実行されているかどうか」を判定するif文です。<br>もちろんなくても動くが、importした時にも動いてしまうから、<strong>python ファイル名.py</strong> 以外で出力を起こさないようなイメージです。</p>",
+    "heroImage": {
+      "url": "/images/blogs/mq7e9gok_67/cover.png",
+      "width": 720,
+      "height": 360
+    },
+    "description": "pythonを入門した記事"
+  }
+]

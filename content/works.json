@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "id": "k7cwmbf8u00",
+    "createdAt": "2024-05-04T13:30:43.807Z",
+    "updatedAt": "2024-09-08T06:26:01.711Z",
+    "publishedAt": "2024-09-08T06:26:01.711Z",
+    "revisedAt": "2024-09-08T06:26:01.711Z",
+    "title": "Tavern株式会社",
+    "fromAt": "2023-09-30T15:00:00.000Z",
+    "description": "受託の案件のフロントエンドの実装を主に担当しています。\n事例を挙げると、CMSの開発やコーポレートサイトの実装、社内で使うシステムの開発などを担当していました。",
+    "link": "https://tavern.co.jp/",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  },
+  {
+    "id": "984v_3bqj",
+    "createdAt": "2024-04-29T20:37:14.116Z",
+    "updatedAt": "2024-05-07T14:29:09.922Z",
+    "publishedAt": "2024-04-29T20:37:14.116Z",
+    "revisedAt": "2024-05-07T14:29:09.922Z",
+    "title": "株式会社Helpfeel",
+    "fromAt": "2024-03-31T15:00:00.000Z",
+    "description": "HelpfeelのGyazoチームでインターンとして参加しています。主にフロントエンドの開発をしています。",
+    "link": "https://corp.helpfeel.com/ja/home",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  },
+  {
+    "id": "kfky012_ck",
+    "createdAt": "2023-12-01T14:20:43.858Z",
+    "updatedAt": "2025-04-06T03:59:27.584Z",
+    "publishedAt": "2023-12-01T14:20:43.858Z",
+    "revisedAt": "2025-04-06T03:59:27.584Z",
+    "title": "関西大学",
+    "fromAt": "2021-03-31T15:00:00.000Z",
+    "toAt": "2025-03-31T15:00:00.000Z",
+    "description": "大学生をしています。情報学科に所属しています。",
+    "link": "https://www.kansai-u.ac.jp",
+    "position": []
+  },
+  {
+    "id": "6wdam067d8",
+    "createdAt": "2023-12-01T16:10:31.687Z",
+    "updatedAt": "2024-05-07T14:29:21.837Z",
+    "publishedAt": "2023-12-01T16:10:31.687Z",
+    "revisedAt": "2024-05-07T14:29:21.837Z",
+    "title": "NPO法人Clipper",
+    "fromAt": "2021-05-31T15:00:00.000Z",
+    "description": "業務委託の開発や自社サービスの開発をしています",
+    "link": "https://www.clpr.pro/",
+    "position": [
+      "ソフトウェアエンジニア"
+    ]
+  },
+  {
+    "id": "e94k0p9rc",
+    "createdAt": "2023-12-01T16:15:20.952Z",
+    "updatedAt": "2024-05-07T14:29:30.076Z",
+    "publishedAt": "2023-12-01T16:15:20.952Z",
+    "revisedAt": "2024-05-07T14:29:30.076Z",
+    "title": "株式会社エクスコア",
+    "fromAt": "2021-11-30T15:00:00.000Z",
+    "toAt": "2022-05-31T15:00:00.000Z",
+    "description": "自社サービスのフロントエンドエンジニア、Nuxt.js(version2)の勉強資料の作成を行いました",
+    "link": "https://xscore.co.jp/",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  },
+  {
+    "id": "jaopbhdw2qsm",
+    "createdAt": "2023-12-01T14:24:35.798Z",
+    "updatedAt": "2024-05-07T14:29:40.747Z",
+    "publishedAt": "2023-12-01T14:24:35.798Z",
+    "revisedAt": "2024-05-07T14:29:40.747Z",
+    "title": "株式会社Zipunk",
+    "fromAt": "2022-06-30T15:00:00.000Z",
+    "toAt": "2022-12-31T15:00:00.000Z",
+    "description": "フロントエンドエンジニアとして、Qudenの開発に携わっていました。\nNext.jsやNest.jsを使った開発をしていました。",
+    "link": "https://zipunk.com/",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  },
+  {
+    "id": "58-l6hpa8q",
+    "createdAt": "2023-12-01T16:15:57.737Z",
+    "updatedAt": "2024-05-07T14:29:00.442Z",
+    "publishedAt": "2023-12-01T16:15:57.737Z",
+    "revisedAt": "2024-05-07T14:29:00.442Z",
+    "title": "株式会社ohmygod",
+    "fromAt": "2023-01-31T15:00:00.000Z",
+    "description": "FirebaseとNuxt3を使って、自社開発や受託開発の開発を行っています。\nザ・スタンプラリーやザ・クーポンなどの開発に携わっています。",
+    "link": "https://ohmygod.jp/",
+    "position": [
+      "ソフトウェアエンジニア"
+    ]
+  },
+  {
+    "id": "9etjonp_1bj",
+    "createdAt": "2023-12-01T16:16:42.066Z",
+    "updatedAt": "2024-05-07T14:29:54.820Z",
+    "publishedAt": "2023-12-01T16:16:42.066Z",
+    "revisedAt": "2024-05-07T14:29:54.820Z",
+    "title": "株式会社BuySell Technologies",
+    "fromAt": "2023-07-31T15:00:00.000Z",
+    "toAt": "2023-08-25T15:00:00.000Z",
+    "description": "サマーインターンに参加していました。Stockチームで、新規機能の開発をさしてもらうことができました。\n技術スタック的には、Goを使って、API実装やReact+Viteのフロントエンドの実装を行いました",
+    "link": "https://buysell-technologies.com/",
+    "position": [
+      "ソフトウェアエンジニア"
+    ]
+  },
+  {
+    "id": "ikujb71gy",
+    "createdAt": "2023-12-01T16:25:52.850Z",
+    "updatedAt": "2024-05-07T14:30:03.859Z",
+    "publishedAt": "2023-12-01T16:25:52.850Z",
+    "revisedAt": "2024-05-07T14:30:03.859Z",
+    "title": "株式会社Beenos",
+    "fromAt": "2023-10-15T15:00:00.000Z",
+    "toAt": "2023-10-30T15:00:00.000Z",
+    "description": "短期のインターンに参加していました。Nuxt2とPHPを触っていました。",
+    "link": "https://beenos.com/",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  },
+  {
+    "id": "8fb5qpml38z",
+    "createdAt": "2023-12-01T16:29:00.804Z",
+    "updatedAt": "2024-05-07T14:30:13.538Z",
+    "publishedAt": "2023-12-01T16:29:00.804Z",
+    "revisedAt": "2024-05-07T14:30:13.538Z",
+    "title": "株式会社CyberAgent",
+    "fromAt": "2023-10-31T15:00:00.000Z",
+    "toAt": "2023-11-29T15:00:00.000Z",
+    "description": "Tech Jobで一ヶ月インターンに参加していました。プロダクトにアニメーションの追加をしていました。React+ViewTransitionAPIなどを主に触っていました。",
+    "link": "https://www.cyberagent.co.jp/",
+    "position": [
+      "フロントエンドエンジニア"
+    ]
+  }
+]

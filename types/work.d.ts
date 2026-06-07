@@ -8,7 +8,7 @@ export type Work = {
   fromAt: string;
   toAt: string | null;
   description: string;
-  position: string;
+  position: string[];
   link: string;
 };
 
