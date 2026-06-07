@@ -1,8 +1,8 @@
-import { client } from "@/libs/client";
-import Layout from "../layout";
-import type { Works } from "@/types/work";
-import { formatDate } from "@/libs/common";
 import { SeoHead } from "@/components/SeoHead";
+import { formatDate } from "@/libs/common";
+import { getWorks } from "@/libs/content";
+import type { Works } from "@/types/work";
+import Layout from "../layout";
 
 export default function Work({ works }: { works: Works }) {
   return (
@@ -38,13 +38,9 @@ export default function Work({ works }: { works: Works }) {
 }
 
 export const getStaticProps = async () => {
-  const data = await client.get({
-    endpoint: "work",
-    queries: { orders: "toAt" },
-  });
   return {
     props: {
-      works: data.contents,
+      works: getWorks(),
     },
   };
 };

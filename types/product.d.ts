@@ -2,8 +2,8 @@ export type Product = {
   id: string;
   createdAt: string;
   updatedAt: string;
-  publishedAt: string;
-  revisedAt: string;
+  publishedAt?: string;
+  revisedAt?: string;
   title: string;
   description: string;
   image: {
@@ -11,8 +11,7 @@ export type Product = {
     height: number;
     width: number;
   };
-  URL: string;
-  // 中身はHTML
-  content: string;
+  URL?: string;
+  content?: string;
 };
 export type Products = Product[];
