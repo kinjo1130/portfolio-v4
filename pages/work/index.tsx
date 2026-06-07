@@ -2,45 +2,50 @@ import { SeoHead } from "@/components/SeoHead";
 import { formatDate } from "@/libs/common";
 import { getWorks } from "@/libs/content";
 import type { Works } from "@/types/work";
+import Link from "next/link";
 import Layout from "../layout";
 
 export default function Work({ works }: { works: Works }) {
-  return (
-    <Layout title="Work" tooltipText="インターンや業務委託の経験をまとめたもの">
-      <SeoHead
-        title="Work"
-        titleTemplate="Work"
-        description="Work List"
-        imgUrl="/favicon.ico"
-      />
-      <ul>
-        {works.map((work) => (
-          <li key={work.id} className="my-10">
-            <h3 className="font-semibold text-lg">{work.title}</h3>
-            <div className="flex gap-2 items-center">
-              <p className="text-slate-400 font-semibold text-sm">
-                {formatDate(work.fromAt)}
-              </p>
-              <p>-</p>
-              <p className="text-slate-400 font-semibold text-sm">
-                {work.toAt ? formatDate(work.toAt) : "現在"}{" "}
-              </p>
-            </div>
-            <p className="text-sm">{work.description}</p>
-            <a href={work.link} className="underline text-sm">
-              会社情報
-            </a>
-          </li>
-        ))}
-      </ul>
-    </Layout>
-  );
+	return (
+		<Layout title="Work" tooltipText="インターンや業務委託の経験をまとめたもの">
+			<SeoHead
+				title="Work"
+				titleTemplate="Work"
+				description="Work List"
+				imgUrl="/favicon.ico"
+			/>
+			<ul>
+				{works.map((work) => (
+					<li key={work.slug} className="my-10">
+						<h3 className="font-semibold text-lg">
+							<Link href={`/work/${work.slug}`} className="hover:underline">
+								{work.title}
+							</Link>
+						</h3>
+						<div className="flex gap-2 items-center">
+							<p className="text-slate-400 font-semibold text-sm">
+								{formatDate(work.fromAt)}
+							</p>
+							<p>-</p>
+							<p className="text-slate-400 font-semibold text-sm">
+								{work.toAt ? formatDate(work.toAt) : "現在"}{" "}
+							</p>
+						</div>
+						<p className="text-sm">{work.description}</p>
+						<a href={work.link} className="underline text-sm">
+							会社情報
+						</a>
+					</li>
+				))}
+			</ul>
+		</Layout>
+	);
 }
 
 export const getStaticProps = async () => {
-  return {
-    props: {
-      works: getWorks(),
-    },
-  };
+	return {
+		props: {
+			works: await getWorks(),
+		},
+	};
 };
