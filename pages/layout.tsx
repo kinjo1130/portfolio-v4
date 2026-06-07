@@ -32,7 +32,9 @@ export default function Layout({
     // }
   }, []);
   return (
-    <div className={`bg-gray-50 ${className}`}>
+    <div
+      className={`min-h-screen bg-surface-page text-ink-primary ${className ?? ""}`}
+    >
       <div className="flex justify-center">
         <Header />
       </div>
