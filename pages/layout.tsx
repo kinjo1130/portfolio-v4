@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import Tooltip from "@/components/Tooltip";
-import { Info, Rss } from "lucide-react";
+import RoadCar from "@/components/RoadCar";
+import { Rss } from "lucide-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,6 @@ type Props = {
 	title?: string;
 	eyebrow?: string;
 	issueNumber?: string;
-	tooltipText?: string;
 	className?: string;
 	hideTitleBlock?: boolean;
 };
@@ -20,7 +19,6 @@ export default function Layout({
 	title,
 	eyebrow,
 	issueNumber,
-	tooltipText,
 	className,
 	hideTitleBlock = false,
 }: Props) {
@@ -30,6 +28,7 @@ export default function Layout({
 		router.push("/api/feed");
 	};
 	const isBlogPath = router.pathname === "/blog";
+	const isTopPath = router.pathname === "/";
 
 	useEffect(() => {
 		setPageClass("page-enter");
@@ -43,9 +42,10 @@ export default function Layout({
 
 			<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
 				{/* Issue meta strip — left: section eyebrow, right: issue number */}
-				<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
+				<div className="relative flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
 					<span>{eyebrow ?? <span aria-hidden>&nbsp;</span>}</span>
 					<span className="tnum">{issueNumber ?? "§ 01 — 2026"}</span>
+					{isTopPath && <RoadCar />}
 				</div>
 
 				{/* Title block */}
@@ -58,13 +58,8 @@ export default function Layout({
 							>
 								{title}
 							</h1>
-							<div className="flex items-center gap-3 pt-3 shrink-0">
-								{tooltipText && (
-									<Tooltip text={tooltipText}>
-										<Info size={20} />
-									</Tooltip>
-								)}
-								{isBlogPath && (
+							{isBlogPath && (
+								<div className="pt-3 shrink-0">
 									<button
 										type="button"
 										className="small-caps text-sm font-semibold text-ink-primary border border-ink-primary px-3 py-1.5 flex items-center gap-2 hover:bg-ink-primary hover:text-paper transition-colors"
@@ -73,8 +68,8 @@ export default function Layout({
 										<Rss size={14} />
 										RSS
 									</button>
-								)}
-							</div>
+								</div>
+							)}
 						</div>
 					</section>
 				)}

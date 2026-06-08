@@ -12,6 +12,9 @@ import type { Work, Works } from "@/types/work";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
+// draft はデフォルトで常に非表示。 SHOW_DRAFTS=true を渡したときだけ表示。
+const showDrafts = process.env.SHOW_DRAFTS === "true";
+
 function readJson<T>(file: string): T {
 	const fullPath = path.join(CONTENT_DIR, file);
 	const raw = fs.readFileSync(fullPath, "utf-8");
@@ -20,7 +23,7 @@ function readJson<T>(file: string): T {
 
 export function getBlogs(): BlogPosts {
 	const posts = readJson<BlogPosts>("blogs.json");
-	const visible = isProd ? posts.filter((p) => !p.draft) : posts;
+	const visible = !showDrafts ?posts.filter((p) => !p.draft) : posts;
 	return [...visible].sort(
 		(a, b) =>
 			new Date(b.publishedAt ?? b.createdAt).getTime() -
@@ -33,8 +36,6 @@ export function getBlog(id: string): BlogPost | undefined {
 }
 
 type WorkFrontmatter = Omit<Work, "slug" | "body">;
-
-const isProd = process.env.NODE_ENV === "production";
 
 export async function getWorks(): Promise<Works> {
 	const dir = path.join(CONTENT_DIR, "works");
@@ -50,7 +51,7 @@ export async function getWorks(): Promise<Works> {
 			} satisfies Work;
 		}),
 	);
-	const visible = isProd ? works.filter((w) => !w.draft) : works;
+	const visible = !showDrafts ?works.filter((w) => !w.draft) : works;
 	return visible.sort((a, b) => {
 		const aTo = a.toAt ? new Date(a.toAt).getTime() : Number.POSITIVE_INFINITY;
 		const bTo = b.toAt ? new Date(b.toAt).getTime() : Number.POSITIVE_INFINITY;
@@ -79,7 +80,7 @@ export async function getProducts(): Promise<Products> {
 			} satisfies Product;
 		}),
 	);
-	const visible = isProd ? products.filter((p) => !p.draft) : products;
+	const visible = !showDrafts ?products.filter((p) => !p.draft) : products;
 	return visible.sort(
 		(a, b) =>
 			new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),

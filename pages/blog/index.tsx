@@ -26,7 +26,6 @@ export default function Blog({
 			title="Writing"
 			eyebrow="§ 05 — Blog"
 			issueNumber="§ 05 — 2026"
-			tooltipText="ブログページ一覧です"
 		>
 			<SeoHead
 				title="Blog"
