@@ -1,76 +1,90 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Tooltip from "@/components/Tooltip";
-import { Info } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Rss } from "lucide-react";
+import { Info, Rss } from "lucide-react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
 type Props = {
-  children: React.ReactNode;
-  title?: string;
-  tooltipText?: string;
-  className?: string;
+	children: React.ReactNode;
+	title?: string;
+	eyebrow?: string;
+	issueNumber?: string;
+	tooltipText?: string;
+	className?: string;
+	hideTitleBlock?: boolean;
 };
 
-// title を props として追加します
 export default function Layout({
-  children,
-  title,
-  tooltipText,
-  className,
+	children,
+	title,
+	eyebrow,
+	issueNumber,
+	tooltipText,
+	className,
+	hideTitleBlock = false,
 }: Props) {
-  const [pageClass, setPageClass] = useState("");
-  const router = useRouter();
-  const routeFeed = () => {
-    router.push("/api/feed");
-  };
-  const isBlogPath = router.pathname === "/blog";
-  useEffect(() => {
-    setPageClass("page-enter");
-    // return () => {
-    //   setPageClass("");
-    // }
-  }, []);
-  return (
-    <div
-      className={`min-h-screen bg-surface-page text-ink-primary ${className ?? ""}`}
-    >
-      <div className="flex justify-center">
-        <Header />
-      </div>
-      <div className={`mx-10 lg:mx-auto mt-10 max-w-screen-md ${pageClass} `}>
-        {/* tooltip */}
-        {title && (
-          <div className="flex items-center mb-5 justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold text-2xl">{title}</h1>
-              {tooltipText && (
-                <Tooltip text={tooltipText}>
-                  <Info size={20} />
-                </Tooltip>
-              )}
-            </div>
-            {/* RSS */}
-            {isBlogPath && (
-              <div className="flex justify-center">
-                <button
-                  type="button"
-                  className="hover:bg-slate-200 px-3 py-2 rounded-2xl flex items-center gap-2"
-                  onClick={() => routeFeed()}
-                >
-                  <Rss size={20} />
-                  RSS
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+	const [pageClass, setPageClass] = useState("");
+	const router = useRouter();
+	const routeFeed = () => {
+		router.push("/api/feed");
+	};
+	const isBlogPath = router.pathname === "/blog";
 
-        {children}
-      </div>
-      <div className="flex justify-center">
-        <Footer />
-      </div>
-    </div>
-  );
+	useEffect(() => {
+		setPageClass("page-enter");
+	}, []);
+
+	return (
+		<div className={`min-h-screen text-ink-primary ${className ?? ""}`}>
+			<div className="flex justify-center">
+				<Header />
+			</div>
+
+			<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
+				{/* Issue meta strip — left: section eyebrow, right: issue number */}
+				<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
+					<span>{eyebrow ?? <span aria-hidden>&nbsp;</span>}</span>
+					<span className="tnum">{issueNumber ?? "§ 01 — 2026"}</span>
+				</div>
+
+				{/* Title block */}
+				{!hideTitleBlock && title && (
+					<section className="pt-12 md:pt-16 lg:pt-20 pb-12 lg:pb-16">
+						<div className="flex items-start justify-between gap-6">
+							<h1
+								className="jp-display font-black leading-[0.95] tracking-tighter ink-settle"
+								style={{ fontSize: "clamp(48px, 9vw, 120px)" }}
+							>
+								{title}
+							</h1>
+							<div className="flex items-center gap-3 pt-3 shrink-0">
+								{tooltipText && (
+									<Tooltip text={tooltipText}>
+										<Info size={20} />
+									</Tooltip>
+								)}
+								{isBlogPath && (
+									<button
+										type="button"
+										className="small-caps text-sm font-semibold text-ink-primary border border-ink-primary px-3 py-1.5 flex items-center gap-2 hover:bg-ink-primary hover:text-paper transition-colors"
+										onClick={() => routeFeed()}
+									>
+										<Rss size={14} />
+										RSS
+									</button>
+								)}
+							</div>
+						</div>
+					</section>
+				)}
+
+				<div className={pageClass}>{children}</div>
+			</main>
+
+			<div className="flex justify-center">
+				<Footer />
+			</div>
+		</div>
+	);
 }

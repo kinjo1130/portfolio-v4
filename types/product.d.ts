@@ -11,5 +11,6 @@ export type Product = {
 	publishedAt: string;
 	updatedAt: string;
 	body: string;
+	draft?: boolean;
 };
 export type Products = Product[];

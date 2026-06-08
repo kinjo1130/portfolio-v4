@@ -7,6 +7,7 @@ export type Work = {
 	position: string[];
 	link: string;
 	body: string;
+	draft?: boolean;
 };
 
 export type Works = Work[];
