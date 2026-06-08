@@ -12,6 +12,7 @@ export interface BlogPost {
     height: number;
     width: number;
   };
+  draft?: boolean;
 }
 
 export type BlogPosts = BlogPost[];

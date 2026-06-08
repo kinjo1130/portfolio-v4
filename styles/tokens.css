@@ -1,107 +1,119 @@
 /*
- * Aphro Design System — Tokens
+ * Design Tokens — Editorial Paper
  * SSoT: ../DESIGN.md
  * 直接 hex を書かず、ここで定義されたトークン経由で参照する。
  */
 
 :root {
-  /* ---- 2.2 Neutral ramp (warm, low-chroma 16-step) ---- */
-  --neutral-950: #1b1a18;
-  --neutral-900: #232220;
-  --neutral-850: #2a2926;
-  --neutral-800: #302f2c; /* = ASPHALT */
+  /* ---- Neutral ramp (cool warm-tinged paper grey) ---- */
+  --neutral-950: #131210;
+  --neutral-900: #1a1815;
+  --neutral-850: #232220;
+  --neutral-800: #2c2a27; /* = INK */
   --neutral-700: #494742;
-  --neutral-600: #625f59;
-  --neutral-500: #777370;
-  --neutral-450: #8a8680; /* = CONCRETE */
-  --neutral-400: #9d9a94;
-  --neutral-300: #b6b3ac;
-  --neutral-250: #c5c2bb;
-  --neutral-200: #d4d1c9;
-  --neutral-150: #e1ddd2;
-  --neutral-100: #efede3; /* = PAPER */
-  --neutral-50: #f5f3eb;
-  --neutral-0: #faf8f0;
+  --neutral-600: #6b6862;
+  --neutral-500: #8a8680;
+  --neutral-450: #9d9a94; /* = CONCRETE */
+  --neutral-400: #b6b3ac;
+  --neutral-300: #c5c2bb;
+  --neutral-250: #d0cfc8; /* = RULE */
+  --neutral-200: #e7e6e1;
+  --neutral-150: #efeeea;
+  --neutral-100: #f3f2ef; /* = PAPER (closer to white) */
+  --neutral-50: #f7f6f3;
+  --neutral-0: #fbfaf8;
 
-  /* ---- 2.1 Material anchors ---- */
-  --asphalt: var(--neutral-800);
+  /* ---- Material anchors ---- */
+  --ink: var(--neutral-800);
+  --asphalt: var(--neutral-800); /* alias for legacy refs */
   --concrete: var(--neutral-450);
   --paper: var(--neutral-100);
+  --rule: var(--neutral-250);
 
-  /* ---- 2.3 Signal tones ---- */
+  /* ---- Signal tones ---- */
   --signal-positive: #5c6e54;
   --signal-caution: #9c7b3f;
   --signal-critical: #92503f;
   --signal-info: #4f6470;
 
-  /* ---- 2.4 Hazard accent (links only) ---- */
-  --hazard: #bb6a35;
-  --hazard-deep: #a85a2b;
+  /* ---- Accent (used sparingly, links only) ---- */
+  --hazard: #2c2a27;
+  --hazard-deep: #000000;
   --accent: var(--hazard);
   --accent-hover: var(--hazard-deep);
   --link: var(--hazard);
 
-  /* ---- 2.5 Semantic aliases — Paper context (default) ---- */
+  /* ---- Semantic aliases ---- */
   --surface-page: var(--paper);
   --surface-raised: var(--neutral-50);
   --surface-sunken: var(--neutral-150);
   --surface-card: var(--neutral-0);
-  --surface-inverse: var(--asphalt);
+  --surface-inverse: var(--ink);
 
-  --text-primary: var(--asphalt);
-  --text-secondary: var(--neutral-600);
-  --text-tertiary: var(--concrete);
-  --text-disabled: var(--neutral-300);
+  --text-primary: var(--ink);
+  --text-secondary: var(--neutral-700);
+  --text-tertiary: var(--neutral-600);
+  --text-disabled: var(--neutral-400);
   --text-on-inverse: var(--paper);
 
-  --border-strong: var(--concrete);
+  --border-strong: var(--neutral-500);
   --border-default: var(--neutral-300);
   --border-subtle: var(--neutral-200);
-  --divider: var(--neutral-200);
+  --divider: var(--rule);
   --border-thick: 2px;
-  --border-rule: 3px;
+  --border-rule: 1px;
 
-  --action-primary-bg: var(--asphalt);
+  --action-primary-bg: var(--ink);
   --action-primary-fg: var(--paper);
   --action-primary-bg-hover: var(--neutral-900);
   --action-secondary-bg: transparent;
-  --action-secondary-fg: var(--asphalt);
-  --action-secondary-border: var(--asphalt);
+  --action-secondary-fg: var(--ink);
+  --action-secondary-border: var(--ink);
   --action-ghost-bg: transparent;
-  --action-ghost-fg: var(--asphalt);
-  --focus-ring: var(--hazard);
+  --action-ghost-fg: var(--ink);
+  --focus-ring: var(--ink);
 
-  /* ---- 3.1 Type scale (1.250 major-third) ---- */
+  /* ---- Type scale ---- */
   --size-3xs: 11px;
   --size-2xs: 12px;
   --size-xs: 13px;
   --size-sm: 14px;
   --size-md: 16px;
-  --size-lg: 18px;
-  --size-xl: 22px;
-  --size-2xl: 28px;
-  --size-3xl: 36px;
-  --size-4xl: 48px;
-  --size-5xl: 64px;
-  --size-6xl: 88px;
+  --size-lg: 19px;
+  --size-xl: 24px;
+  --size-2xl: 32px;
+  --size-3xl: 44px;
+  --size-4xl: 60px;
+  --size-5xl: 84px;
+  --size-6xl: 120px;
+  --size-7xl: 168px;
 
-  /* ---- 3.2 Leading & tracking ---- */
-  --leading-tight: 1.05;
-  --leading-snug: 1.18;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.7;
+  /* ---- Leading & tracking ---- */
+  --leading-tight: 0.95;
+  --leading-snug: 1.12;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
   --tracking-tight: -0.02em;
   --tracking-snug: -0.01em;
+  --tracking-normal: 0;
   --tracking-wide: 0.08em;
-  --tracking-wider: 0.16em;
+  --tracking-wider: 0.18em;
 
-  /* ---- 3 Fonts ---- */
-  --font-display: "Space Grotesk", "Noto Sans JP", system-ui, sans-serif;
-  --font-body: "DM Sans", "Noto Sans JP", system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-  --font-jp: "Noto Sans JP", system-ui, sans-serif;
+  /* ---- Fonts ---- */
+  /* Noto Sans family for clarity and legibility, JP + Latin matched. */
+  --font-display: "Noto Sans", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", system-ui, sans-serif;
+  --font-body: "Noto Sans", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", system-ui, sans-serif;
+  --font-jp-display: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    sans-serif;
+  --font-sans: "Noto Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-small-caps: "Noto Sans", sans-serif;
 
-  /* ---- 4 Spacing scale (4px base / 8px rhythm) ---- */
+  /* ---- Spacing scale (4px base / 8px rhythm) ---- */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -114,34 +126,39 @@
   --space-10: 128px;
   --space-11: 192px;
 
-  /* ---- 4 Containers ---- */
-  --container-prose: 68ch;
+  /* ---- Containers ---- */
+  --container-prose: 64ch;
   --container-narrow: 720px;
   --container-content: 1080px;
   --container-wide: 1320px;
   --gutter: var(--space-5);
 
-  /* ---- 5 Radius (max 6px, pill only for tags/avatars) ---- */
-  --radius-xs: 2px;
-  --radius-sm: 3px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  /* ---- Loose-leaf rule grid ---- */
+  --rule-gap: 32px;
+  --rule-color: rgba(20, 20, 18, 0.1);
+
+  /* ---- Radius (editorial: no rounding) ---- */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
   --radius-pill: 999px;
 
-  /* ---- 5 Depth — only flat hard offset allowed ---- */
-  --shadow-hard: 4px 4px 0 0 var(--asphalt);
+  /* ---- Depth ---- */
+  --shadow-hard: 4px 4px 0 0 var(--ink);
 
-  /* ---- 6 Motion ---- */
-  --duration-fast: 120ms;
-  --duration-normal: 200ms;
-  --duration-slow: 320ms;
+  /* ---- Motion ---- */
+  --duration-fast: 160ms;
+  --duration-normal: 280ms;
+  --duration-slow: 520ms;
   --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---- 2.6 Asphalt (dark) surface context ---- */
-[data-theme="asphalt"] {
-  --surface-page: var(--asphalt);
+/* ---- Dark / inverse context ---- */
+[data-theme="ink"] {
+  --surface-page: var(--ink);
   --surface-raised: var(--neutral-850);
   --surface-sunken: var(--neutral-900);
   --surface-card: var(--neutral-850);
@@ -149,28 +166,23 @@
 
   --text-primary: var(--paper);
   --text-secondary: var(--neutral-300);
-  --text-tertiary: var(--concrete);
+  --text-tertiary: var(--neutral-450);
   --text-disabled: var(--neutral-600);
-  --text-on-inverse: var(--asphalt);
+  --text-on-inverse: var(--ink);
 
   --border-strong: var(--neutral-500);
   --border-default: var(--neutral-700);
   --border-subtle: var(--neutral-800);
-  --divider: var(--neutral-800);
+  --divider: var(--neutral-700);
+
+  --rule-color: rgba(245, 243, 235, 0.08);
 
   --action-primary-bg: var(--paper);
-  --action-primary-fg: var(--asphalt);
+  --action-primary-fg: var(--ink);
   --action-primary-bg-hover: var(--neutral-50);
   --action-secondary-fg: var(--paper);
   --action-secondary-border: var(--paper);
   --action-ghost-fg: var(--paper);
-
-  /* DESIGN.md §2.4: Asphalt context lifts hazard for legibility */
-  --hazard: #cf8348;
-  --hazard-deep: #dd9358;
-  --accent: var(--hazard);
-  --accent-hover: var(--hazard-deep);
-  --link: var(--hazard);
 }
 
 @media (prefers-reduced-motion: reduce) {

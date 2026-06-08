@@ -20,7 +20,8 @@ function readJson<T>(file: string): T {
 
 export function getBlogs(): BlogPosts {
 	const posts = readJson<BlogPosts>("blogs.json");
-	return [...posts].sort(
+	const visible = isProd ? posts.filter((p) => !p.draft) : posts;
+	return [...visible].sort(
 		(a, b) =>
 			new Date(b.publishedAt ?? b.createdAt).getTime() -
 			new Date(a.publishedAt ?? a.createdAt).getTime(),
@@ -32,6 +33,8 @@ export function getBlog(id: string): BlogPost | undefined {
 }
 
 type WorkFrontmatter = Omit<Work, "slug" | "body">;
+
+const isProd = process.env.NODE_ENV === "production";
 
 export async function getWorks(): Promise<Works> {
 	const dir = path.join(CONTENT_DIR, "works");
@@ -47,7 +50,8 @@ export async function getWorks(): Promise<Works> {
 			} satisfies Work;
 		}),
 	);
-	return works.sort((a, b) => {
+	const visible = isProd ? works.filter((w) => !w.draft) : works;
+	return visible.sort((a, b) => {
 		const aTo = a.toAt ? new Date(a.toAt).getTime() : Number.POSITIVE_INFINITY;
 		const bTo = b.toAt ? new Date(b.toAt).getTime() : Number.POSITIVE_INFINITY;
 		return bTo - aTo;
@@ -75,7 +79,8 @@ export async function getProducts(): Promise<Products> {
 			} satisfies Product;
 		}),
 	);
-	return products.sort(
+	const visible = isProd ? products.filter((p) => !p.draft) : products;
+	return visible.sort(
 		(a, b) =>
 			new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
 	);

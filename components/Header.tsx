@@ -1,65 +1,42 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Tooltip from "./Tooltip";
+
+const NAV = [
+	{ href: "/about", label: "About" },
+	{ href: "/work", label: "Work" },
+	{ href: "/products", label: "Products" },
+	{ href: "/blog", label: "Blog" },
+];
 
 export const Header: React.FC = () => {
 	const router = useRouter();
+
 	const isActive = (href: string) => {
-		// ルートパスの場合は、pathnameが正確に'/'であることを確認
-		if (href === "/") {
-			return router.pathname === "/"
-				? "bg-slate-200 rounded-2xl py-2 px-4 no-underline"
-				: "";
-		}
-		// それ以外のパスの場合は、サブパスを含むかどうかをチェック
-		return router.pathname.startsWith(`${href}/`) || router.pathname === href
-			? "bg-slate-200 rounded-2xl py-2 px-4 no-underline"
-			: "";
+		if (href === "/") return router.pathname === "/";
+		return router.pathname === href || router.pathname.startsWith(`${href}/`);
 	};
+
 	return (
-		<header className="p-6 flex items-center gap-4">
+		<header className="w-full px-6 md:px-12 lg:px-20 py-5 flex items-center justify-between max-w-wide mx-auto">
 			<Link
 				href="/"
-				className={`underline hover:no-underline ${isActive("/")}`}
+				className="small-caps text-sm font-semibold text-ink-primary tracking-wider no-underline link-draw"
 			>
-				<p>home</p>
+				kinjo.me
 			</Link>
-			{/* <Tooltip text="blogページです">
-        <Link href="/blog" className="underline">
-          <p>blog</p>
-        </Link>
-      </Tooltip> */}
-			<Link
-				href="/blog"
-				className={`underline hover:no-underline ${isActive("/blog")}`}
-			>
-				<p>blog</p>
-			</Link>
-
-			<Link
-				href="/products"
-				className={`underline hover:no-underline ${isActive("/products")}`}
-			>
-				<p>products</p>
-			</Link>
-			<Link
-				href="/work"
-				className={`underline hover:no-underline ${isActive("/work")}`}
-			>
-				<p>work</p>
-			</Link>
-			<Link
-				href="/tools/crop"
-				className={`underline hover:no-underline ${isActive("/tools")}`}
-			>
-				<p>tools</p>
-			</Link>
-			{/* <Link
-				href="/about"
-				className={`underline hover:no-underline ${isActive("/about")}`}
-			>
-				<p>about</p>
-			</Link> */}
+			<nav className="flex items-center gap-5 md:gap-7">
+				{NAV.map((item) => (
+					<Link
+						key={item.href}
+						href={item.href}
+						className={`small-caps text-sm font-semibold no-underline link-draw text-ink-primary ${
+							isActive(item.href) ? "underline underline-offset-4" : ""
+						}`}
+					>
+						{item.label}
+					</Link>
+				))}
+			</nav>
 		</header>
 	);
 };
