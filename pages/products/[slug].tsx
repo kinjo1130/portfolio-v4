@@ -21,10 +21,11 @@ export default function ProductDetail({ product }: { product: Product }) {
 				</div>
 				<Image
 					src={product.image.url}
-					alt="product image"
+					alt={product.title}
 					width={product.image.width}
 					height={product.image.height}
-					className="w-full"
+					sizes="(min-width: 768px) 640px, 100vw"
+					className="mx-auto h-auto w-auto max-h-[70vh] max-w-full object-contain"
 				/>
 				{product.url && (
 					<div className="mt-6">
