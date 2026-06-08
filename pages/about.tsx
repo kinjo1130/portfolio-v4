@@ -1,8 +1,8 @@
-import Heading from "@/components/Heading";
 import { SeoHead } from "@/components/SeoHead";
+import { type About, getAbout } from "@/libs/content";
 import Layout from "./layout";
 
-export default function About() {
+export default function AboutPage({ about }: { about: About }) {
 	return (
 		<Layout title="About">
 			<SeoHead
@@ -11,27 +11,22 @@ export default function About() {
 				description="About me"
 				imgUrl="/favicon.ico"
 			/>
-			<p>名前: 金城翔太郎</p>
-			<p>生年月日: 2002-11-30</p>
-			<p>出身地: 大阪生まれ、滋賀育ち</p>
-			<Heading level={2}>学生のころとプログラミングとの出会い</Heading>
-			<p>
-				小学校から高校までは運動が大好きな少年でした。そのときは、プログラミングのプの字も知らないような少年でした。友人と毎日体を動かして遊ぶようなことばっかりをしていました。
-				ましては、自分が機械に触るなんて思ってもなかったです。
-				そんな時の転機は、高校三年生の頃に、席が隣だった友達が、まさに自分のプログラミングの師匠になる人だったのです。
-				受験も早く終わって、暇を持て余していたら、PCを買って、プログラミングでもしてみたら？っていう勧めがあって、フットワークの軽かった自分は、すぐに大学で使うからと言って、親にPCを少し早いけど、お願いをして、買ってもらいました。
-				買ってもらってからは、友達に教えてもらって、LINEbotを作る日々を過ごしていました。最初の頃は、Lambdaを使って、LINEbotを作っていました。その後、LINEbotを作るために、AWSを使って、サーバーレスでLINEbotを作っていました。ですが、あまりにも難しすぎて、GASなどを使ってみたけど、スプレッドシートを使ったりしていくうちに、DBのことを自分は苦手だったのか、全然自分の思った通りに、出来なくて、別のことをしようとして、マークアップの方に興味を持って、この頃からフロントエンドの方に興味を持ち始めました。
-			</p>
-			<Heading level={3}>大学入学</Heading>
-			<p>
-				高校生のことからプログラミングなどを使っていたけど、それ以前に大学は情報系に進むと決まっていた。
-			</p>
-			<Heading level={3}>大学1-2年生</Heading>
-			<p>
-				この頃は、プログラミングに明け暮れていました。せっかくなら、大学生らしいこともしようと思って、サークルとかにも参加してみましたが、どうにも合わなかったので、趣味でいろんな開発をしたり、インターンに行って、技術を磨いていました。今と思うと、もう少し大学生らしいことをできたらなぁって思ったのですが、それは今、考えても仕方ないことだと割り切っています。
-			</p>
-			<Heading level={3}>大学3年生</Heading>
-			<p>Coming soon...</p>
+			<p>名前: {about.name}</p>
+			<p>生年月日: {about.birth}</p>
+			<p>出身地: {about.origin}</p>
+			<div
+				className="prose min-w-full mt-6"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: rendered markdown
+				dangerouslySetInnerHTML={{ __html: about.body }}
+			/>
 		</Layout>
 	);
 }
+
+export const getStaticProps = async () => {
+	return {
+		props: {
+			about: await getAbout(),
+		},
+	};
+};
