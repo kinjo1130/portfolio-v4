@@ -55,7 +55,7 @@ export default function Home({
 				<main className="px-6 md:px-12 lg:px-20 pb-32">
 					{/* Issue meta strip */}
 					<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
-						<span>kinjo.me</span>
+						<span>§ 01 — Home</span>
 						<span className="tnum">§ 01 — 2026</span>
 					</div>
 
