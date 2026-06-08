@@ -55,7 +55,7 @@ export default function Home({
 				<main className="px-6 md:px-12 lg:px-20 pb-32">
 					{/* Issue meta strip */}
 					<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
-						<span>kinjo.me</span>
+						<span>§ 01 — Home</span>
 						<span className="tnum">§ 01 — 2026</span>
 					</div>
 
@@ -68,7 +68,7 @@ export default function Home({
 						<h1
 							className="jp-display font-black leading-[0.92] tracking-tighter ink-settle"
 							style={{
-								fontSize: "clamp(72px, 16vw, 192px)",
+								fontSize: "clamp(40px, 12vw, 192px)",
 							}}
 						>
 							金城翔太郎
@@ -76,7 +76,7 @@ export default function Home({
 
 						<p
 							className="font-bold mt-6 tracking-tight text-ink-secondary ink-settle"
-							style={{ fontSize: "clamp(24px, 4vw, 48px)", letterSpacing: "0.01em" }}
+							style={{ fontSize: "clamp(18px, 4vw, 48px)", letterSpacing: "0.01em" }}
 						>
 							Shotaro Kinjo
 						</p>

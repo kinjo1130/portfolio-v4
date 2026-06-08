@@ -16,6 +16,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* prevent horizontal scroll caused by hero clamp + paddings on narrow screens */
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
   }
 
   /* Paper texture: loose-leaf horizontal rule + grain, scrolls with content */
