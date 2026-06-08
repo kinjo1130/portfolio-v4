@@ -51,7 +51,7 @@ export default function Layout({
 						<div className="flex items-start justify-between gap-6">
 							<h1
 								className="jp-display font-black leading-[0.95] tracking-tighter ink-settle"
-								style={{ fontSize: "clamp(48px, 9vw, 120px)" }}
+								style={{ fontSize: "clamp(32px, 8vw, 120px)" }}
 							>
 								{title}
 							</h1>

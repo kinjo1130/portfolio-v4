@@ -18,14 +18,14 @@ export const Header: React.FC = () => {
 	};
 
 	return (
-		<header className="w-full px-6 md:px-12 lg:px-20 py-5 flex items-center justify-between max-w-wide mx-auto">
+		<header className="w-full px-6 md:px-12 lg:px-20 py-5 max-w-wide mx-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
 			<Link
 				href="/"
-				className="small-caps text-sm font-semibold text-ink-primary tracking-wider no-underline link-draw"
+				className="small-caps text-sm font-semibold text-ink-primary tracking-wider no-underline link-draw shrink-0"
 			>
 				kinjo.me
 			</Link>
-			<nav className="flex items-center gap-5 md:gap-7">
+			<nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 md:gap-x-7">
 				{NAV.map((item) => (
 					<Link
 						key={item.href}
