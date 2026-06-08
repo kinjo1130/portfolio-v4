@@ -6,6 +6,7 @@ const NAV = [
 	{ href: "/work", label: "Work" },
 	{ href: "/products", label: "Products" },
 	{ href: "/blog", label: "Blog" },
+	{ href: "/tools", label: "Tools" },
 ];
 
 export const Header: React.FC = () => {
