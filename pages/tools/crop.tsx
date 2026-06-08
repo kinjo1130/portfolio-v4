@@ -128,7 +128,7 @@ export default function CropPage() {
         description="サムネイル・OGP・SNSアイコン用の画像を素早くトリミング"
         imgUrl="/favicon.ico"
       />
-      <Layout title="Image crop" tooltipText="ローカル完結のクライアントサイド画像クロップツール">
+      <Layout title="Image crop">
         <div className="mb-6">
           <p className="text-sm text-ink-secondary">
             画像はあなたのブラウザ内だけで処理されます。サーバーには送信されません。

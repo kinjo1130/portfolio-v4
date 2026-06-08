@@ -11,7 +11,6 @@ export default function Work({ works }: { works: Works }) {
 			title="Work"
 			eyebrow="§ 03 — Work"
 			issueNumber="§ 03 — 2026"
-			tooltipText="インターンや業務委託の経験をまとめたもの"
 		>
 			<SeoHead
 				title="Work"

@@ -1,7 +1,7 @@
 ---
 title: 株式会社Xer
 fromAt: "2025-06-01"
-toAt: "2025-11-30"
+toAt: "2026-01-30"
 link: ""
 position:
   - バックエンドエンジニア
