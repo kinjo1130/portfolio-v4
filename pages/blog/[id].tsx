@@ -10,18 +10,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import Layout from "../layout";
 
-interface BlogLike {
-  likes: number;
-  id: string;
-  _id: string;
-}
-
-export default function BlogId({
-  blog,
-}: {
-  blog: BlogPost;
-  likeData: BlogLike;
-}) {
+export default function BlogId({ blog }: { blog: BlogPost }) {
   const toc = renderToc(blog.body);
   const isDevImageUrl =
     process.env.NODE_ENV === "development"
@@ -34,35 +23,53 @@ export default function BlogId({
   };
   useEffect(() => {
     getBlogLike(blog.id);
-  }, []);
+  }, [blog.id]);
+
   return (
     <>
       <SeoHead
         title="Blog"
         titleTemplate={blog.title}
         description={blog.description}
-        imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(
-          blog.title
-        )}`}
+        imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}`}
       />
-      <Layout title={blog.title} className=" md:px-20">
-        <div className="mb-10">
-          <p>公開日: {formatDate(blog.createdAt)}</p>
-          <p>更新日: {formatDate(blog.updatedAt)}</p>
+      <Layout title={blog.title} className="md:px-12 lg:px-16">
+        <div className="md:grid md:grid-cols-12 md:gap-10 mt-10">
+          <aside className="md:col-span-3 mb-10 md:mb-0">
+            <div className="md:sticky md:top-10 space-y-8">
+              <div>
+                <p className="font-mono text-2xs uppercase tracking-wider text-ink-secondary mb-2">
+                  公開日
+                </p>
+                <p className="text-sm text-ink-primary tnum">
+                  {formatDate(blog.createdAt)}
+                </p>
+              </div>
+              {blog.updatedAt && blog.updatedAt !== blog.createdAt && (
+                <div>
+                  <p className="font-mono text-2xs uppercase tracking-wider text-ink-secondary mb-2">
+                    更新日
+                  </p>
+                  <p className="text-sm text-ink-primary tnum">
+                    {formatDate(blog.updatedAt)}
+                  </p>
+                </div>
+              )}
+              <TableOfContents toc={toc} />
+            </div>
+          </aside>
+
+          <article className="md:col-span-9">
+            <div
+              className="prose prose-slate max-w-none"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: rendered HTML
+              dangerouslySetInnerHTML={{ __html: blog.body }}
+            />
+          </article>
         </div>
-        <div className="md:grid md:grid-cols-12">
-          <TableOfContents toc={toc} className="col-span-2 mb-10 md:mb-0" />
-          <div
-            className="prose min-w-full col-span-10"
-            dangerouslySetInnerHTML={{
-              __html: `${blog.body}`,
-            }}
-          />
-        </div>
+
         <div className="flex justify-center mt-20">
-          <Button className="" handleClick={handleClickBlogPostLike}>
-            いいね！
-          </Button>
+          <Button handleClick={handleClickBlogPostLike}>いいね！</Button>
         </div>
         <p className="text-center">{likeCount}</p>
 
@@ -81,16 +88,10 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps = async (context: {
-  params: { id: string };
-}) => {
+export const getStaticProps = async (context: { params: { id: string } }) => {
   const blog = getBlog(context.params.id);
   if (!blog) {
     return { notFound: true as const };
   }
-  return {
-    props: {
-      blog,
-    },
-  };
+  return { props: { blog } };
 };
