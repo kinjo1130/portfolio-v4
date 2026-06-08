@@ -1,6 +1,5 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import RoadCar from "@/components/RoadCar";
 import { Rss } from "lucide-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -28,7 +27,6 @@ export default function Layout({
 		router.push("/api/feed");
 	};
 	const isBlogPath = router.pathname === "/blog";
-	const isTopPath = router.pathname === "/";
 
 	useEffect(() => {
 		setPageClass("page-enter");
@@ -42,10 +40,9 @@ export default function Layout({
 
 			<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
 				{/* Issue meta strip — left: section eyebrow, right: issue number */}
-				<div className="relative flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
+				<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
 					<span>{eyebrow ?? <span aria-hidden>&nbsp;</span>}</span>
 					<span className="tnum">{issueNumber ?? "§ 01 — 2026"}</span>
-					{isTopPath && <RoadCar />}
 				</div>
 
 				{/* Title block */}
