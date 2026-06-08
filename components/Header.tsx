@@ -48,6 +48,12 @@ export const Header: React.FC = () => {
 			>
 				<p>work</p>
 			</Link>
+			<Link
+				href="/tools/crop"
+				className={`underline hover:no-underline ${isActive("/tools")}`}
+			>
+				<p>tools</p>
+			</Link>
 			{/* <Link
 				href="/about"
 				className={`underline hover:no-underline ${isActive("/about")}`}
