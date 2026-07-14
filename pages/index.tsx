@@ -47,7 +47,7 @@ export default function Home({
 				description="A frontend engineer's portfolio."
 				imgUrl="/favicon.ico"
 			/>
-			<div className="min-h-screen text-ink-primary">
+			<div className="home-plain-paper min-h-screen text-ink-primary">
 				<div className="flex justify-center">
 					<Header />
 				</div>
