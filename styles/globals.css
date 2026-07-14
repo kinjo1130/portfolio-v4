@@ -147,6 +147,15 @@
 .page-enter > *:nth-child(6) { animation-delay: 400ms; }
 .page-enter > *:nth-child(n + 7) { animation-delay: 480ms; }
 
+.home-plain-paper {
+  background-color: var(--surface-page);
+  background-image: url("/textures/paper-grain.svg");
+  background-size: 320px 320px;
+  background-attachment: scroll;
+  background-position: top left;
+  background-repeat: repeat;
+}
+
 /* Decorative rule that animates in */
 .rule-line {
   display: block;
