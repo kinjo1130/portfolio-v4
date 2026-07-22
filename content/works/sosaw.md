@@ -5,7 +5,6 @@ toAt: null
 link: ""
 position:
   - ソフトウェアエンジニア
-draft: true
 description: AI電話応対プラットフォーム「MCPhone」の初期構築を単独で担当。Skill×Flow×MCPの3層アーキテクチャ設計から実装まで。
 ---
 

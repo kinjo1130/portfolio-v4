@@ -6,7 +6,6 @@ link: https://corp.helpfeel.com/ja/home
 position:
   - フロントエンドエンジニア
   - ソフトウェアエンジニア
-draft: true
 description: Gyazoチームで機能ベースの開発に参加。Rails本体の認可や課金から、macOSクライアント、動画処理サービス、ブラウザ拡張まで、機能に必要な部分を全部実装。
 ---
 

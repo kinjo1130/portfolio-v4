@@ -5,7 +5,6 @@ toAt: null
 link: ""
 position:
   - ソフトウェアエンジニア
-draft: true
 description: 営業の工数を削減する社内システム・自動化ツールの開発。デリバリー営業自動化、Threads自動投稿、コーポレートサイトのリニューアルなど。
 ---
 

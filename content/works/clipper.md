@@ -5,7 +5,6 @@ toAt: null
 link: https://www.clpr.pro/
 position:
   - ソフトウェアエンジニア
-draft: true
 description: 大学生向けのプログラミング教室イベントのスタッフや、自社サービス・業務委託の開発に時々関わっています。
 ---
 

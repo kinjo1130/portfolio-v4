@@ -6,7 +6,6 @@ link: https://tavern.co.jp/
 position:
   - フロントエンドエンジニア
   - フルスタックエンジニア
-draft: true
 description: 受託案件のフロントエンド実装から、自社AI SaaS「開発AIコア」の開発まで。コーポレートサイトのリプレイス、業務システム、AI検図SaaSなど。
 ---
 

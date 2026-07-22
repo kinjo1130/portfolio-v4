@@ -6,7 +6,6 @@ link: https://beenos.com/
 position:
   - フロントエンドエンジニア
   - 短期インターン
-draft: true
 description: 短期インターンとして参加。Nuxt2とPHPで自社サービスの一部に触れた。
 ---
 

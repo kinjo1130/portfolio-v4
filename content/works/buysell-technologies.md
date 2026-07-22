@@ -6,7 +6,6 @@ link: https://buysell-technologies.com/
 position:
   - ソフトウェアエンジニア
   - サマーインターン
-draft: true
 description: サマーインターンとして、Stockチームで自社システムの新規機能の作成に参加。フロントエンドの実装からAPIの実装・設計まで担当。
 ---
 

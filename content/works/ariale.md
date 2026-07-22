@@ -5,7 +5,6 @@ toAt: "2025-11-30"
 link: ""
 position:
   - フルスタックエンジニア
-draft: true
 description: 勤怠・シフト管理システム構築の全般を担当。Laravel + React + Vite の構成で、実装から顧客折衝や報告書作成まで。
 ---
 

@@ -5,7 +5,6 @@ toAt: null
 link: ""
 position:
   - フルスタックエンジニア
-draft: true
 description: マルチテナントのB2B動画配信プラットフォームの開発。文字起こしパイプラインやRAGチャットなど、AIまわりはほぼ自分が実装。
 ---
 

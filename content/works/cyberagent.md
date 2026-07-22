@@ -6,7 +6,6 @@ link: https://www.cyberagent.co.jp/
 position:
   - フロントエンドエンジニア
   - Tech Job
-draft: true
 description: Tech Jobで一ヶ月インターンに参加。自社システムへのViewTransition API組み込みを担当し、社内に知見がないAPIを既存コードと突き合わせて実装。
 ---
 

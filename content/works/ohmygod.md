@@ -5,7 +5,6 @@ toAt: "2024-12-31"
 link: https://ohmygod.jp/
 position:
   - ソフトウェアエンジニア
-draft: true
 description: 自社サービスの開発を、DB設計から実装まで幅広く担当。FirebaseとNuxt2/Nuxt3を使い、ザ・スタンプラリーやザ・クーポンなどの開発に携わった。
 ---
 
