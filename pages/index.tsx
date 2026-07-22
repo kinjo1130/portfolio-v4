@@ -66,7 +66,7 @@ export default function Home({
 						</p>
 
 						<h1
-							className="jp-display font-black leading-[0.92] tracking-tighter ink-settle"
+							className="jp-display font-bold leading-tight tracking-tight ink-settle"
 							style={{
 								fontSize: "clamp(40px, 12vw, 192px)",
 							}}

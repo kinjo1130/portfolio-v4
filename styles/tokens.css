@@ -1,130 +1,117 @@
 /*
- * Design Tokens — Editorial Paper
+ * Design Tokens — v2 (monochrome, warm tint)
  * SSoT: ../DESIGN.md
  * 直接 hex を書かず、ここで定義されたトークン経由で参照する。
+ * hex は OKLCH ソースから導出済みの値 (DESIGN.md §2)。再導出しない。
  */
 
 :root {
-  /* ---- Neutral ramp (cool warm-tinged paper grey) ---- */
-  --neutral-950: #131210;
-  --neutral-900: #1a1815;
-  --neutral-850: #232220;
-  --neutral-800: #2c2a27; /* = INK */
-  --neutral-700: #494742;
-  --neutral-600: #6b6862;
-  --neutral-500: #8a8680;
-  --neutral-450: #9d9a94; /* = CONCRETE */
-  --neutral-400: #b6b3ac;
-  --neutral-300: #c5c2bb;
-  --neutral-250: #d0cfc8; /* = RULE */
-  --neutral-200: #e7e6e1;
-  --neutral-150: #efeeea;
-  --neutral-100: #f3f2ef; /* = PAPER (closer to white) */
-  --neutral-50: #f7f6f3;
-  --neutral-0: #fbfaf8;
+  /* ---- Neutral / Primary ramp (DESIGN.md §2.1) ---- */
+  --neutral-50: #fafafa;
+  --neutral-100: #f2f2f1;
+  --neutral-200: #dfdedd;
+  --neutral-300: #c5c4c2;
+  --neutral-400: #a6a4a3;
+  --neutral-500: #878684;
+  --neutral-600: #6a6867;
+  --neutral-700: #4e4d4c;
+  --neutral-800: #343332;
+  --neutral-900: #1b1a1a;
+  --neutral-950: #0b0b0b;
 
-  /* ---- Material anchors ---- */
-  --ink: var(--neutral-800);
-  --asphalt: var(--neutral-800); /* alias for legacy refs */
-  --concrete: var(--neutral-450);
-  --paper: var(--neutral-100);
-  --rule: var(--neutral-250);
+  --primary: var(--neutral-500);
+  --primary-hover: var(--neutral-600);
+  --primary-active: var(--neutral-700);
 
-  /* ---- Signal tones ---- */
-  --signal-positive: #5c6e54;
-  --signal-caution: #9c7b3f;
-  --signal-critical: #92503f;
-  --signal-info: #4f6470;
+  /* ---- Material aliases (テーマで反転しない・リテラル) ---- */
+  --paper: var(--neutral-50);
+  --asphalt: var(--neutral-900);
+  --concrete: var(--neutral-500);
 
-  /* ---- Accent (used sparingly, links only) ---- */
-  --hazard: #2c2a27;
-  --hazard-deep: #000000;
-  --accent: var(--hazard);
-  --accent-hover: var(--hazard-deep);
-  --link: var(--hazard);
+  /* ---- Signals (DESIGN.md §2.2) ---- */
+  --signal-positive: #6b8a6b;
+  --signal-caution: #b8a17c;
+  --signal-critical: #a0736f;
+  --signal-info: #61859f;
 
-  /* ---- Semantic aliases ---- */
-  --surface-page: var(--paper);
-  --surface-raised: var(--neutral-50);
-  --surface-sunken: var(--neutral-150);
-  --surface-card: var(--neutral-0);
-  --surface-inverse: var(--ink);
+  /* ---- Semantic aliases (テーマで反転する) ---- */
+  --surface-page: var(--neutral-50);
+  --surface-raised: var(--neutral-100);
+  --surface-sunken: var(--neutral-100);
+  --surface-card: var(--neutral-50);
+  --surface-inverse: var(--neutral-900);
 
-  --text-primary: var(--ink);
-  --text-secondary: var(--neutral-700);
-  --text-tertiary: var(--neutral-600);
+  --text-primary: var(--neutral-800);
+  --text-heading: var(--neutral-900);
+  --text-secondary: var(--neutral-600);
+  --text-tertiary: var(--neutral-500);
   --text-disabled: var(--neutral-400);
-  --text-on-inverse: var(--paper);
+  --text-on-inverse: var(--neutral-50);
 
-  --border-strong: var(--neutral-500);
-  --border-default: var(--neutral-300);
-  --border-subtle: var(--neutral-200);
-  --divider: var(--rule);
-  --border-thick: 2px;
-  --border-rule: 1px;
+  --border-strong: var(--neutral-300);
+  --border-default: var(--neutral-200);
+  --border-subtle: var(--neutral-100);
+  --divider: var(--neutral-200);
 
-  --action-primary-bg: var(--ink);
-  --action-primary-fg: var(--paper);
-  --action-primary-bg-hover: var(--neutral-900);
+  /* リンク: primary-700 + 下線 (DESIGN.md §11 A2)。hover は明度 −5% 相当をランプで近似 */
+  --link: var(--neutral-700);
+  --link-hover: var(--neutral-800);
+
+  /* アクション: primary を使い hover→600 / active→700 (DESIGN.md §9) */
+  --action-primary-bg: var(--primary);
+  --action-primary-fg: var(--neutral-50);
+  --action-primary-bg-hover: var(--primary-hover);
+  --action-primary-bg-active: var(--primary-active);
   --action-secondary-bg: transparent;
-  --action-secondary-fg: var(--ink);
-  --action-secondary-border: var(--ink);
-  --action-ghost-bg: transparent;
-  --action-ghost-fg: var(--ink);
-  --focus-ring: var(--ink);
+  --action-secondary-fg: var(--text-primary);
+  --action-secondary-border: var(--border-strong);
+  --focus-ring: var(--primary);
 
-  /* ---- Type scale ---- */
-  --size-3xs: 11px;
-  --size-2xs: 12px;
-  --size-xs: 13px;
-  --size-sm: 14px;
-  --size-md: 16px;
-  --size-lg: 19px;
-  --size-xl: 24px;
-  --size-2xl: 32px;
-  --size-3xl: 44px;
-  --size-4xl: 60px;
-  --size-5xl: 84px;
-  --size-6xl: 120px;
-  --size-7xl: 168px;
+  /* ---- Type scale (base 16px, ratio 1.2 — DESIGN.md §3) ---- */
+  --size-3xs: 0.5787rem;
+  --size-2xs: 0.6944rem;
+  --size-xs: 0.6944rem;
+  --size-sm: 0.8333rem; /* caption */
+  --size-md: 1rem; /* body */
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem; /* h4 */
+  --size-2xl: 1.728rem; /* h3 */
+  --size-3xl: 2.0736rem; /* h2 */
+  --size-4xl: 2.4883rem; /* h1 */
+  --size-5xl: 2.986rem;
+  --size-6xl: 3.5832rem;
 
   /* ---- Leading & tracking ---- */
-  --leading-tight: 0.95;
-  --leading-snug: 1.12;
-  --leading-normal: 1.6;
-  --leading-relaxed: 1.8;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3; /* headings */
+  --leading-normal: 1.6; /* body */
+  --leading-relaxed: 1.75;
   --tracking-tight: -0.02em;
   --tracking-snug: -0.01em;
   --tracking-normal: 0;
-  --tracking-wide: 0.08em;
-  --tracking-wider: 0.18em;
+  --tracking-wide: 0.08em; /* micro labels (DESIGN.md §11 A3) */
+  --tracking-wider: 0.08em;
 
-  /* ---- Fonts ---- */
-  /* Noto Sans family for clarity and legibility, JP + Latin matched. */
-  --font-display: "Noto Sans", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
-    "Yu Gothic", system-ui, sans-serif;
-  --font-body: "Noto Sans", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
-    "Yu Gothic", system-ui, sans-serif;
-  --font-jp-display: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
-    sans-serif;
+  /* ---- Fonts (Inter 単一ファミリー + Noto Sans JP fallback — §3 / §11 A1) ---- */
+  --font-body: "Inter", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-body);
   --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
     sans-serif;
-  --font-sans: "Noto Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-jp-display: var(--font-jp);
+  --font-sans: var(--font-body);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-small-caps: "Noto Sans", sans-serif;
 
-  /* ---- Spacing scale (4px base / 8px rhythm) ---- */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
-  --space-10: 128px;
-  --space-11: 192px;
+  /* ---- Spacing (8px base, linear — DESIGN.md §4) ---- */
+  --space-1: 4px; /* 2xs */
+  --space-2: 8px; /* xs */
+  --space-3: 12px; /* sm */
+  --space-4: 16px; /* md — ブロック内スタック */
+  --space-5: 24px; /* lg */
+  --space-6: 32px; /* xl */
+  --space-7: 48px; /* 2xl */
+  --space-8: 64px; /* 3xl — セクション間 */
+  --space-9: 96px; /* 4xl */
+  --space-10: 128px; /* 5xl */
 
   /* ---- Containers ---- */
   --container-prose: 64ch;
@@ -133,56 +120,107 @@
   --container-wide: 1320px;
   --gutter: var(--space-5);
 
-  /* ---- Loose-leaf rule grid ---- */
-  --rule-gap: 32px;
-  --rule-color: rgba(20, 20, 18, 0.1);
+  /* ---- Radius (base 8px, scaled — DESIGN.md §5) ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+  /* コンポーネントロール */
+  --radius-input: var(--radius-sm);
+  --radius-button: var(--radius-md);
+  --radius-card: var(--radius-lg);
+  --radius-badge: var(--radius-pill);
 
-  /* ---- Radius (editorial: no rounding) ---- */
-  --radius-xs: 0;
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-pill: 999px;
+  /* ---- Shadows (subtle, neutral black — DESIGN.md §6) ---- */
+  /* elevation: dropdown (sm) < card (md) < modal (lg) < toast (xl) */
+  --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.08),
+    0 2px 4px -2px oklch(0% 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.1),
+    0 4px 6px -4px oklch(0% 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.12),
+    0 8px 10px -6px oklch(0% 0 0 / 0.12);
 
-  /* ---- Depth ---- */
-  --shadow-hard: 4px 4px 0 0 var(--ink);
-
-  /* ---- Motion ---- */
-  --duration-fast: 160ms;
-  --duration-normal: 280ms;
-  --duration-slow: 520ms;
+  /* ---- Motion (DESIGN.md §7) ---- */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 320ms;
   --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Prose rule color ---- */
+  --rule-color: var(--border-default);
 }
 
-/* ---- Dark / inverse context ---- */
-[data-theme="ink"] {
-  --surface-page: var(--ink);
-  --surface-raised: var(--neutral-850);
+/* ---- Dark mode (ランプ共通・役割反転 — DESIGN.md §2.4) ---- */
+[data-theme="dark"] {
+  --surface-page: var(--neutral-950);
+  --surface-raised: var(--neutral-900);
   --surface-sunken: var(--neutral-900);
-  --surface-card: var(--neutral-850);
-  --surface-inverse: var(--paper);
+  --surface-card: var(--neutral-900);
+  --surface-inverse: var(--neutral-50);
 
-  --text-primary: var(--paper);
-  --text-secondary: var(--neutral-300);
-  --text-tertiary: var(--neutral-450);
+  --text-primary: var(--neutral-200);
+  --text-heading: var(--neutral-50);
+  --text-secondary: var(--neutral-400);
+  --text-tertiary: var(--neutral-500);
   --text-disabled: var(--neutral-600);
-  --text-on-inverse: var(--ink);
+  --text-on-inverse: var(--neutral-900);
 
-  --border-strong: var(--neutral-500);
-  --border-default: var(--neutral-700);
-  --border-subtle: var(--neutral-800);
-  --divider: var(--neutral-700);
+  --border-strong: var(--neutral-600);
+  --border-default: var(--neutral-800);
+  --border-subtle: var(--neutral-900);
+  --divider: var(--neutral-800);
 
-  --rule-color: rgba(245, 243, 235, 0.08);
+  --link: var(--neutral-300);
+  --link-hover: var(--neutral-200);
 
-  --action-primary-bg: var(--paper);
-  --action-primary-fg: var(--ink);
-  --action-primary-bg-hover: var(--neutral-50);
-  --action-secondary-fg: var(--paper);
-  --action-secondary-border: var(--paper);
-  --action-ghost-fg: var(--paper);
+  --action-primary-bg: var(--neutral-200);
+  --action-primary-fg: var(--neutral-900);
+  --action-primary-bg-hover: var(--neutral-300);
+  --action-primary-bg-active: var(--neutral-400);
+  --action-secondary-fg: var(--text-primary);
+  --action-secondary-border: var(--border-strong);
+  --focus-ring: var(--neutral-300);
+
+  --rule-color: var(--neutral-800);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --surface-page: var(--neutral-950);
+    --surface-raised: var(--neutral-900);
+    --surface-sunken: var(--neutral-900);
+    --surface-card: var(--neutral-900);
+    --surface-inverse: var(--neutral-50);
+
+    --text-primary: var(--neutral-200);
+    --text-heading: var(--neutral-50);
+    --text-secondary: var(--neutral-400);
+    --text-tertiary: var(--neutral-500);
+    --text-disabled: var(--neutral-600);
+    --text-on-inverse: var(--neutral-900);
+
+    --border-strong: var(--neutral-600);
+    --border-default: var(--neutral-800);
+    --border-subtle: var(--neutral-900);
+    --divider: var(--neutral-800);
+
+    --link: var(--neutral-300);
+    --link-hover: var(--neutral-200);
+
+    --action-primary-bg: var(--neutral-200);
+    --action-primary-fg: var(--neutral-900);
+    --action-primary-bg-hover: var(--neutral-300);
+    --action-primary-bg-active: var(--neutral-400);
+    --action-secondary-fg: var(--text-primary);
+    --action-secondary-border: var(--border-strong);
+    --focus-ring: var(--neutral-300);
+
+    --rule-color: var(--neutral-800);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
