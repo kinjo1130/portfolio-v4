@@ -44,7 +44,7 @@ export default function ToolsIndex() {
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 						{String(TOOLS.length).padStart(2, "0")} tools
 					</p>
-					<p className="text-sm text-ink-secondary mt-4 leading-relaxed">
+					<p className="text-base text-ink-secondary mt-4 leading-relaxed">
 						ブラウザ内で完結する自作の小ユーティリティ。サーバー送信なし。
 					</p>
 				</header>
@@ -65,17 +65,24 @@ export default function ToolsIndex() {
 								>
 									{tool.title}
 								</Link>
-								<p className="text-sm text-ink-secondary mt-2 leading-relaxed">
+								<p className="text-base text-ink-secondary mt-2 leading-relaxed">
 									{tool.description}
 								</p>
-								<p className="small-caps text-xs font-semibold text-ink-secondary mt-2 tracking-wider">
-									{tool.tags.join(" / ")}
+								<p className="mt-3 flex flex-wrap gap-2">
+									{tool.tags.map((tag) => (
+										<span
+											key={tag}
+											className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5"
+										>
+											{tag}
+										</span>
+									))}
 								</p>
 							</div>
 							<div className="col-span-12 md:col-span-3 md:text-right mt-2 md:mt-0">
 								<Link
 									href={`/tools/${tool.slug}`}
-									className="small-caps text-xs font-semibold text-ink-primary link-draw inline-block no-underline"
+									className="text-sm font-medium text-ink-primary link-draw inline-block no-underline"
 								>
 									open →
 								</Link>

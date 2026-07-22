@@ -65,7 +65,7 @@ export default function Blog({
 								>
 									{post.title}
 								</Link>
-								<span className="col-span-3 md:col-span-3 small-caps text-sm font-semibold text-ink-primary tnum text-right">
+								<span className="col-span-3 md:col-span-3 text-sm font-medium text-ink-secondary tnum text-right">
 									{published.toLocaleDateString("ja-JP")}
 								</span>
 							</li>

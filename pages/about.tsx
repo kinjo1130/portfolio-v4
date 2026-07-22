@@ -17,7 +17,7 @@ export default function AboutPage({ about }: { about: About }) {
 					<p className="small-caps text-sm font-semibold text-ink-primary mb-6 tracking-wider">
 						Profile
 					</p>
-					<dl className="space-y-4 text-sm">
+					<dl className="space-y-4 text-base">
 						<div>
 							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
 								Name

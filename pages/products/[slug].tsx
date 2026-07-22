@@ -22,7 +22,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<aside className="col-span-12 md:col-span-3">
-					<dl className="space-y-4 text-sm">
+					<dl className="space-y-4 text-base">
 						<div>
 							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
 								Published
@@ -49,7 +49,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 										href={product.url}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="link-draw small-caps text-sm font-semibold text-ink-primary no-underline"
+										className="link-draw text-sm font-medium text-ink-primary no-underline"
 									>
 										Visit →
 									</a>
@@ -60,7 +60,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 				</aside>
 
 				<article className="col-span-12 md:col-span-9">
-					<div className="border border-line mb-10">
+					<div className="border border-line rounded-card overflow-hidden mb-10">
 						<Image
 							src={product.image.url}
 							alt={product.title}
@@ -84,7 +84,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 					<div className="mt-16 pt-6 border-t border-line">
 						<Link
 							href="/products"
-							className="small-caps text-sm font-semibold text-ink-primary link-draw no-underline"
+							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
 							← Back to index
 						</Link>

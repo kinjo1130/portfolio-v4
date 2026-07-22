@@ -59,7 +59,7 @@ export default function Layout({
 								<div className="pt-3 shrink-0">
 									<button
 										type="button"
-										className="small-caps text-sm font-semibold text-ink-primary border border-ink-primary px-3 py-1.5 flex items-center gap-2 hover:bg-ink-primary hover:text-paper transition-colors"
+										className="text-sm font-medium text-ink-primary border border-line rounded-button px-3 py-1.5 flex items-center gap-2 hover:bg-ink-primary hover:text-paper transition-colors"
 										onClick={() => routeFeed()}
 									>
 										<Rss size={14} />

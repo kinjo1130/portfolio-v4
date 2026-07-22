@@ -45,28 +45,30 @@ export default function Work({ works }: { works: Works }) {
 								>
 									{work.title}
 								</Link>
-								<p className="text-sm text-ink-secondary mt-2 leading-relaxed">
+								<p className="text-base text-ink-secondary mt-2 leading-relaxed">
 									{work.description}
 								</p>
 								{work.position.length > 0 && (
-									<p className="small-caps text-xs font-semibold text-ink-secondary mt-2 tracking-wider">
+									<p className="text-sm font-medium text-ink-secondary mt-2">
 										{work.position.join(" / ")}
 									</p>
 								)}
 							</div>
 							<div className="col-span-12 md:col-span-4 md:text-right mt-2 md:mt-0">
-								<p className="small-caps text-sm font-semibold text-ink-primary tnum">
+								<p className="text-sm font-medium text-ink-primary tnum">
 									{formatDate(work.fromAt)} —{" "}
 									{work.toAt ? formatDate(work.toAt) : "現在"}
 								</p>
-								<p className="small-caps text-xs font-medium text-ink-secondary mt-1">
-									{work.toAt ? "closed" : "ongoing"}
+								<p className="mt-2">
+									<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+										{work.toAt ? "closed" : "ongoing"}
+									</span>
 								</p>
 								<a
 									href={work.link}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="small-caps text-xs font-semibold text-ink-primary link-draw mt-2 inline-block no-underline"
+									className="text-sm font-medium text-ink-primary link-draw mt-2 inline-block no-underline"
 								>
 									company →
 								</a>

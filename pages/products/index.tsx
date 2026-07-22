@@ -33,39 +33,35 @@ export default function Product({ products }: { products: Products }) {
 
 				<ul className="col-span-12 md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
 					{products.map((product, i) => (
-						<li
-							key={product.slug}
-							className="border-t border-ink-primary pt-4"
-						>
-							<div className="flex items-baseline justify-between mb-4">
-								<span className="tnum small-caps text-sm font-medium text-ink-secondary">
-									{String(i + 1).padStart(2, "0")}
-								</span>
-								<span className="small-caps text-sm font-semibold text-ink-primary tnum">
-									{year(product.publishedAt)}
-								</span>
-							</div>
+						<li key={product.slug}>
 							<Link
 								href={`/products/${product.slug}`}
-								className="block link-draw no-underline group"
+								className="block no-underline group border border-line rounded-card bg-surface-card shadow-sm hover:shadow-md transition-shadow overflow-hidden"
 							>
-								<div className="relative overflow-hidden border border-line">
+								<div className="relative overflow-hidden border-b border-line aspect-[1200/630] bg-surface-sunken">
 									<Image
 										src={product.image.url}
 										alt={product.title}
 										width={product.image.width}
 										height={product.image.height}
-										className="w-full h-auto"
+										className="w-full h-full object-contain"
 									/>
 								</div>
-								<p className="jp-display text-xl md:text-2xl font-medium text-ink-primary mt-4">
-									{product.title}
-								</p>
-								{product.description && (
-									<p className="text-sm text-ink-secondary mt-2 leading-relaxed">
-										{product.description}
-									</p>
-								)}
+								<div className="p-5">
+									<div className="flex items-baseline justify-between gap-4">
+										<p className="jp-display text-xl md:text-2xl font-medium text-ink-primary">
+											{product.title}
+										</p>
+										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+											{year(product.publishedAt)}
+										</span>
+									</div>
+									{product.description && (
+										<p className="text-base text-ink-secondary mt-2 leading-relaxed">
+											{product.description}
+										</p>
+									)}
+								</div>
 							</Link>
 						</li>
 					))}
