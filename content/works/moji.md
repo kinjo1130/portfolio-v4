@@ -5,7 +5,6 @@ toAt: null
 link: ""
 position:
   - フルスタックエンジニア
-draft: true
 description: AIマーケティング分析・クリエイティブ提案プラットフォーム「GrowthMan」の開発と、Claude Codeを使った開発基盤の整備。
 ---
 

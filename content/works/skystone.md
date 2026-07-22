@@ -5,7 +5,6 @@ toAt: null
 link: ""
 position:
   - フルスタックエンジニア
-draft: true
 description: 採用SaaS「youlish」の開発。AI面接まわりを中心に、課金からTerraformまで必要なところは全部触っている。
 ---
 

@@ -4,7 +4,6 @@ fromAt: "2021-03-31"
 toAt: "2025-03-31"
 link: https://www.kansai-u.ac.jp
 position: []
-draft: true
 description: 情報系の学科に在籍。学内で情報の基礎を学びつつ、ハッカソン・個人開発・インターンを通じて手を動かす機会を増やしていた4年間。
 ---
 

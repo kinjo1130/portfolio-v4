@@ -6,7 +6,6 @@ link: https://zipunk.com/
 position:
   - フロントエンドエンジニア
   - インターン
-draft: true
 description: 動画関連の自社サービス「Quden」のフロントエンド開発。初めて「強いエンジニアが整備したプロダクト」に触れた現場。
 ---
 

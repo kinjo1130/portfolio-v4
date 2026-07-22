@@ -6,7 +6,6 @@ link: https://xscore.co.jp/
 position:
   - フロントエンドエンジニア
   - インターン
-draft: true
 description: 自社サービスのフロントエンドエンジニアとしてインターン参加。Nuxt.js (v2) のUI修正やAPI繋ぎ込み、勉強資料の作成を担当。
 ---
 

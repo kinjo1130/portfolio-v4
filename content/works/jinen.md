@@ -5,7 +5,6 @@ toAt: "2026-02-02"
 link: ""
 position:
   - フルスタックエンジニア
-draft: true
 description: コミュニティ設計支援SaaSの開発。KPI設計フローとダッシュボードを中心に、ほぼ全部の画面を実装。
 ---
 

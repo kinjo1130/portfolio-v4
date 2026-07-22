@@ -5,7 +5,6 @@ toAt: "2026-02-17"
 link: ""
 position:
   - フロントエンドエンジニア
-draft: true
 description: Japan AI Studio上で動くチャットボット + ファイルストレージ管理のPoCフロントエンドを単独で実装。
 ---
 
