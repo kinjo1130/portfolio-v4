@@ -4,7 +4,7 @@ import Layout from "./layout";
 
 export default function AboutPage({ about }: { about: About }) {
 	return (
-		<Layout title="About" eyebrow="§ 02 — About" issueNumber="§ 02 — 2026">
+		<Layout title="About">
 			<SeoHead
 				title="About"
 				titleTemplate="About"
@@ -14,30 +14,22 @@ export default function AboutPage({ about }: { about: About }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="small-caps text-sm font-semibold text-ink-primary mb-6 tracking-wider">
-						Profile
-					</p>
+					<p className="text-sm font-medium text-ink-secondary mb-6">Profile</p>
 					<dl className="space-y-4 text-base">
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-								Name
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">Name</dt>
 							<dd className="font-semibold text-ink-primary mt-1">
 								{about.name}
 							</dd>
 						</div>
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-								Birth
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">Birth</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
 								{about.birth}
 							</dd>
 						</div>
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-								Origin
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">Origin</dt>
 							<dd className="font-semibold text-ink-primary mt-1">
 								{about.origin}
 							</dd>

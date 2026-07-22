@@ -52,45 +52,34 @@ export default function Home({
 					<Header />
 				</div>
 
-				<main className="px-6 md:px-12 lg:px-20 pb-32">
-					{/* Issue meta strip */}
-					<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
-						<span>§ 01 — Home</span>
-						<span className="tnum">§ 01 — 2026</span>
-					</div>
-
+				<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
 					{/* Cover */}
-					<section className="pt-16 md:pt-24 lg:pt-32 pb-20 lg:pb-28">
-						<p className="small-caps text-sm font-semibold text-ink-primary mb-10 ink-settle tracking-wider">
+					<section className="pt-16 md:pt-24 pb-16 lg:pb-20">
+						<p className="text-sm font-medium text-ink-secondary mb-6 ink-settle">
 							a product engineer&apos;s portfolio
 						</p>
 
-						<h1
-							className="jp-display font-bold leading-tight tracking-tight ink-settle"
-							style={{
-								fontSize: "clamp(40px, 12vw, 192px)",
-							}}
-						>
+						<h1 className="jp-display text-5xl md:text-7xl font-bold leading-tight tracking-tight ink-settle">
 							金城翔太郎
 						</h1>
 
-						<p
-							className="font-bold mt-6 tracking-tight text-ink-secondary ink-settle"
-							style={{ fontSize: "clamp(18px, 4vw, 48px)", letterSpacing: "0.01em" }}
-						>
+						<p className="text-xl md:text-3xl font-semibold mt-4 tracking-tight text-ink-secondary ink-settle">
 							Shotaro Kinjo
 						</p>
 
-						<div className="mt-16 lg:mt-20 grid grid-cols-12 gap-6">
-							<p className="col-span-12 md:col-span-7 text-xl md:text-2xl font-medium leading-relaxed">
+						<div className="mt-12 grid grid-cols-12 gap-6">
+							<p className="col-span-12 md:col-span-7 text-lg md:text-xl font-medium leading-relaxed">
 								ソフトウェアで少しの役立つものをつくるために
 								<br className="hidden md:inline" />
 								コードを書くということをしています。
 							</p>
-							<div className="col-span-12 md:col-span-4 md:col-start-9 small-caps text-sm font-semibold text-ink-primary self-end space-y-2 tracking-wider">
-								<p>FRONTEND ENGINEER</p>
-								<p>KANSAI UNIVERSITY, INFO SCIENCE</p>
-								<p>BASED IN OSAKA</p>
+							<div className="col-span-12 md:col-span-4 md:col-start-9 self-end flex flex-wrap gap-2">
+								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
+									Frontend Engineer
+								</span>
+								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
+									Based in Osaka
+								</span>
 							</div>
 						</div>
 					</section>
@@ -100,7 +89,7 @@ export default function Home({
 					{/* Featured: Work */}
 					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="small-caps text-sm font-semibold text-ink-primary">
+							<p className="text-sm font-medium text-ink-secondary">
 								Featured — Work
 							</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
@@ -123,8 +112,7 @@ export default function Home({
 										{work.title}
 									</Link>
 									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum hidden md:block">
-										{year(work.fromAt)}—
-										{work.toAt ? year(work.toAt) : "now"}
+										{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "now"}
 									</span>
 									<span className="col-span-4 md:col-span-2 text-right">
 										<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
@@ -145,7 +133,7 @@ export default function Home({
 					{/* Featured: Products */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="small-caps text-sm font-semibold text-ink-primary">
+							<p className="text-sm font-medium text-ink-secondary">
 								Featured — Products
 							</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
@@ -184,7 +172,7 @@ export default function Home({
 					{/* Recent: Blog */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="small-caps text-sm font-semibold text-ink-primary">
+							<p className="text-sm font-medium text-ink-secondary">
 								Recent — Writing
 							</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
@@ -223,7 +211,7 @@ export default function Home({
 					{/* Awards */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="small-caps text-sm font-semibold text-ink-primary">Awards</p>
+							<p className="text-sm font-medium text-ink-secondary">Awards</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{ACHIEVEMENTS.map((a, i) => (
@@ -252,7 +240,7 @@ export default function Home({
 
 					{/* Colophon */}
 					<section className="pt-24 lg:pt-32">
-						<p className="small-caps text-sm font-semibold text-ink-primary mb-6">
+						<p className="text-sm font-medium text-ink-secondary mb-6">
 							Colophon — elsewhere
 						</p>
 						<SNS />

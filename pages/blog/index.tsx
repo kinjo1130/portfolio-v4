@@ -1,8 +1,8 @@
 import { SeoHead } from "@/components/SeoHead";
 import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/common";
 import { getBlogs } from "@/libs/content";
-import type { BlogPost, BlogPosts } from "@/types/blog";
 import type { QiitaPost } from "@/types/Qiita";
+import type { BlogPost, BlogPosts } from "@/types/blog";
 import Link from "next/link";
 import Layout from "../layout";
 
@@ -22,11 +22,7 @@ export default function Blog({
 	blog: (BlogPost | QiitaPost | ZennPost)[];
 }) {
 	return (
-		<Layout
-			title="Writing"
-			eyebrow="§ 05 — Blog"
-			issueNumber="§ 05 — 2026"
-		>
+		<Layout title="Writing">
 			<SeoHead
 				title="Blog"
 				titleTemplate="Top"
@@ -36,9 +32,7 @@ export default function Blog({
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="small-caps text-sm font-semibold text-ink-primary tracking-wider">
-						Index
-					</p>
+					<p className="text-sm font-medium text-ink-secondary">Index</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 						{String(blog.length).padStart(2, "0")} entries
 					</p>

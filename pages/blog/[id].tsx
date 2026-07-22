@@ -15,11 +15,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 			: "https://kinjo.me";
 
 	return (
-		<Layout
-			title={blog.title}
-			eyebrow="§ 05 — Writing"
-			issueNumber="§ 05 — 2026"
-		>
+		<Layout title={blog.title} eyebrow="Writing">
 			<SeoHead
 				title="Blog"
 				titleTemplate={blog.title}
@@ -32,7 +28,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 					<div className="md:sticky md:top-10 space-y-6">
 						<dl className="space-y-4 text-sm">
 							<div>
-								<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+								<dt className="text-sm font-medium text-ink-secondary">
 									Published
 								</dt>
 								<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -41,7 +37,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 							</div>
 							{blog.updatedAt && blog.updatedAt !== blog.createdAt && (
 								<div>
-									<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+									<dt className="text-sm font-medium text-ink-secondary">
 										Updated
 									</dt>
 									<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -52,7 +48,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 						</dl>
 						{toc.length > 0 && (
 							<div>
-								<p className="small-caps text-xs font-semibold text-ink-secondary tracking-wider mb-2">
+								<p className="text-sm font-medium text-ink-secondary mb-2">
 									Contents
 								</p>
 								<TableOfContents toc={toc} />
@@ -76,7 +72,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 					<div className="mt-16 pt-6 border-t border-line">
 						<Link
 							href="/blog"
-							className="small-caps text-sm font-semibold text-ink-primary link-draw no-underline"
+							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
 							← Back to index
 						</Link>

@@ -8,7 +8,6 @@ type Props = {
 	children: React.ReactNode;
 	title?: string;
 	eyebrow?: string;
-	issueNumber?: string;
 	className?: string;
 	hideTitleBlock?: boolean;
 };
@@ -17,7 +16,6 @@ export default function Layout({
 	children,
 	title,
 	eyebrow,
-	issueNumber,
 	className,
 	hideTitleBlock = false,
 }: Props) {
@@ -39,22 +37,20 @@ export default function Layout({
 			</div>
 
 			<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
-				{/* Issue meta strip — left: section eyebrow, right: issue number */}
-				<div className="flex items-baseline justify-between border-b border-ink-primary py-3 small-caps text-sm font-semibold text-ink-primary">
-					<span>{eyebrow ?? <span aria-hidden>&nbsp;</span>}</span>
-					<span className="tnum">{issueNumber ?? "§ 01 — 2026"}</span>
-				</div>
-
 				{/* Title block */}
 				{!hideTitleBlock && title && (
-					<section className="pt-12 md:pt-16 lg:pt-20 pb-12 lg:pb-16">
+					<section className="pt-12 md:pt-16 pb-8 lg:pb-12 border-b border-line">
 						<div className="flex items-start justify-between gap-6">
-							<h1
-								className="jp-display font-bold leading-tight tracking-tight ink-settle"
-								style={{ fontSize: "clamp(32px, 8vw, 120px)" }}
-							>
-								{title}
-							</h1>
+							<div>
+								{eyebrow && (
+									<p className="text-sm font-medium text-ink-secondary mb-3 ink-settle">
+										{eyebrow}
+									</p>
+								)}
+								<h1 className="jp-display text-4xl md:text-5xl font-bold leading-tight tracking-tight ink-settle">
+									{title}
+								</h1>
+							</div>
 							{isBlogPath && (
 								<div className="pt-3 shrink-0">
 									<button

@@ -28,7 +28,7 @@ const TOOLS: Tool[] = [
 
 export default function ToolsIndex() {
 	return (
-		<Layout title="Tools" eyebrow="§ 06 — Tools" issueNumber="§ 06 — 2026">
+		<Layout title="Tools">
 			<SeoHead
 				title="Tools"
 				titleTemplate="Tools"
@@ -38,9 +38,7 @@ export default function ToolsIndex() {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="small-caps text-sm font-semibold text-ink-primary tracking-wider">
-						Index
-					</p>
+					<p className="text-sm font-medium text-ink-secondary">Index</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 						{String(TOOLS.length).padStart(2, "0")} tools
 					</p>
