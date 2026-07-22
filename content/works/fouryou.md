@@ -8,23 +8,34 @@ position:
 description: 関西電力向け政策情報AIシステムの開発。504障害の根本原因特定、クローラー信頼性改善、非同期アーキテクチャへの移行を担当。
 ---
 
-関西電力向けの政策情報AIシステム（各省庁サイトの審議会情報を自動クローリングして、AI要約レポートをメール配信するシステム）の開発に参加しました。期間は短めで、やったことの大半はバックエンドの障害調査と改善です。
+関西電力向けの政策情報AIシステムの開発に参加しました。各省庁のサイトに分散している審議会情報を自動クローリングで集め、PDFやHTMLからテキストを抽出して、AWS Bedrock (Claude) で要約レポートを生成してメール配信するシステムです。期間は短めで、やったことの大半はバックエンドの障害調査と改善です。
 
-## やったこと
+## 504 Gateway Timeout 障害の根本原因特定
 
-- **504 Gateway Timeout 障害の根本原因特定**
-  - JWKS取得、DB接続プール、クエリ実行と段階的に切り分け、Aurora Serverless v2 の低ACU時のクエリハングが原因と確定
-  - タイムアウト設定・ACU引き上げなどの対策を提案し、調査レポートを作成
-- **URLインポートの非同期化**
-  - 同期処理から EventBridge + Lambda、さらに ECS Fargate へと段階的に移行
-- **クローラーの信頼性改善**
-  - iframe / embed 内のPDF検出、メインコンテンツ優先抽出、スケジュール抽出の改善
-- CI整備（ruff / actionlint）、STGデータを使ったローカル検証環境の整備
+URL登録時にAPIが504を返す障害があり、その調査を担当しました。仮説を立てて段階的に切り分けていきました。
+
+1. まずJWKS取得（認証）のタイムアウトを疑い、取得タイムアウトを短縮 → 再発
+2. 次にDB接続プールを疑い、NullPoolとQueuePoolの切り替えやpool_timeoutを調整 → 再発
+3. asyncpgに `command_timeout` を入れて診断ログを仕込んだところ、クエリ実行そのものがハングしていると判明
+
+最終的に、Aurora Serverless v2 が低ACU（0.5）までスケールインした状態でクエリ処理がハングするのが根本原因だと確定しました。対策として command_timeout の設定、最小ACUの引き上げ、フロント側のリトライを提案し、一連の流れを調査レポートにまとめて納品しています。
+
+## URLインポートの非同期化
+
+PDFのインポートが同期処理でタイムアウトの温床になっていたため、EventBridge + Lambda の非同期構成に移し、さらに実行時間の制約から ECS Fargate に移行しました。途中、Lambdaがモジュール未同梱と環境変数不足で全滅していた問題も特定しています（デプロイCIのRevert放置が原因でした）。
+
+## クローラーの信頼性改善
+
+- iframe / embed / object の中にあるPDFの検出
+- HTMLの取得制限を広げつつ、メインコンテンツを優先して抽出する処理
+- クエリ文字列付きPDF URLの判定修正、開催スケジュール抽出の改善
+
+「未来の審議会を検知して開催日に再クロールする」という追加要望については、既存のバッチ設計で既に実現されていることを調査で示し、追加実装なしで済ませました。作らずに済むことを示すのも調査の仕事のうちです。
 
 ## 使った技術
 
-- Python / FastAPI / SQLAlchemy
-- AWS (Bedrock / Lambda / ECS Fargate / Aurora PostgreSQL Serverless v2 / EventBridge)
+- Python / FastAPI / SQLAlchemy (async) / Alembic
+- AWS (Bedrock / Lambda / ECS Fargate / Aurora PostgreSQL Serverless v2 / EventBridge / SES)
 - Terraform
 
 ## 学び・所感
