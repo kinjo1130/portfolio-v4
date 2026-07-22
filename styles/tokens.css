@@ -67,19 +67,19 @@
   --action-secondary-border: var(--border-strong);
   --focus-ring: var(--primary);
 
-  /* ---- Type scale (base 16px, ratio 1.2 — DESIGN.md §3) ---- */
-  --size-3xs: 0.5787rem;
-  --size-2xs: 0.6944rem;
-  --size-xs: 0.6944rem;
-  --size-sm: 0.8333rem; /* caption */
+  /* ---- Type scale (base 16px, Tailwind 標準スケール — DESIGN.md §3) ---- */
+  --size-3xs: 0.75rem;
+  --size-2xs: 0.75rem;
+  --size-xs: 0.75rem;
+  --size-sm: 0.875rem; /* caption */
   --size-md: 1rem; /* body */
-  --size-lg: 1.2rem;
-  --size-xl: 1.44rem; /* h4 */
-  --size-2xl: 1.728rem; /* h3 */
-  --size-3xl: 2.0736rem; /* h2 */
-  --size-4xl: 2.4883rem; /* h1 */
-  --size-5xl: 2.986rem;
-  --size-6xl: 3.5832rem;
+  --size-lg: 1.125rem;
+  --size-xl: 1.25rem; /* h4 */
+  --size-2xl: 1.5rem; /* h3 */
+  --size-3xl: 1.875rem; /* h2 */
+  --size-4xl: 2.25rem; /* h1 */
+  --size-5xl: 3rem;
+  --size-6xl: 3.75rem;
 
   /* ---- Leading & tracking ---- */
   --leading-tight: 1.1;

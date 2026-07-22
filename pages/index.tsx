@@ -122,19 +122,21 @@ export default function Home({
 									>
 										{work.title}
 									</Link>
-									<span className="col-span-2 small-caps text-sm font-semibold text-ink-primary tnum hidden md:block">
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum hidden md:block">
 										{year(work.fromAt)}—
 										{work.toAt ? year(work.toAt) : "now"}
 									</span>
-									<span className="col-span-4 md:col-span-2 small-caps text-sm font-medium text-ink-secondary text-right">
-										{work.toAt ? "closed" : "ongoing"}
+									<span className="col-span-4 md:col-span-2 text-right">
+										<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+											{work.toAt ? "closed" : "ongoing"}
+										</span>
 									</span>
 								</li>
 							))}
 						</ul>
 						<Link
 							href="/work"
-							className="col-span-12 md:col-start-4 md:col-span-9 small-caps text-sm font-semibold text-ink-primary link-draw mt-2"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
 							see all work →
 						</Link>
@@ -165,7 +167,7 @@ export default function Home({
 									>
 										{product.title}
 									</Link>
-									<span className="col-span-2 small-caps text-sm font-semibold text-ink-primary tnum text-right">
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
 										{year(product.publishedAt)}
 									</span>
 								</li>
@@ -173,7 +175,7 @@ export default function Home({
 						</ul>
 						<Link
 							href="/products"
-							className="col-span-12 md:col-start-4 md:col-span-9 small-caps text-sm font-semibold text-ink-primary link-draw mt-2"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
 							see all products →
 						</Link>
@@ -204,7 +206,7 @@ export default function Home({
 									>
 										{post.title}
 									</Link>
-									<span className="col-span-2 small-caps text-sm font-semibold text-ink-primary tnum text-right">
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
 										{year(post.createdAt)}
 									</span>
 								</li>
@@ -212,7 +214,7 @@ export default function Home({
 						</ul>
 						<Link
 							href="/blog"
-							className="col-span-12 md:col-start-4 md:col-span-9 small-caps text-sm font-semibold text-ink-primary link-draw mt-2"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
 							see all writing →
 						</Link>
@@ -240,7 +242,7 @@ export default function Home({
 									>
 										{a.title}
 									</a>
-									<span className="col-span-2 small-caps text-sm font-semibold text-ink-primary tnum text-right">
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
 										{a.year}
 									</span>
 								</li>

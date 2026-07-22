@@ -21,7 +21,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<aside className="col-span-12 md:col-span-3">
-					<dl className="space-y-4 text-sm">
+					<dl className="space-y-4 text-base">
 						<div>
 							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
 								Duration
@@ -45,8 +45,10 @@ export default function WorkDetail({ work }: { work: Work }) {
 							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
 								Status
 							</dt>
-							<dd className="font-semibold text-ink-primary mt-1 small-caps">
-								{work.toAt ? "Closed" : "Ongoing"}
+							<dd className="mt-1">
+								<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+									{work.toAt ? "closed" : "ongoing"}
+								</span>
 							</dd>
 						</div>
 						<div>
@@ -58,7 +60,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 									href={work.link}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="link-draw small-caps text-sm font-semibold text-ink-primary no-underline"
+									className="link-draw text-sm font-medium text-ink-primary no-underline"
 								>
 									Visit site →
 								</a>
@@ -79,7 +81,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 					<div className="mt-16 pt-6 border-t border-line">
 						<Link
 							href="/work"
-							className="small-caps text-sm font-semibold text-ink-primary link-draw no-underline"
+							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
 							← Back to index
 						</Link>

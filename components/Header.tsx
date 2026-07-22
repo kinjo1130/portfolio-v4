@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
 		<header className="w-full px-6 md:px-12 lg:px-20 py-5 max-w-wide mx-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
 			<Link
 				href="/"
-				className="small-caps text-sm font-semibold text-ink-primary tracking-wider no-underline link-draw shrink-0"
+				className="text-base font-semibold text-ink-primary no-underline link-draw shrink-0"
 			>
 				kinjo.me
 			</Link>
@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
 					<Link
 						key={item.href}
 						href={item.href}
-						className={`small-caps text-sm font-semibold no-underline link-draw text-ink-primary ${
+						className={`text-sm font-medium no-underline link-draw text-ink-primary ${
 							isActive(item.href) ? "underline underline-offset-4" : ""
 						}`}
 					>
