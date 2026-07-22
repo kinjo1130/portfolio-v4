@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 /**
  * Tailwind theme is wired to CSS variables defined in styles/tokens.css.
- * SSoT for design decisions: DESIGN.md
+ * SSoT for design decisions: DESIGN.md (v2 — monochrome warm tint)
  */
 const config: Config = {
   content: [
@@ -13,32 +13,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Material anchors
+        // Material aliases (literal, do not flip with theme)
         asphalt: "var(--asphalt)",
         concrete: "var(--concrete)",
         paper: "var(--paper)",
 
-        // Neutral ramp
+        // Monochrome ramp (DESIGN.md §2.1)
         neutral: {
-          0: "var(--neutral-0)",
           50: "var(--neutral-50)",
           100: "var(--neutral-100)",
-          150: "var(--neutral-150)",
           200: "var(--neutral-200)",
-          250: "var(--neutral-250)",
           300: "var(--neutral-300)",
           400: "var(--neutral-400)",
-          450: "var(--neutral-450)",
           500: "var(--neutral-500)",
           600: "var(--neutral-600)",
           700: "var(--neutral-700)",
           800: "var(--neutral-800)",
-          850: "var(--neutral-850)",
           900: "var(--neutral-900)",
           950: "var(--neutral-950)",
         },
+        primary: {
+          DEFAULT: "var(--primary)",
+          hover: "var(--primary-hover)",
+          active: "var(--primary-active)",
+        },
 
-        // Signals
+        // Signals (DESIGN.md §2.2)
         signal: {
           positive: "var(--signal-positive)",
           caution: "var(--signal-caution)",
@@ -46,17 +46,7 @@ const config: Config = {
           info: "var(--signal-info)",
         },
 
-        // Accent
-        hazard: {
-          DEFAULT: "var(--hazard)",
-          deep: "var(--hazard-deep)",
-        },
-        accent: {
-          DEFAULT: "var(--accent)",
-          hover: "var(--accent-hover)",
-        },
-
-        // Semantic aliases
+        // Semantic aliases (flip with theme)
         surface: {
           page: "var(--surface-page)",
           raised: "var(--surface-raised)",
@@ -66,6 +56,7 @@ const config: Config = {
         },
         ink: {
           primary: "var(--text-primary)",
+          heading: "var(--text-heading)",
           secondary: "var(--text-secondary)",
           tertiary: "var(--text-tertiary)",
           disabled: "var(--text-disabled)",
@@ -76,6 +67,10 @@ const config: Config = {
           DEFAULT: "var(--border-default)",
           subtle: "var(--border-subtle)",
           divider: "var(--divider)",
+        },
+        link: {
+          DEFAULT: "var(--link)",
+          hover: "var(--link-hover)",
         },
       },
       fontFamily: {
@@ -122,7 +117,6 @@ const config: Config = {
         8: "var(--space-8)",
         9: "var(--space-9)",
         10: "var(--space-10)",
-        11: "var(--space-11)",
       },
       maxWidth: {
         prose: "var(--container-prose)",
@@ -130,23 +124,29 @@ const config: Config = {
         content: "var(--container-content)",
         wide: "var(--container-wide)",
       },
+      // Radius tokens + component roles (DESIGN.md §5)
       borderRadius: {
         none: "0",
-        xs: "var(--radius-xs)",
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         DEFAULT: "var(--radius-md)",
         lg: "var(--radius-lg)",
+        xl: "var(--radius-xl)",
         pill: "var(--radius-pill)",
+        full: "var(--radius-pill)",
+        input: "var(--radius-input)",
+        button: "var(--radius-button)",
+        card: "var(--radius-card)",
+        badge: "var(--radius-badge)",
       },
-      borderWidth: {
-        DEFAULT: "1px",
-        thick: "var(--border-thick)",
-        rule: "var(--border-rule)",
-      },
+      // Subtle shadows only, elevation: dropdown < card < modal < toast (DESIGN.md §6)
       boxShadow: {
         none: "none",
-        hard: "var(--shadow-hard)",
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+        DEFAULT: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
+        xl: "var(--shadow-xl)",
       },
       transitionDuration: {
         fast: "var(--duration-fast)",

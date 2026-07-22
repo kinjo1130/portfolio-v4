@@ -50,7 +50,7 @@ export default function Layout({
 					<section className="pt-12 md:pt-16 lg:pt-20 pb-12 lg:pb-16">
 						<div className="flex items-start justify-between gap-6">
 							<h1
-								className="jp-display font-black leading-[0.95] tracking-tighter ink-settle"
+								className="jp-display font-bold leading-tight tracking-tight ink-settle"
 								style={{ fontSize: "clamp(32px, 8vw, 120px)" }}
 							>
 								{title}

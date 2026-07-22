@@ -1,5 +1,5 @@
 @import "./tokens.css";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,35 +12,17 @@
     font-family: var(--font-body);
     font-size: var(--size-md);
     line-height: var(--leading-normal);
-    font-feature-settings: "kern", "liga", "calt", "onum";
+    font-feature-settings: "kern", "liga", "calt";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* prevent horizontal scroll caused by hero clamp + paddings on narrow screens */
     overflow-x: clip;
   }
 
-  body {
-    overflow-x: clip;
-  }
-
-  /* Paper texture: loose-leaf horizontal rule + grain, scrolls with content */
   body {
     background-color: var(--surface-page);
     color: var(--text-primary);
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent calc(var(--rule-gap) - 1px),
-        var(--rule-color) calc(var(--rule-gap) - 1px),
-        var(--rule-color) var(--rule-gap)
-      ),
-      url("/textures/paper-grain.svg");
-    background-size: auto, 320px 320px;
-    background-attachment: scroll;
-    background-position: top left;
-    background-repeat: repeat, repeat;
+    overflow-x: clip;
   }
 
   h1,
@@ -48,13 +30,12 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: var(--tracking-tight);
     line-height: var(--leading-snug);
-    color: var(--text-primary);
+    color: var(--text-heading);
     font-weight: 700;
   }
 
-  /* Japanese display uses mincho — only when explicitly opted in */
+  /* JP 見出し (Noto Sans JP 明示) */
   .jp-display {
     font-family: var(--font-jp-display);
     font-weight: 700;
@@ -69,43 +50,39 @@
   }
 
   a:hover {
-    color: var(--accent-hover);
+    color: var(--link-hover);
+  }
+
+  /* Focus ring: 2px solid primary, offset 2px (DESIGN.md §2.3) */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  :disabled {
+    opacity: 0.4;
   }
 
   ::selection {
-    background-color: var(--ink);
-    color: var(--paper);
+    background-color: var(--surface-inverse);
+    color: var(--text-on-inverse);
   }
 
-  /* Small caps utility for captions — uses clean sans for legibility */
+  /* Micro label: caption + uppercase + 0.08em (DESIGN.md §11 A3) */
   .small-caps {
-    font-family: var(--font-sans);
-    font-variant-caps: all-small-caps;
-    letter-spacing: var(--tracking-wider);
-    font-feature-settings: "smcp", "c2sc";
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
   }
 
-  /* Tabular numerals for index numbers — also uses sans */
+  /* Tabular numerals for index numbers */
   .tnum {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-variant-numeric: tabular-nums;
-  }
-
-  /* Optical sizes for Newsreader */
-  .display {
-    font-family: var(--font-display);
-    font-optical-sizing: auto;
-    font-variation-settings: "opsz" 72;
-  }
-
-  /* Vertical Japanese writing (used selectively) */
-  .vertical {
-    writing-mode: vertical-rl;
-    font-family: var(--font-jp-display);
   }
 }
 
-/* ---- Editorial animations ---- */
+/* ---- Animations (restrained — DESIGN.md §7) ---- */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -126,17 +103,6 @@
   }
 }
 
-@keyframes inkSettle {
-  0% {
-    opacity: 0;
-    letter-spacing: 0.05em;
-  }
-  100% {
-    opacity: 1;
-    letter-spacing: var(--tracking-tight);
-  }
-}
-
 .page-enter {
   animation: fadeUp var(--duration-slow) var(--ease-editorial) forwards;
 }
@@ -146,41 +112,37 @@
 }
 
 .page-enter > *:nth-child(1) { animation-delay: 0ms; }
-.page-enter > *:nth-child(2) { animation-delay: 80ms; }
-.page-enter > *:nth-child(3) { animation-delay: 160ms; }
-.page-enter > *:nth-child(4) { animation-delay: 240ms; }
-.page-enter > *:nth-child(5) { animation-delay: 320ms; }
-.page-enter > *:nth-child(6) { animation-delay: 400ms; }
-.page-enter > *:nth-child(n + 7) { animation-delay: 480ms; }
+.page-enter > *:nth-child(2) { animation-delay: 60ms; }
+.page-enter > *:nth-child(3) { animation-delay: 120ms; }
+.page-enter > *:nth-child(4) { animation-delay: 180ms; }
+.page-enter > *:nth-child(5) { animation-delay: 240ms; }
+.page-enter > *:nth-child(6) { animation-delay: 300ms; }
+.page-enter > *:nth-child(n + 7) { animation-delay: 360ms; }
 
+.ink-settle {
+  animation: fadeUp var(--duration-slow) var(--ease-editorial) both;
+}
+
+/* v1 のテクスチャ背景は廃止。プレーンなサーフェスのみ */
 .home-plain-paper {
   background-color: var(--surface-page);
-  background-image: url("/textures/paper-grain.svg");
-  background-size: 320px 320px;
-  background-attachment: scroll;
-  background-position: top left;
-  background-repeat: repeat;
 }
 
 /* Decorative rule that animates in */
 .rule-line {
   display: block;
   height: 1px;
-  background-color: var(--ink);
+  background-color: var(--border-strong);
   transform-origin: left center;
   animation: drawRule var(--duration-slow) var(--ease-editorial) forwards;
 }
 
-.ink-settle {
-  animation: inkSettle var(--duration-slow) var(--ease-editorial) both;
-}
-
-/* Editorial prose overrides for markdown body */
+/* ---- Prose (markdown body) ---- */
 .prose {
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.85;
+  font-size: var(--size-md);
+  line-height: 1.8;
 }
 
 .prose p {
@@ -189,54 +151,47 @@
 }
 
 .prose h2 {
-  font-family: var(--font-jp-display);
-  font-weight: 900;
-  font-size: 1.625rem;
+  font-weight: 700;
+  font-size: var(--size-2xl);
+  line-height: var(--leading-snug);
   margin-top: 2.5em;
   margin-bottom: 0.6em;
   padding-top: 1em;
   border-top: 1px solid var(--rule-color);
-  letter-spacing: var(--tracking-tight);
 }
 
 .prose h3 {
-  font-family: var(--font-jp-display);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: var(--size-xl);
+  line-height: var(--leading-snug);
   margin-top: 2em;
   margin-bottom: 0.6em;
-  letter-spacing: var(--tracking-tight);
 }
 
 .prose h4 {
-  font-family: var(--font-jp-display);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--size-lg);
   margin-top: 1.6em;
   margin-bottom: 0.4em;
 }
 
 .prose a {
-  color: var(--text-primary);
+  color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .prose a:hover {
-  background-color: var(--ink);
-  color: var(--paper);
-  text-decoration-color: transparent;
+  color: var(--link-hover);
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--ink);
+  border-left: 2px solid var(--border-strong);
   padding-left: 1em;
   font-style: normal;
-  font-family: var(--font-jp-display);
-  font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   margin: 1.5em 0;
 }
 
@@ -246,17 +201,8 @@
   margin: 1em 0;
 }
 
-.prose ul > li {
-  list-style: none;
-  position: relative;
-}
-
-.prose ul > li::before {
-  content: "—";
-  position: absolute;
-  left: -1.4em;
-  color: var(--text-secondary);
-  font-weight: 600;
+.prose ul {
+  list-style: disc;
 }
 
 .prose ol {
@@ -268,24 +214,30 @@
   margin: 0.4em 0;
 }
 
+.prose li::marker {
+  color: var(--text-tertiary);
+}
+
 .prose code {
   background: var(--surface-sunken);
   padding: 0.12em 0.4em;
   font-family: var(--font-mono);
   font-size: 0.92em;
   font-weight: 500;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
 }
 
 .prose pre {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
   padding: 1.2em 1.4em;
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 0.9em;
   line-height: 1.6;
   margin: 1.5em 0;
+  border-radius: var(--radius-md);
 }
 
 .prose pre code {
@@ -303,7 +255,8 @@
 
 .prose img {
   margin: 2em 0;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
 }
 
 .prose table {
@@ -315,20 +268,20 @@
 
 .prose th,
 .prose td {
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-default);
   padding: 0.6em 0.8em;
   text-align: left;
 }
 
 .prose th {
   font-weight: 700;
-  font-family: var(--font-sans);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-wide);
   font-size: 0.85em;
+  color: var(--text-secondary);
 }
 
-/* Editorial link hover: drawn underline */
+/* Link hover: drawn underline */
 .link-draw {
   position: relative;
   text-decoration: none;
