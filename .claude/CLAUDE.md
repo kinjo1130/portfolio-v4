@@ -4,16 +4,18 @@
 
 UI / トークン / コピー / アイコノグラフィに関する変更は、必ずリポジトリ root の `DESIGN.md` を参照すること。`DESIGN.md` がアフロ Design System の Single Source of Truth。
 
-### 必須ルール（DESIGN.md から派生）
+### 必須ルール（DESIGN.md v2 から派生）
 
-- **カラー**: 任意の hex を直書きしない。`styles/tokens.css` のセマンティックエイリアス（`--surface-*` / `--text-*` / `--border-*` / `--action-*`）または Tailwind の対応クラス（`bg-paper`, `text-primary` 等）を使う。
-- **影**: ソフト/ブラー影は禁止（`shadow-sm/md/lg/xl/2xl` 等）。許容は `--shadow-hard`（4px 4px 0 0 インク、ぼかしなし）のみ、インタラクティブカードの hover に限る。
+- **カラー**: 任意の hex を直書きしない。モノクローム（warm tint）の primary/neutral ランプ（50–950）とシグナルカラー（success / warning / danger / info）のトークン経由で使う。シグナル以外の有彩色を持ち込まない。
+- **インタラクション状態**: hover = 明度 −5%、active = 明度 −10%、focus = 2px solid primary + offset 2px、disabled = opacity 40%。値をハードコードせず導出ルールとして適用する。
+- **影**: `--shadow-sm/md/lg/xl` の4段のみ（subtle、中立ブラック）。エレベーションは dropdown (sm) < card (md) < modal (lg) < toast (xl)。この4段以外の影・色付き影は作らない。
 - **グラデーション禁止**。
-- **角丸は 0–6px**。`rounded-pill`（999px）はタグ・アバターのみ。`rounded-lg/2xl/3xl/full` を一般 UI に使わない。
-- **タイポ**: 見出し = Space Grotesk、本文 = DM Sans、JP = Noto Sans JP、mono ラベルは大文字 + 0.16em tracking。
+- **角丸**: トークン（sm 4px / md 8px / lg 12px / xl 16px / full）経由。コンポーネントロールで参照する: input = sm、button = md、card = lg、badge = full。px 直書き禁止。
+- **タイポ**: Inter 単一ファミリー（JP フォールバックに Noto Sans JP）。ベース 16px、スケール比 1.2。ロールは h1–h4 / body / caption（DESIGN.md §3 の値が正）。
 - **Emoji 禁止**（UI / コピー / コメント全てで）。状態は Badge / ドットで表す。
-- **リンク色**: `--hazard #BB6A35` のみ。それ以外の色（blue 等）でリンクを描画しない。
-- **余白**: セクション縦リズム 64–128px。ぎゅっと詰めない。
+- **リンク色**: `primary-700` + 下線（DESIGN.md §11 A2）。有彩色（blue 等）でリンクを描画しない。
+- **余白**: 8px ベースのリニアスケール。セクション間は `3xl`（64px）、ブロック内スタックは `md`（16px）。
+- **ダークモード**: 対応必須。ランプ共通で役割を反転（背景 950、本文 200 等）。
 - **Voice**: 一人称・単数 "I"。マーケ語（leverage / synergy / best-in-class）禁止。誇張・感嘆禁止。
 
 ### 乖離の扱い
