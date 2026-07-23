@@ -15,7 +15,10 @@ export default function CompressPage() {
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
 	const [originalName, setOriginalName] = useState<string>("image");
 	const [originalSize, setOriginalSize] = useState<number>(0);
-	const [originalDim, setOriginalDim] = useState<{ w: number; h: number } | null>(null);
+	const [originalDim, setOriginalDim] = useState<{
+		w: number;
+		h: number;
+	} | null>(null);
 	const [format, setFormat] = useState<CompressFormat>("webp");
 	const [quality, setQuality] = useState<number>(0.82);
 	const [maxDimension, setMaxDimension] = useState<number | "">("");
@@ -106,10 +109,9 @@ export default function CompressPage() {
 		if (fileInputRef.current) fileInputRef.current.value = "";
 	};
 
-	const labelClass =
-		"block text-xs font-semibold small-caps tracking-wider text-ink-secondary mb-2";
+	const labelClass = "block text-sm font-medium text-ink-secondary mb-2";
 	const chipBase =
-		"px-3 py-2 text-xs font-semibold small-caps tracking-wider border border-line transition-colors duration-fast";
+		"px-3 py-2 text-sm font-medium rounded-button border border-line transition-colors duration-fast";
 	const chipActive = "bg-ink-primary text-paper border-ink-primary";
 	const chipInactive =
 		"bg-transparent text-ink-primary hover:border-ink-primary";
@@ -127,7 +129,7 @@ export default function CompressPage() {
 				description="画像をブラウザ内で圧縮・形式変換 (WebP / AVIF / JPG / PNG)"
 				imgUrl="/favicon.ico"
 			/>
-			<Layout title="Compress" eyebrow="§ — Tools" issueNumber="§ — 2026">
+			<Layout title="Compress">
 				<div className="mb-6">
 					<p className="text-sm text-ink-secondary">
 						画像はあなたのブラウザ内だけで処理されます。サーバーには送信されません。
@@ -140,7 +142,7 @@ export default function CompressPage() {
 						onDragOver={(e) => e.preventDefault()}
 						className="border border-ink-primary p-8 text-center"
 					>
-						<p className="small-caps text-xs font-semibold tracking-wider text-ink-secondary mb-4">
+						<p className="text-sm font-medium text-ink-secondary mb-4">
 							Drop image here
 						</p>
 						<p className="text-sm text-ink-secondary mb-4">— or —</p>
@@ -171,7 +173,7 @@ export default function CompressPage() {
 							{/* Stats */}
 							<dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
 								<div>
-									<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+									<dt className="text-sm font-medium text-ink-secondary">
 										Source
 									</dt>
 									<dd className="font-semibold text-ink-primary mt-1">
@@ -184,7 +186,7 @@ export default function CompressPage() {
 									</dd>
 								</div>
 								<div>
-									<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+									<dt className="text-sm font-medium text-ink-secondary">
 										Output
 									</dt>
 									<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -202,7 +204,7 @@ export default function CompressPage() {
 								</div>
 								{reduction !== null && (
 									<div className="col-span-2">
-										<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+										<dt className="text-sm font-medium text-ink-secondary">
 											Reduction
 										</dt>
 										<dd

@@ -9,11 +9,7 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 export default function Product({ products }: { products: Products }) {
 	return (
-		<Layout
-			title="Products"
-			eyebrow="§ 04 — Products"
-			issueNumber="§ 04 — 2026"
-		>
+		<Layout title="Products">
 			<SeoHead
 				title="Products"
 				titleTemplate="プロダクト一覧"
@@ -23,9 +19,7 @@ export default function Product({ products }: { products: Products }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="small-caps text-sm font-semibold text-ink-primary tracking-wider">
-						Index
-					</p>
+					<p className="text-sm font-medium text-ink-secondary">Index</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 						{String(products.length).padStart(2, "0")} entries
 					</p>

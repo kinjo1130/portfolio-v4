@@ -8,11 +8,7 @@ import Layout from "../layout";
 
 export default function ProductDetail({ product }: { product: Product }) {
 	return (
-		<Layout
-			title={product.title}
-			eyebrow="§ 04 — Products"
-			issueNumber="§ 04 — 2026"
-		>
+		<Layout title={product.title} eyebrow="Products">
 			<SeoHead
 				title="Products"
 				titleTemplate={product.title}
@@ -24,7 +20,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 				<aside className="col-span-12 md:col-span-3">
 					<dl className="space-y-4 text-base">
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+							<dt className="text-sm font-medium text-ink-secondary">
 								Published
 							</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -32,7 +28,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 							</dd>
 						</div>
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+							<dt className="text-sm font-medium text-ink-secondary">
 								Updated
 							</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -41,9 +37,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 						</div>
 						{product.url && (
 							<div>
-								<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-									Link
-								</dt>
+								<dt className="text-sm font-medium text-ink-secondary">Link</dt>
 								<dd className="mt-1">
 									<a
 										href={product.url}

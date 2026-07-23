@@ -7,11 +7,7 @@ import Layout from "../layout";
 
 export default function WorkDetail({ work }: { work: Work }) {
 	return (
-		<Layout
-			title={work.title}
-			eyebrow="§ 03 — Work"
-			issueNumber="§ 03 — 2026"
-		>
+		<Layout title={work.title} eyebrow="Work">
 			<SeoHead
 				title="Work"
 				titleTemplate={work.title}
@@ -23,7 +19,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 				<aside className="col-span-12 md:col-span-3">
 					<dl className="space-y-4 text-base">
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+							<dt className="text-sm font-medium text-ink-secondary">
 								Duration
 							</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
@@ -33,18 +29,14 @@ export default function WorkDetail({ work }: { work: Work }) {
 						</div>
 						{work.position.length > 0 && (
 							<div>
-								<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-									Role
-								</dt>
+								<dt className="text-sm font-medium text-ink-secondary">Role</dt>
 								<dd className="font-semibold text-ink-primary mt-1">
 									{work.position.join(" / ")}
 								</dd>
 							</div>
 						)}
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
-								Status
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">Status</dt>
 							<dd className="mt-1">
 								<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
 									{work.toAt ? "closed" : "ongoing"}
@@ -52,7 +44,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 							</dd>
 						</div>
 						<div>
-							<dt className="small-caps text-xs font-semibold text-ink-secondary tracking-wider">
+							<dt className="text-sm font-medium text-ink-secondary">
 								Company
 							</dt>
 							<dd className="mt-1">

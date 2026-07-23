@@ -7,11 +7,7 @@ import Layout from "../layout";
 
 export default function Work({ works }: { works: Works }) {
 	return (
-		<Layout
-			title="Work"
-			eyebrow="§ 03 — Work"
-			issueNumber="§ 03 — 2026"
-		>
+		<Layout title="Work">
 			<SeoHead
 				title="Work"
 				titleTemplate="Work"
@@ -21,9 +17,7 @@ export default function Work({ works }: { works: Works }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="small-caps text-sm font-semibold text-ink-primary tracking-wider">
-						Index
-					</p>
+					<p className="text-sm font-medium text-ink-secondary">Index</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 						{String(works.length).padStart(2, "0")} entries
 					</p>

@@ -68,11 +68,10 @@
     color: var(--text-on-inverse);
   }
 
-  /* Micro label: caption + uppercase + 0.08em (DESIGN.md §11 A3) */
+  /* Label: 通常ケースの muted ラベル (DESIGN.md §11 A4)。旧 uppercase マイクロラベルは廃止 */
   .small-caps {
     font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: var(--tracking-normal);
   }
 
   /* Tabular numerals for index numbers */
@@ -274,10 +273,8 @@
 }
 
 .prose th {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  font-size: 0.85em;
+  font-weight: 600;
+  font-size: 0.9em;
   color: var(--text-secondary);
 }
 
