@@ -47,7 +47,6 @@ export const TableOfContents = ({ toc, className }: Props) => {
 
 	return (
 		<nav className={className} aria-label="目次">
-			<p className="text-sm font-medium text-ink-secondary mb-3">目次</p>
 			<ul className="border-l border-line">
 				{toc.map((item) => {
 					const isActive = activeId === item.id;
