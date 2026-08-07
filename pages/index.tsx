@@ -86,14 +86,53 @@ export default function Home({
 
 					<span className="rule-line" />
 
-					{/* Featured: Work */}
+					{/* Featured: Products */}
 					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-6 lg:gap-8">
+						<header className="col-span-12 md:col-span-3">
+							<p className="text-sm font-medium text-ink-secondary">
+								Featured — Products
+							</p>
+							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+								01 / {String(featuredProducts.length).padStart(2, "0")}
+							</p>
+						</header>
+						<ul className="col-span-12 md:col-span-9">
+							{featuredProducts.map((product, i) => (
+								<li
+									key={product.slug}
+									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
+								>
+									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+										{String(i + 1).padStart(2, "0")}
+									</span>
+									<Link
+										href={`/products/${product.slug}`}
+										className="col-span-9 link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
+									>
+										{product.title}
+									</Link>
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
+										{year(product.publishedAt)}
+									</span>
+								</li>
+							))}
+						</ul>
+						<Link
+							href="/products"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
+						>
+							see all products →
+						</Link>
+					</section>
+
+					{/* Featured: Work */}
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
 							<p className="text-sm font-medium text-ink-secondary">
 								Featured — Work
 							</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-								01 / {String(featuredWorks.length).padStart(2, "0")}
+								02 / {String(featuredWorks.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
@@ -127,45 +166,6 @@ export default function Home({
 							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
 							see all work →
-						</Link>
-					</section>
-
-					{/* Featured: Products */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
-							<p className="text-sm font-medium text-ink-secondary">
-								Featured — Products
-							</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-								02 / {String(featuredProducts.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{featuredProducts.map((product, i) => (
-								<li
-									key={product.slug}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
-										{String(i + 1).padStart(2, "0")}
-									</span>
-									<Link
-										href={`/products/${product.slug}`}
-										className="col-span-9 link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
-									>
-										{product.title}
-									</Link>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-										{year(product.publishedAt)}
-									</span>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/products"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							see all products →
 						</Link>
 					</section>
 
