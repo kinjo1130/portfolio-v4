@@ -1,11 +1,14 @@
 import { SeoHead } from "@/components/SeoHead";
+import { TableOfContents } from "@/components/TableOfContents";
 import { formatDate } from "@/libs/common";
 import { getWork, getWorks } from "@/libs/content";
+import { renderToc } from "@/libs/renderDoc";
 import type { Work } from "@/types/work";
 import Link from "next/link";
 import Layout from "../layout";
 
 export default function WorkDetail({ work }: { work: Work }) {
+	const toc = renderToc(work.body);
 	return (
 		<Layout title={work.title} eyebrow="Work">
 			<SeoHead
@@ -17,48 +20,62 @@ export default function WorkDetail({ work }: { work: Work }) {
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<aside className="col-span-12 md:col-span-3">
-					<dl className="space-y-4 text-base">
-						<div>
-							<dt className="text-sm font-medium text-ink-secondary">
-								Duration
-							</dt>
-							<dd className="font-semibold text-ink-primary mt-1 tnum">
-								{formatDate(work.fromAt)} —{" "}
-								{work.toAt ? formatDate(work.toAt) : "現在"}
-							</dd>
-						</div>
-						{work.position.length > 0 && (
+					<div className="md:sticky md:top-10 space-y-6">
+						<dl className="space-y-4 text-base">
 							<div>
-								<dt className="text-sm font-medium text-ink-secondary">Role</dt>
-								<dd className="font-semibold text-ink-primary mt-1">
-									{work.position.join(" / ")}
+								<dt className="text-sm font-medium text-ink-secondary">
+									Duration
+								</dt>
+								<dd className="font-semibold text-ink-primary mt-1 tnum">
+									{formatDate(work.fromAt)} —{" "}
+									{work.toAt ? formatDate(work.toAt) : "現在"}
 								</dd>
 							</div>
+							{work.position.length > 0 && (
+								<div>
+									<dt className="text-sm font-medium text-ink-secondary">
+										Role
+									</dt>
+									<dd className="font-semibold text-ink-primary mt-1">
+										{work.position.join(" / ")}
+									</dd>
+								</div>
+							)}
+							<div>
+								<dt className="text-sm font-medium text-ink-secondary">
+									Status
+								</dt>
+								<dd className="mt-1">
+									<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+										{work.toAt ? "closed" : "ongoing"}
+									</span>
+								</dd>
+							</div>
+							<div>
+								<dt className="text-sm font-medium text-ink-secondary">
+									Company
+								</dt>
+								<dd className="mt-1">
+									<a
+										href={work.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="link-draw text-sm font-medium text-ink-primary no-underline"
+									>
+										Visit site →
+									</a>
+								</dd>
+							</div>
+						</dl>
+						{toc.length >= 4 && (
+							<div>
+								<p className="text-sm font-medium text-ink-secondary mb-2">
+									Contents
+								</p>
+								<TableOfContents toc={toc} />
+							</div>
 						)}
-						<div>
-							<dt className="text-sm font-medium text-ink-secondary">Status</dt>
-							<dd className="mt-1">
-								<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-									{work.toAt ? "closed" : "ongoing"}
-								</span>
-							</dd>
-						</div>
-						<div>
-							<dt className="text-sm font-medium text-ink-secondary">
-								Company
-							</dt>
-							<dd className="mt-1">
-								<a
-									href={work.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="link-draw text-sm font-medium text-ink-primary no-underline"
-								>
-									Visit site →
-								</a>
-							</dd>
-						</div>
-					</dl>
+					</div>
 				</aside>
 
 				<article className="col-span-12 md:col-span-9">
