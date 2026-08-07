@@ -1,10 +1,7 @@
-import { Github } from "lucide-react";
 import Image from "next/image";
 
 export default function SNS() {
 	const ICON_SIZE = 48;
-	// SNS はブランドアイコン。Lucide (Github) は currentColor を継承するため
-	// グローバルの hazard リンク色に染まらないよう ink-primary を明示。
 	const linkClass =
 		"inline-flex items-center justify-center text-ink-primary hover:text-ink-primary no-underline";
 	return (
@@ -22,6 +19,7 @@ export default function SNS() {
 						<Image
 							src="/sns/x.svg"
 							alt=""
+							unoptimized
 							width={ICON_SIZE}
 							height={ICON_SIZE}
 						/>
@@ -35,7 +33,12 @@ export default function SNS() {
 						className={linkClass}
 						aria-label="GitHub"
 					>
-						<Github size={ICON_SIZE} strokeWidth={1.5} />
+						<Image
+							src="/sns/github.png"
+							alt=""
+							width={ICON_SIZE}
+							height={ICON_SIZE}
+						/>
 					</a>
 				</li>
 				<li>
@@ -49,6 +52,7 @@ export default function SNS() {
 						<Image
 							src="/sns/instagram.svg"
 							alt=""
+							unoptimized
 							width={ICON_SIZE}
 							height={ICON_SIZE}
 						/>
@@ -81,6 +85,7 @@ export default function SNS() {
 						<Image
 							src="/sns/zenn.svg"
 							alt=""
+							unoptimized
 							width={ICON_SIZE}
 							height={ICON_SIZE}
 						/>

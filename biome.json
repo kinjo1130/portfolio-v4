@@ -7,7 +7,12 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": [
+			".next",
+			"node_modules",
+			"pnpm-lock.yaml",
+			"tsconfig.tsbuildinfo"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -27,5 +32,4 @@
 			"quoteStyle": "double"
 		}
 	}
-	
 }
