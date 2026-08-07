@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import type { AppProps } from "next/app";
 
 // GA4 測定 ID (kinjyo.me / ストリーム 2657990993)。測定 ID は公開情報のため直書き。
@@ -10,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<Component {...pageProps} />
 			<GoogleAnalytics gaId={GA_ID} />
+			<Analytics />
 		</>
 	);
 }
