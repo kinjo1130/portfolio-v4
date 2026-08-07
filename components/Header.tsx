@@ -19,19 +19,19 @@ export const Header: React.FC = () => {
 
 	return (
 		<header className="w-full border-b border-line">
-			<div className="max-w-wide mx-auto px-6 md:px-12 lg:px-20 py-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+			<div className="max-w-wide mx-auto px-6 md:px-12 lg:px-20 py-4 flex flex-col gap-y-2 md:flex-row md:items-center md:justify-between md:gap-x-6">
 				<Link
 					href="/"
-					className="text-base font-semibold text-ink-primary no-underline link-draw shrink-0"
+					className="text-base font-semibold text-ink-primary no-underline link-draw self-start shrink-0"
 				>
 					kinjo.me
 				</Link>
-				<nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 md:gap-x-7">
+				<nav className="flex flex-wrap items-center gap-x-1 gap-y-1 -mx-2 md:mx-0 md:justify-end md:gap-x-4">
 					{NAV.map((item) => (
 						<Link
 							key={item.href}
 							href={item.href}
-							className={`text-sm font-medium no-underline rounded-button px-3 py-1.5 transition-colors ${
+							className={`text-sm font-medium no-underline rounded-button px-2 md:px-3 py-1.5 transition-colors ${
 								isActive(item.href)
 									? "bg-surface-sunken text-ink-primary"
 									: "text-ink-secondary hover:text-ink-primary hover:bg-surface-sunken"
