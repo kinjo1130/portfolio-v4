@@ -152,75 +152,9 @@
 
   /* ---- Prose rule color ---- */
   --rule-color: var(--border-default);
-}
 
-/* ---- Dark mode (ランプ共通・役割反転 — DESIGN.md §2.4) ---- */
-[data-theme="dark"] {
-  --surface-page: var(--neutral-950);
-  --surface-raised: var(--neutral-900);
-  --surface-sunken: var(--neutral-900);
-  --surface-card: var(--neutral-900);
-  --surface-inverse: var(--neutral-50);
-
-  --text-primary: var(--neutral-200);
-  --text-heading: var(--neutral-50);
-  --text-secondary: var(--neutral-400);
-  --text-tertiary: var(--neutral-500);
-  --text-disabled: var(--neutral-600);
-  --text-on-inverse: var(--neutral-900);
-
-  --border-strong: var(--neutral-600);
-  --border-default: var(--neutral-800);
-  --border-subtle: var(--neutral-900);
-  --divider: var(--neutral-800);
-
-  --link: var(--neutral-300);
-  --link-hover: var(--neutral-200);
-
-  --action-primary-bg: var(--neutral-200);
-  --action-primary-fg: var(--neutral-900);
-  --action-primary-bg-hover: var(--neutral-300);
-  --action-primary-bg-active: var(--neutral-400);
-  --action-secondary-fg: var(--text-primary);
-  --action-secondary-border: var(--border-strong);
-  --focus-ring: var(--neutral-300);
-
-  --rule-color: var(--neutral-800);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="dark"]) {
-    --surface-page: var(--neutral-950);
-    --surface-raised: var(--neutral-900);
-    --surface-sunken: var(--neutral-900);
-    --surface-card: var(--neutral-900);
-    --surface-inverse: var(--neutral-50);
-
-    --text-primary: var(--neutral-200);
-    --text-heading: var(--neutral-50);
-    --text-secondary: var(--neutral-400);
-    --text-tertiary: var(--neutral-500);
-    --text-disabled: var(--neutral-600);
-    --text-on-inverse: var(--neutral-900);
-
-    --border-strong: var(--neutral-600);
-    --border-default: var(--neutral-800);
-    --border-subtle: var(--neutral-900);
-    --divider: var(--neutral-800);
-
-    --link: var(--neutral-300);
-    --link-hover: var(--neutral-200);
-
-    --action-primary-bg: var(--neutral-200);
-    --action-primary-fg: var(--neutral-900);
-    --action-primary-bg-hover: var(--neutral-300);
-    --action-primary-bg-active: var(--neutral-400);
-    --action-secondary-fg: var(--text-primary);
-    --action-secondary-border: var(--border-strong);
-    --focus-ring: var(--neutral-300);
-
-    --rule-color: var(--neutral-800);
-  }
+  /* ライトモード固定 — OS のダークモード設定に追従しない */
+  color-scheme: light;
 }
 
 @media (prefers-reduced-motion: reduce) {
