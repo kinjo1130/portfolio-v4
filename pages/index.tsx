@@ -44,7 +44,7 @@ export default function Home({
 			<SeoHead
 				title="Home"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
-				description="A frontend engineer's portfolio."
+				description="A product engineer's portfolio."
 				imgUrl="/favicon.ico"
 			/>
 			<div className="home-plain-paper min-h-screen text-ink-primary">
@@ -75,10 +75,10 @@ export default function Home({
 							</p>
 							<div className="col-span-12 md:col-span-4 md:col-start-9 self-end flex flex-wrap gap-2">
 								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
-									Frontend Engineer
+									Product Engineer
 								</span>
 								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
-									Based in Osaka
+									Based in Kyoto
 								</span>
 							</div>
 						</div>
