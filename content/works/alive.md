@@ -39,8 +39,8 @@ WordPressサイトの既存CSSとテーマを解析してデザイントーク�
 - Google Apps Script / Google Maps API / Google Sheets API
 - Terraform / AWS (EC2 / App Runner / RDS) / WordPress
 
+<!-- 下書き (自分で書き直す)
 ## 学び・所感
 
-<!-- 下書き (自分で書き直す)
 最初にPython CLIで作って渡したところ、結局使うたびに自分が呼ばれることになりました。営業チームが自分で回せるところまでが納品で、Webアプリへの作り直しはそのコストを払う価値がありました。エンジニアがいないと動かないツールは、社内ツールとしては未完成だと考えるようになりました。
 -->
