@@ -7,6 +7,7 @@ image:
   width: 1170
   height: 2532
 url: https://liff.line.me/2005710452-e6m8Ao66
+description: LINEグループにGoogle MapのURLを送るだけで、行きたい場所を自動で保存して見返せるLINEボットです。
 ---
 
 ## LINEボット「mapMemo」で旅の思い出をBotが自動で収集して記録します。
