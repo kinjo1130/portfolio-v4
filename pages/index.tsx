@@ -238,11 +238,8 @@ export default function Home({
 						</ul>
 					</section>
 
-					{/* Colophon */}
+					{/* SNS */}
 					<section className="pt-24 lg:pt-32">
-						<p className="text-sm font-medium text-ink-secondary mb-6">
-							Colophon — elsewhere
-						</p>
 						<SNS />
 					</section>
 				</main>
