@@ -24,9 +24,9 @@ export default function Blog({
 	return (
 		<Layout title="Writing">
 			<SeoHead
-				title="Blog"
+				title="Writing"
 				titleTemplate="Top"
-				description="Blogの一覧ページです"
+				description="記事の一覧ページです"
 				imgUrl="/favicon.ico"
 			/>
 
