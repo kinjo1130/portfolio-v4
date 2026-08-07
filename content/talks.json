@@ -1,0 +1,104 @@
+[
+	{
+		"title": "liff-cliのngrok対応をコントリビュートした話",
+		"event": "Generative AI X-Meetup Vol.1 Tokyo & Osaka (LINE Developer Community)",
+		"date": "2025-07-25",
+		"links": [
+			{
+				"label": "Video",
+				"url": "https://www.youtube.com/watch?v=1UslPe4uqwo"
+			},
+			{
+				"label": "Full archive",
+				"url": "https://www.youtube.com/watch?v=MovKmQ-buqI"
+			},
+			{
+				"label": "Event",
+				"url": "https://linedevelopercommunity.connpass.com/event/361757/"
+			}
+		]
+	},
+	{
+		"title": "スピノカップ 最終発表（最優秀賞）",
+		"event": "ハックツハッカソン スピノカップ 2024",
+		"date": "2024-09-26",
+		"links": [
+			{
+				"label": "Archive",
+				"url": "https://www.youtube.com/watch?v=cBfp5APDX38"
+			}
+		]
+	},
+	{
+		"title": "ツマジロカップ 最終発表（studist賞）",
+		"event": "ハックツハッカソン ツマジロカップ",
+		"date": "2024-02-18",
+		"links": [
+			{
+				"label": "Archive",
+				"url": "https://www.youtube.com/watch?v=gM_mhyWiQz8"
+			}
+		]
+	},
+	{
+		"title": "Linebotと通学時間",
+		"event": "LINE DC Monthly LT #2 - LINEと個人開発のTips共有会",
+		"date": "2022-05-23",
+		"links": [
+			{
+				"label": "Video",
+				"url": "https://www.youtube.com/watch?v=211hua_FMOs"
+			},
+			{
+				"label": "Slides",
+				"url": "https://speakerdeck.com/kinjyo/monthly-lt-line"
+			},
+			{
+				"label": "Event",
+				"url": "https://linedevelopercommunity.connpass.com/event/245787/"
+			}
+		]
+	},
+	{
+		"title": "CCCとチーム開発で学んだこと",
+		"event": "NSEEM LT",
+		"date": "2022-03-12",
+		"links": [
+			{
+				"label": "Slides",
+				"url": "https://speakerdeck.com/kinjyo/nseemnoltnozi-liao-desu"
+			}
+		]
+	},
+	{
+		"title": "CCC 最終発表（Code for Japan賞）",
+		"event": "Civictech Challenge Cup U-22 2021 最終審査会",
+		"date": "2021-10-09",
+		"links": [
+			{
+				"label": "Archive",
+				"url": "https://www.youtube.com/watch?v=PB4Wg-y1JrI"
+			},
+			{
+				"label": "Slides",
+				"url": "https://speakerdeck.com/kinjyo/cccnozui-zhong-fa-biao"
+			}
+		]
+	},
+	{
+		"title": "GASでLINE Botを作る話",
+		"event": "LINE API登壇ビギナー祭り！LT大会 (LINE Developer Community)",
+		"date": "2021-07-27",
+		"links": [
+			{
+				"label": "Archive",
+				"url": "https://www.youtube.com/watch?v=O5w8-B0AsDg"
+			},
+			{ "label": "Slides", "url": "https://speakerdeck.com/kinjyo/line-dc" },
+			{
+				"label": "Event",
+				"url": "https://linedevelopercommunity.connpass.com/event/217740/"
+			}
+		]
+	}
+]
