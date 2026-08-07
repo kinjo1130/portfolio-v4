@@ -6,6 +6,7 @@ image:
   url: /images/products/slipsnap/cover.png
   width: 1024
   height: 1024
+description: 撮り溜めたレシートをOCRとAIで仕分け・抽出して、まとめて経費にできるiOSアプリです。
 ---
 
 ## レシートを撮り溜めて、まとめて経費にするアプリ
