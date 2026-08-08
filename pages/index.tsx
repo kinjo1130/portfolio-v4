@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import SNS from "@/components/SNS";
@@ -44,12 +46,19 @@ type Props = {
 	recentPosts: (Pick<BlogPost, "id" | "title" | "createdAt"> & {
 		image: string;
 	})[];
+	recentTalks: {
+		title: string;
+		event: string;
+		date: string;
+		url: string;
+	}[];
 };
 
 export default function Home({
 	featuredWorks,
 	featuredProducts,
 	recentPosts,
+	recentTalks,
 }: Props) {
 	return (
 		<>
@@ -68,7 +77,7 @@ export default function Home({
 					{/* Cover */}
 					<section className="pt-16 md:pt-24 pb-16 lg:pb-20">
 						<p className="text-sm font-medium text-ink-secondary mb-6 ink-settle">
-							a product engineer&apos;s portfolio
+							プロダクトエンジニアのポートフォリオ
 						</p>
 
 						<h1 className="jp-display text-5xl md:text-7xl font-bold leading-tight tracking-tight ink-settle">
@@ -102,7 +111,7 @@ export default function Home({
 					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
 							<p className="text-sm font-medium text-ink-secondary">
-								Featured — Products
+								プロダクト
 							</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 								01 / {String(featuredProducts.length).padStart(2, "0")}
@@ -147,16 +156,14 @@ export default function Home({
 							href="/products"
 							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
-							see all products →
+							プロダクト一覧へ →
 						</Link>
 					</section>
 
 					{/* Featured: Work */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="text-sm font-medium text-ink-secondary">
-								Featured — Work
-							</p>
+							<p className="text-sm font-medium text-ink-secondary">職歴</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 								02 / {String(featuredWorks.length).padStart(2, "0")}
 							</p>
@@ -190,11 +197,11 @@ export default function Home({
 										</Link>
 									</span>
 									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum hidden md:block">
-										{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "now"}
+										{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "現在"}
 									</span>
 									<span className="col-span-4 md:col-span-2 text-right">
 										<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-											{work.toAt ? "closed" : "ongoing"}
+											{work.toAt ? "終了" : "継続中"}
 										</span>
 									</span>
 								</li>
@@ -204,16 +211,14 @@ export default function Home({
 							href="/work"
 							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
-							see all work →
+							職歴一覧へ →
 						</Link>
 					</section>
 
 					{/* Recent: Blog */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="text-sm font-medium text-ink-secondary">
-								Recent — Writing
-							</p>
+							<p className="text-sm font-medium text-ink-secondary">記事</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
 								03 / {String(recentPosts.length).padStart(2, "0")}
 							</p>
@@ -257,14 +262,58 @@ export default function Home({
 							href="/writing"
 							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
-							see all writing →
+							記事一覧へ →
+						</Link>
+					</section>
+
+					{/* Recent: Talks */}
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+						<header className="col-span-12 md:col-span-3">
+							<p className="text-sm font-medium text-ink-secondary">登壇</p>
+							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+								04 / {String(recentTalks.length).padStart(2, "0")}
+							</p>
+						</header>
+						<ul className="col-span-12 md:col-span-9">
+							{recentTalks.map((talk, i) => (
+								<li
+									key={`${talk.date}-${talk.title}`}
+									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
+								>
+									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+										{String(i + 1).padStart(2, "0")}
+									</span>
+									<div className="col-span-9">
+										<a
+											href={talk.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+										>
+											{talk.title}
+										</a>
+										<p className="text-sm font-medium text-ink-secondary mt-1">
+											{talk.event}
+										</p>
+									</div>
+									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
+										{year(talk.date)}
+									</span>
+								</li>
+							))}
+						</ul>
+						<Link
+							href="/talks"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
+						>
+							登壇一覧へ →
 						</Link>
 					</section>
 
 					{/* Awards */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
-							<p className="text-sm font-medium text-ink-secondary">Awards</p>
+							<p className="text-sm font-medium text-ink-secondary">受賞</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{ACHIEVEMENTS.map((a, i) => (
@@ -333,7 +382,25 @@ export const getStaticProps = async () => {
 		image: `/api/og?title=${encodeURIComponent(p.title)}&date=${p.createdAt.slice(0, 10)}`,
 	}));
 
+	const talks = JSON.parse(
+		fs.readFileSync(path.join(process.cwd(), "content", "talks.json"), "utf-8"),
+	) as {
+		title: string;
+		event: string;
+		date: string;
+		links: { url: string }[];
+	}[];
+	const recentTalks = [...talks]
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+		.slice(0, 3)
+		.map((t) => ({
+			title: t.title,
+			event: t.event,
+			date: t.date,
+			url: t.links[0].url,
+		}));
+
 	return {
-		props: { featuredWorks, featuredProducts, recentPosts },
+		props: { featuredWorks, featuredProducts, recentPosts, recentTalks },
 	};
 };
