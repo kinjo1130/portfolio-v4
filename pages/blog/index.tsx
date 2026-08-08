@@ -6,7 +6,7 @@ import type { BlogPost } from "@/types/blog";
 import Link from "next/link";
 import Layout from "../layout";
 
-type Post = BlogPost | QiitaPost | ZennPost;
+type Post = (BlogPost | QiitaPost | ZennPost) & { image: string | null };
 
 function getHref(post: Post): string {
 	if (isPostWithUrl(post)) return post.url;
@@ -52,29 +52,53 @@ export default function Blog({ blog }: { blog: Post[] }) {
 						return (
 							<li
 								key={`${source ?? "blog"}-${post.id}`}
-								className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
+								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
 							>
-								<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+								<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 									{String(i + 1).padStart(2, "0")}
 								</span>
 								<Link
 									href={href}
 									target={external ? "_blank" : undefined}
 									rel={external ? "noopener noreferrer" : undefined}
-									className="col-span-8 md:col-span-6 link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+									className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 								>
-									{post.title}
-								</Link>
-								<span className="col-span-2 text-right hidden md:block">
-									{source && (
-										<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-											{source}
+									{post.image ? (
+										<img
+											src={post.image}
+											alt={post.title}
+											loading="lazy"
+											decoding="async"
+											className="w-full h-full object-cover"
+										/>
+									) : (
+										<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
+											kinjo.me
 										</span>
 									)}
-								</span>
-								<span className="col-span-3 md:col-span-3 text-sm font-medium text-ink-secondary tnum text-right">
-									{published.toLocaleDateString("ja-JP")}
-								</span>
+								</Link>
+								<div className="col-span-12 md:col-span-8">
+									<div className="flex items-baseline justify-between gap-4">
+										<Link
+											href={href}
+											target={external ? "_blank" : undefined}
+											rel={external ? "noopener noreferrer" : undefined}
+											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+										>
+											{post.title}
+										</Link>
+										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+											{published.toLocaleDateString("ja-JP")}
+										</span>
+									</div>
+									{source && (
+										<p className="mt-2">
+											<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+												{source}
+											</span>
+										</p>
+									)}
+								</div>
 							</li>
 						);
 					})}
@@ -112,6 +136,19 @@ async function fetchZennPosts(): Promise<ZennPost[]> {
 	}
 }
 
+// 記事ページの og:image をビルド/ISR時に取得する (Qiita/Zenn の API は画像を返さないため)
+async function fetchOgImage(url: string): Promise<string | null> {
+	try {
+		const res = await fetch(url);
+		if (!res.ok) return null;
+		const html = await res.text();
+		const match = html.match(/<meta property="og:image" content="([^"]+)"/);
+		return match ? match[1].replace(/&amp;/g, "&") : null;
+	} catch {
+		return null;
+	}
+}
+
 export const getStaticProps = async () => {
 	const [qiita, zenn] = await Promise.all([
 		fetchQiitaPosts(),
@@ -129,7 +166,15 @@ export const getStaticProps = async () => {
 		({ id, title, path, published_at }) =>
 			({ id, title, path, published_at }) as ZennPost,
 	);
-	const blog: Post[] = [...localSlim, ...qiitaSlim, ...zennSlim].sort(
+	const blog: Post[] = await Promise.all(
+		[...localSlim, ...qiitaSlim, ...zennSlim].map(async (post) => {
+			const withImage = { ...post, image: null } as Post;
+			return isExternal(withImage)
+				? { ...withImage, image: await fetchOgImage(getHref(withImage)) }
+				: withImage;
+		}),
+	);
+	blog.sort(
 		(a, b) => getPublishedDate(b).getTime() - getPublishedDate(a).getTime(),
 	);
 	return {
