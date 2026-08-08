@@ -16,7 +16,12 @@
 				"label": "Event",
 				"url": "https://linedevelopercommunity.connpass.com/event/361757/"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/liff-cli-ngrok.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	},
 	{
 		"title": "スピノカップ 最終発表（最優秀賞）",
@@ -27,7 +32,12 @@
 				"label": "Archive",
 				"url": "https://www.youtube.com/watch?v=cBfp5APDX38"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/spinocup.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	},
 	{
 		"title": "ツマジロカップ 最終発表（studist賞）",
@@ -38,7 +48,12 @@
 				"label": "Archive",
 				"url": "https://www.youtube.com/watch?v=gM_mhyWiQz8"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/tsumajirocup.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	},
 	{
 		"title": "Linebotと通学時間",
@@ -57,7 +72,12 @@
 				"label": "Event",
 				"url": "https://linedevelopercommunity.connpass.com/event/245787/"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/linebot-commute.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	},
 	{
 		"title": "CCCとチーム開発で学んだこと",
@@ -68,7 +88,12 @@
 				"label": "Slides",
 				"url": "https://speakerdeck.com/kinjyo/nseemnoltnozi-liao-desu"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/nseem-lt.jpg",
+			"width": 1280,
+			"height": 960
+		}
 	},
 	{
 		"title": "CCC 最終発表（Code for Japan賞）",
@@ -83,7 +108,12 @@
 				"label": "Slides",
 				"url": "https://speakerdeck.com/kinjyo/cccnozui-zhong-fa-biao"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/ccc-final.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	},
 	{
 		"title": "GASでLINE Botを作る話",
@@ -94,11 +124,19 @@
 				"label": "Archive",
 				"url": "https://www.youtube.com/watch?v=O5w8-B0AsDg"
 			},
-			{ "label": "Slides", "url": "https://speakerdeck.com/kinjyo/line-dc" },
+			{
+				"label": "Slides",
+				"url": "https://speakerdeck.com/kinjyo/line-dc"
+			},
 			{
 				"label": "Event",
 				"url": "https://linedevelopercommunity.connpass.com/event/217740/"
 			}
-		]
+		],
+		"image": {
+			"url": "/images/talks/gas-linebot.jpg",
+			"width": 1280,
+			"height": 720
+		}
 	}
 ]

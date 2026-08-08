@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { SeoHead } from "@/components/SeoHead";
+import Image from "next/image";
 import Layout from "../layout";
 
 type TalkLink = {
@@ -12,6 +13,11 @@ type Talk = {
 	title: string;
 	event: string;
 	date: string;
+	image: {
+		url: string;
+		width: number;
+		height: number;
+	};
 	links: TalkLink[];
 };
 
@@ -36,40 +42,64 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 				</header>
 
 				<ul className="col-span-12 md:col-span-9">
-					{talks.map((talk, i) => (
-						<li
-							key={`${talk.date}-${talk.title}`}
-							className="grid grid-cols-12 gap-3 border-b border-line py-5"
-						>
-							<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
-								{String(i + 1).padStart(2, "0")}
-							</span>
-							<div className="col-span-9 md:col-span-9">
-								<p className="jp-display text-lg md:text-xl font-medium text-ink-primary">
-									{talk.title}
-								</p>
-								<p className="text-sm font-medium text-ink-secondary mt-1">
-									{talk.event}
-								</p>
-								<p className="mt-2 flex flex-wrap gap-2">
-									{talk.links.map((link) => (
+					{talks.map((talk, i) => {
+						const primary = talk.links[0];
+						return (
+							<li
+								key={`${talk.date}-${talk.title}`}
+								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+							>
+								<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								<a
+									href={primary.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="col-span-12 md:col-span-4 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-video"
+								>
+									<Image
+										src={talk.image.url}
+										alt={talk.title}
+										width={talk.image.width}
+										height={talk.image.height}
+										className="w-full h-full object-contain"
+									/>
+								</a>
+								<div className="col-span-12 md:col-span-7">
+									<div className="flex items-baseline justify-between gap-4">
 										<a
-											key={link.url}
-											href={link.url}
+											href={primary.url}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5 no-underline hover:text-ink-primary"
+											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
 										>
-											{link.label}
+											{talk.title}
 										</a>
-									))}
-								</p>
-							</div>
-							<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-								{year(talk.date)}
-							</span>
-						</li>
-					))}
+										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+											{year(talk.date)}
+										</span>
+									</div>
+									<p className="text-sm font-medium text-ink-secondary mt-1">
+										{talk.event}
+									</p>
+									<p className="mt-3 flex flex-wrap gap-2">
+										{talk.links.map((link) => (
+											<a
+												key={link.url}
+												href={link.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5 no-underline hover:text-ink-primary"
+											>
+												{link.label}
+											</a>
+										))}
+									</p>
+								</div>
+							</li>
+						);
+					})}
 				</ul>
 				<p className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium mt-2">
 					<a
