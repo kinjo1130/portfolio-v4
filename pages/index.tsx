@@ -17,7 +17,7 @@ const ACHIEVEMENTS = [
 	{
 		title: "ハックツハッカソン ツマジロカップ studist賞",
 		url: "https://hackz.team/news/28VSpLaigPOw6KcqbgbVZT",
-		year: "2023",
+		year: "2024",
 	},
 	{
 		title: "ハックツハッカソン スピノカップ 最優秀賞",
