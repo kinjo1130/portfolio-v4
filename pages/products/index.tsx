@@ -28,24 +28,29 @@ export default function Product({ products }: { products: Products }) {
 				<ul className="col-span-12 md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
 					{products.map((product, i) => (
 						<li key={product.slug}>
-							<Link
-								href={`/products/${product.slug}`}
-								className="block no-underline group border border-line rounded-card bg-surface-card shadow-sm hover:shadow-md transition-shadow overflow-hidden"
-							>
-								<div className="relative overflow-hidden border-b border-line aspect-[1200/630] bg-surface-sunken">
-									<Image
-										src={product.image.url}
-										alt={product.title}
-										width={product.image.width}
-										height={product.image.height}
-										className="w-full h-full object-contain"
-									/>
-								</div>
+							<div className="border border-line rounded-card bg-surface-card shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+								<Link
+									href={`/products/${product.slug}`}
+									className="block no-underline"
+								>
+									<div className="relative overflow-hidden border-b border-line aspect-[1200/630] bg-surface-sunken">
+										<Image
+											src={product.image.url}
+											alt={product.title}
+											width={product.image.width}
+											height={product.image.height}
+											className="w-full h-full object-contain"
+										/>
+									</div>
+								</Link>
 								<div className="p-5">
 									<div className="flex items-baseline justify-between gap-4">
-										<p className="jp-display text-xl md:text-2xl font-medium text-ink-primary">
+										<Link
+											href={`/products/${product.slug}`}
+											className="jp-display text-xl md:text-2xl font-medium text-ink-primary no-underline link-draw"
+										>
 											{product.title}
-										</p>
+										</Link>
 										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
 											{year(product.publishedAt)}
 										</span>
@@ -55,8 +60,20 @@ export default function Product({ products }: { products: Products }) {
 											{product.description}
 										</p>
 									)}
+									{product.url && (
+										<a
+											href={product.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="inline-block text-sm font-medium text-ink-primary link-draw no-underline mt-3"
+										>
+											{product.url.includes("github.com")
+												? "github →"
+												: "website →"}
+										</a>
+									)}
 								</div>
-							</Link>
+							</div>
 						</li>
 					))}
 				</ul>

@@ -45,7 +45,9 @@ export default function ProductDetail({ product }: { product: Product }) {
 										rel="noopener noreferrer"
 										className="link-draw text-sm font-medium text-ink-primary no-underline"
 									>
-										Visit →
+										{product.url.includes("github.com")
+											? "github →"
+											: "website →"}
 									</a>
 								</dd>
 							</div>
