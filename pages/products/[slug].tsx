@@ -46,8 +46,8 @@ export default function ProductDetail({ product }: { product: Product }) {
 										className="link-draw text-sm font-medium text-ink-primary no-underline"
 									>
 										{product.url.includes("github.com")
-											? "GitHub →"
-											: "Try it →"}
+											? "github →"
+											: "website →"}
 									</a>
 								</dd>
 							</div>

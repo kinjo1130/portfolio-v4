@@ -68,8 +68,8 @@ export default function Product({ products }: { products: Products }) {
 											className="inline-block text-sm font-medium text-ink-primary link-draw no-underline mt-3"
 										>
 											{product.url.includes("github.com")
-												? "GitHub →"
-												: "Try it →"}
+												? "github →"
+												: "website →"}
 										</a>
 									)}
 								</div>
