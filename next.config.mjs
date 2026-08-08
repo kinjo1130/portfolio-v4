@@ -14,6 +14,12 @@ const nextConfig = {
 				destination: "/writing/:id",
 				permanent: true,
 			},
+			// 職歴のスラッグをプロダクト名 (OWNED) から社名 (ONDO) に変更した
+			{
+				source: "/work/owned",
+				destination: "/work/ondo",
+				permanent: true,
+			},
 		];
 	},
 	async headers() {
