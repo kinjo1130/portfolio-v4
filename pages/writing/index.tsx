@@ -4,9 +4,13 @@ import { getBlogs } from "@/libs/content";
 import type { QiitaPost } from "@/types/Qiita";
 import type { BlogPost } from "@/types/blog";
 import Link from "next/link";
+import { useState } from "react";
 import Layout from "../layout";
 
 type Post = (BlogPost | QiitaPost | ZennPost) & { image: string | null };
+
+const FILTERS = ["All", "kinjo.me", "Qiita", "Zenn"] as const;
+type Filter = (typeof FILTERS)[number];
 
 function getHref(post: Post): string {
 	if (isPostWithUrl(post)) return post.url;
@@ -26,6 +30,12 @@ function getSource(post: Post): "Qiita" | "Zenn" | null {
 }
 
 export default function Blog({ blog }: { blog: Post[] }) {
+	const [filter, setFilter] = useState<Filter>("All");
+	const sourceName = (post: Post) => getSource(post) ?? "kinjo.me";
+	const filtered =
+		filter === "All"
+			? blog
+			: blog.filter((post) => sourceName(post) === filter);
 	return (
 		<Layout title="Writing">
 			<SeoHead
@@ -39,12 +49,29 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				<header className="col-span-12 md:col-span-3">
 					<p className="text-sm font-medium text-ink-secondary">Index</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{String(blog.length).padStart(2, "0")} entries
+						{String(filtered.length).padStart(2, "0")} entries
 					</p>
+					<div className="flex flex-wrap md:flex-col items-start gap-2 mt-4">
+						{FILTERS.map((f) => (
+							<button
+								type="button"
+								key={f}
+								onClick={() => setFilter(f)}
+								aria-pressed={filter === f}
+								className={`text-xs font-medium border rounded-badge px-3 py-1 transition-colors ${
+									filter === f
+										? "bg-ink-primary text-paper border-ink-primary"
+										: "text-ink-secondary border-line hover:text-ink-primary hover:bg-surface-sunken"
+								}`}
+							>
+								{f}
+							</button>
+						))}
+					</div>
 				</header>
 
 				<ul className="col-span-12 md:col-span-9">
-					{blog.map((post, i) => {
+					{filtered.map((post, i) => {
 						const external = isExternal(post);
 						const href = getHref(post);
 						const published = getPublishedDate(post);
