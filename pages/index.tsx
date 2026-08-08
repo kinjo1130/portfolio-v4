@@ -6,6 +6,7 @@ import { getBlogs, getProducts, getWorks } from "@/libs/content";
 import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
 import type { Work } from "@/types/work";
+import Image from "next/image";
 import Link from "next/link";
 
 const ACHIEVEMENTS = [
@@ -30,8 +31,10 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 type Props = {
 	featuredWorks: Pick<Work, "slug" | "title" | "fromAt" | "toAt">[];
-	featuredProducts: Pick<Product, "slug" | "title" | "publishedAt">[];
-	recentPosts: Pick<BlogPost, "id" | "title" | "createdAt">[];
+	featuredProducts: Pick<Product, "slug" | "title" | "publishedAt" | "image">[];
+	recentPosts: (Pick<BlogPost, "id" | "title" | "createdAt"> & {
+		image: string;
+	})[];
 };
 
 export default function Home({
@@ -100,20 +103,34 @@ export default function Home({
 							{featuredProducts.map((product, i) => (
 								<li
 									key={product.slug}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
+									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
 								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 										{String(i + 1).padStart(2, "0")}
 									</span>
 									<Link
 										href={`/products/${product.slug}`}
-										className="col-span-9 link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
+										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 									>
-										{product.title}
+										<Image
+											src={product.image.url}
+											alt={product.title}
+											width={product.image.width}
+											height={product.image.height}
+											className="w-full h-full object-contain"
+										/>
 									</Link>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-										{year(product.publishedAt)}
-									</span>
+									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto flex items-baseline justify-between gap-4">
+										<Link
+											href={`/products/${product.slug}`}
+											className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
+										>
+											{product.title}
+										</Link>
+										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+											{year(product.publishedAt)}
+										</span>
+									</div>
 								</li>
 							))}
 						</ul>
@@ -183,20 +200,34 @@ export default function Home({
 							{recentPosts.map((post, i) => (
 								<li
 									key={post.id}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
+									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
 								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 										{String(i + 1).padStart(2, "0")}
 									</span>
 									<Link
 										href={`/writing/${post.id}`}
-										className="col-span-9 link-draw jp-display text-lg md:text-xl font-medium text-ink-primary"
+										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 									>
-										{post.title}
+										<img
+											src={post.image}
+											alt={post.title}
+											loading="lazy"
+											decoding="async"
+											className="w-full h-full object-cover"
+										/>
 									</Link>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-										{year(post.createdAt)}
-									</span>
+									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto flex items-baseline justify-between gap-4">
+										<Link
+											href={`/writing/${post.id}`}
+											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary"
+										>
+											{post.title}
+										</Link>
+										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+											{year(post.createdAt)}
+										</span>
+									</div>
 								</li>
 							))}
 						</ul>
@@ -268,12 +299,15 @@ export const getStaticProps = async () => {
 		slug: p.slug,
 		title: p.title,
 		publishedAt: p.publishedAt,
+		image: p.image,
 	}));
 
 	const recentPosts = blogs.slice(0, 3).map((p) => ({
 		id: p.id,
 		title: p.title,
 		createdAt: p.createdAt,
+		// ローカル記事のサムネイルは自前の OGP 生成 API
+		image: `/api/og?title=${encodeURIComponent(p.title)}&date=${p.createdAt.slice(0, 10)}`,
 	}));
 
 	return {
