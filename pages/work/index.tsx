@@ -1,11 +1,20 @@
 import { SeoHead } from "@/components/SeoHead";
 import { formatDate } from "@/libs/common";
-import { getWorks } from "@/libs/content";
-import type { Works } from "@/types/work";
+import { getWorkLogo, getWorks } from "@/libs/content";
+import type { Work as WorkType } from "@/types/work";
 import Link from "next/link";
 import Layout from "../layout";
 
-export default function Work({ works }: { works: Works }) {
+type WorkWithLogo = WorkType & { logo: string | null };
+
+// ロゴがない会社は法人格を除いた頭文字をモノグラム表示する
+const monogram = (title: string) =>
+	title
+		.replace(/^(株式会社|合同会社|有限会社|NPO法人)/, "")
+		.charAt(0)
+		.toUpperCase();
+
+export default function Work({ works }: { works: WorkWithLogo[] }) {
 	return (
 		<Layout title="Work">
 			<SeoHead
@@ -33,12 +42,25 @@ export default function Work({ works }: { works: Works }) {
 								{String(i + 1).padStart(2, "0")}
 							</span>
 							<div className="col-span-11 md:col-span-7">
-								<Link
-									href={`/work/${work.slug}`}
-									className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary no-underline"
-								>
-									{work.title}
-								</Link>
+								<span className="flex items-center gap-3 min-w-0">
+									{work.logo ? (
+										<img
+											src={work.logo}
+											alt=""
+											className="w-7 h-7 rounded-md border border-line bg-surface-card object-contain shrink-0"
+										/>
+									) : (
+										<span className="w-7 h-7 rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0">
+											{monogram(work.title)}
+										</span>
+									)}
+									<Link
+										href={`/work/${work.slug}`}
+										className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary no-underline"
+									>
+										{work.title}
+									</Link>
+								</span>
 								<p className="text-base text-ink-secondary mt-2 leading-relaxed">
 									{work.description}
 								</p>
@@ -58,14 +80,16 @@ export default function Work({ works }: { works: Works }) {
 										{work.toAt ? "closed" : "ongoing"}
 									</span>
 								</p>
-								<a
-									href={work.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-sm font-medium text-ink-primary link-draw mt-2 inline-block no-underline"
-								>
-									company →
-								</a>
+								{work.link && (
+									<a
+										href={work.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-sm font-medium text-ink-primary link-draw mt-2 inline-block no-underline"
+									>
+										company →
+									</a>
+								)}
 							</div>
 						</li>
 					))}
@@ -76,9 +100,10 @@ export default function Work({ works }: { works: Works }) {
 }
 
 export const getStaticProps = async () => {
+	const works = await getWorks();
 	return {
 		props: {
-			works: await getWorks(),
+			works: works.map((w) => ({ ...w, logo: getWorkLogo(w.slug) })),
 		},
 	};
 };

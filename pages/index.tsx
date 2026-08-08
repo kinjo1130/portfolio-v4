@@ -2,7 +2,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import SNS from "@/components/SNS";
 import { SeoHead } from "@/components/SeoHead";
-import { getBlogs, getProducts, getWorks } from "@/libs/content";
+import { getBlogs, getProducts, getWorkLogo, getWorks } from "@/libs/content";
 import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
 import type { Work } from "@/types/work";
@@ -29,8 +29,17 @@ const ACHIEVEMENTS = [
 
 const year = (iso: string) => new Date(iso).getFullYear();
 
+// ロゴがない会社は法人格を除いた頭文字をモノグラム表示する
+const monogram = (title: string) =>
+	title
+		.replace(/^(株式会社|合同会社|有限会社|NPO法人)/, "")
+		.charAt(0)
+		.toUpperCase();
+
 type Props = {
-	featuredWorks: Pick<Work, "slug" | "title" | "fromAt" | "toAt">[];
+	featuredWorks: (Pick<Work, "slug" | "title" | "fromAt" | "toAt"> & {
+		logo: string | null;
+	})[];
 	featuredProducts: Pick<Product, "slug" | "title" | "publishedAt" | "image">[];
 	recentPosts: (Pick<BlogPost, "id" | "title" | "createdAt"> & {
 		image: string;
@@ -161,12 +170,25 @@ export default function Home({
 									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
 										{String(i + 1).padStart(2, "0")}
 									</span>
-									<Link
-										href={`/work/${work.slug}`}
-										className="col-span-7 md:col-span-7 link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
-									>
-										{work.title}
-									</Link>
+									<span className="col-span-7 md:col-span-7 flex items-center gap-3 min-w-0">
+										{work.logo ? (
+											<img
+												src={work.logo}
+												alt=""
+												className="w-7 h-7 rounded-md border border-line bg-surface-card object-contain shrink-0"
+											/>
+										) : (
+											<span className="w-7 h-7 rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0">
+												{monogram(work.title)}
+											</span>
+										)}
+										<Link
+											href={`/work/${work.slug}`}
+											className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
+										>
+											{work.title}
+										</Link>
+									</span>
 									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum hidden md:block">
 										{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "now"}
 									</span>
@@ -293,6 +315,7 @@ export const getStaticProps = async () => {
 		title: w.title,
 		fromAt: w.fromAt,
 		toAt: w.toAt,
+		logo: getWorkLogo(w.slug),
 	}));
 
 	const featuredProducts = products.slice(0, 3).map((p) => ({
