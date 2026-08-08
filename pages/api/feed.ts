@@ -14,14 +14,14 @@ export default async function handler(
 		language: "ja",
 	});
 	const blogs = getBlogs();
-	blogs.forEach((post) => {
+	for (const post of blogs) {
 		feed.item({
 			title: post.title,
 			description: post.description,
 			date: new Date(post.createdAt),
-			url: `${process.env.URL}/blog/${post.id}`,
+			url: `${process.env.URL}/writing/${post.id}`,
 		});
-	});
+	}
 	res.statusCode = 200;
 	res.setHeader("Content-Type", "application/xml; charset=utf-8");
 	res.end(feed.xml());

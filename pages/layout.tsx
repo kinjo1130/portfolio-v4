@@ -24,7 +24,7 @@ export default function Layout({
 	const routeFeed = () => {
 		router.push("/api/feed");
 	};
-	const isBlogPath = router.pathname === "/blog";
+	const isBlogPath = router.pathname === "/writing";
 
 	useEffect(() => {
 		setPageClass("page-enter");

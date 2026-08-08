@@ -71,7 +71,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 
 					<div className="mt-16 pt-6 border-t border-line">
 						<Link
-							href="/blog"
+							href="/writing"
 							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
 							← Back to index
@@ -84,7 +84,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 }
 
 export const getStaticPaths = async () => {
-	const paths = getBlogs().map((post) => `/blog/${post.id}`);
+	const paths = getBlogs().map((post) => `/writing/${post.id}`);
 	return { paths, fallback: false };
 };
 

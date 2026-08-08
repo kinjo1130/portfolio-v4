@@ -189,7 +189,7 @@ export default function Home({
 										{String(i + 1).padStart(2, "0")}
 									</span>
 									<Link
-										href={`/blog/${post.id}`}
+										href={`/writing/${post.id}`}
 										className="col-span-9 link-draw jp-display text-lg md:text-xl font-medium text-ink-primary"
 									>
 										{post.title}
@@ -201,7 +201,7 @@ export default function Home({
 							))}
 						</ul>
 						<Link
-							href="/blog"
+							href="/writing"
 							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
 						>
 							see all writing →
