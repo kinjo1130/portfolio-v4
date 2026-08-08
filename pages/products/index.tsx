@@ -9,19 +9,19 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 export default function Product({ products }: { products: Products }) {
 	return (
-		<Layout title="Products">
+		<Layout title="プロダクト">
 			<SeoHead
-				title="Products"
-				titleTemplate="プロダクト一覧"
-				description="Products List"
+				title="プロダクト"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
+				description="個人でつくったプロダクトの一覧です。"
 				imgUrl="/favicon.ico"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary">Index</p>
+					<p className="text-sm font-medium text-ink-secondary">一覧</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{String(products.length).padStart(2, "0")} entries
+						{products.length}件
 					</p>
 				</header>
 
@@ -68,8 +68,8 @@ export default function Product({ products }: { products: Products }) {
 											className="inline-block text-sm font-medium text-ink-primary link-draw no-underline mt-3"
 										>
 											{product.url.includes("github.com")
-												? "github →"
-												: "website →"}
+												? "GitHub →"
+												: "サイトを見る →"}
 										</a>
 									)}
 								</div>

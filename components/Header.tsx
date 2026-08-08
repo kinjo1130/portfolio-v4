@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const NAV = [
-	{ href: "/about", label: "About" },
-	{ href: "/work", label: "Work" },
-	{ href: "/products", label: "Products" },
-	{ href: "/writing", label: "Writing" },
-	{ href: "/talks", label: "Talks" },
-	{ href: "/tools", label: "Tools" },
+	{ href: "/about", label: "自己紹介" },
+	{ href: "/work", label: "職歴" },
+	{ href: "/products", label: "プロダクト" },
+	{ href: "/writing", label: "記事" },
+	{ href: "/talks", label: "登壇" },
+	{ href: "/tools", label: "ツール" },
 ];
 
 export const Header: React.FC = () => {

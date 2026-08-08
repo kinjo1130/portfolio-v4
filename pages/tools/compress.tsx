@@ -124,12 +124,12 @@ export default function CompressPage() {
 	return (
 		<>
 			<SeoHead
-				title="Image Compress"
-				titleTemplate="Image Compress"
+				title="画像を圧縮する"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="画像をブラウザ内で圧縮・形式変換 (WebP / AVIF / JPG / PNG)"
 				imgUrl="/favicon.ico"
 			/>
-			<Layout title="Compress">
+			<Layout title="画像を圧縮する" eyebrow="ツール">
 				<div className="mb-6">
 					<p className="text-sm text-ink-secondary">
 						画像はあなたのブラウザ内だけで処理されます。サーバーには送信されません。

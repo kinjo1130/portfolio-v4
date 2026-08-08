@@ -8,10 +8,10 @@ import Layout from "../layout";
 
 export default function ProductDetail({ product }: { product: Product }) {
 	return (
-		<Layout title={product.title} eyebrow="Products">
+		<Layout title={product.title} eyebrow="プロダクト">
 			<SeoHead
-				title="Products"
-				titleTemplate={product.title}
+				title={product.title}
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description={product.description ?? product.title}
 				imgUrl={product.image.url}
 			/>
@@ -20,24 +20,22 @@ export default function ProductDetail({ product }: { product: Product }) {
 				<aside className="col-span-12 md:col-span-3">
 					<dl className="space-y-4 text-base">
 						<div>
-							<dt className="text-sm font-medium text-ink-secondary">
-								Published
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">公開日</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
 								{formatDate(product.publishedAt)}
 							</dd>
 						</div>
 						<div>
-							<dt className="text-sm font-medium text-ink-secondary">
-								Updated
-							</dt>
+							<dt className="text-sm font-medium text-ink-secondary">更新日</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
 								{formatDate(product.updatedAt)}
 							</dd>
 						</div>
 						{product.url && (
 							<div>
-								<dt className="text-sm font-medium text-ink-secondary">Link</dt>
+								<dt className="text-sm font-medium text-ink-secondary">
+									リンク
+								</dt>
 								<dd className="mt-1">
 									<a
 										href={product.url}
@@ -46,8 +44,8 @@ export default function ProductDetail({ product }: { product: Product }) {
 										className="link-draw text-sm font-medium text-ink-primary no-underline"
 									>
 										{product.url.includes("github.com")
-											? "github →"
-											: "website →"}
+											? "GitHub →"
+											: "サイトを見る →"}
 									</a>
 								</dd>
 							</div>
@@ -82,7 +80,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 							href="/products"
 							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
-							← Back to index
+							← プロダクト一覧へ
 						</Link>
 					</div>
 				</article>
