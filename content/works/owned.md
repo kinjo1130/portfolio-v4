@@ -2,7 +2,7 @@
 title: OWNED（動画配信プラットフォーム）
 fromAt: "2025-07-05"
 toAt: null
-link: ""
+link: https://ondo-japan.com/owned/
 position:
   - フルスタックエンジニア
 description: マルチテナントのB2B動画配信プラットフォームの開発。文字起こしパイプラインやRAGチャットなど、AIまわりはほぼ自分が実装。

@@ -23,7 +23,7 @@ function readJson<T>(file: string): T {
 
 export function getBlogs(): BlogPosts {
 	const posts = readJson<BlogPosts>("blogs.json");
-	const visible = !showDrafts ?posts.filter((p) => !p.draft) : posts;
+	const visible = !showDrafts ? posts.filter((p) => !p.draft) : posts;
 	return [...visible].sort(
 		(a, b) =>
 			new Date(b.publishedAt ?? b.createdAt).getTime() -
@@ -51,7 +51,7 @@ export async function getWorks(): Promise<Works> {
 			} satisfies Work;
 		}),
 	);
-	const visible = !showDrafts ?works.filter((w) => !w.draft) : works;
+	const visible = !showDrafts ? works.filter((w) => !w.draft) : works;
 	return visible.sort((a, b) => {
 		const aTo = a.toAt ? new Date(a.toAt).getTime() : Number.POSITIVE_INFINITY;
 		const bTo = b.toAt ? new Date(b.toAt).getTime() : Number.POSITIVE_INFINITY;
@@ -62,6 +62,21 @@ export async function getWorks(): Promise<Works> {
 export async function getWork(slug: string): Promise<Work | undefined> {
 	const works = await getWorks();
 	return works.find((w) => w.slug === slug);
+}
+
+// public/images/works/<slug>.(png|svg) があればロゴとして使う (slug 規約)
+export function getWorkLogo(slug: string): string | null {
+	for (const ext of ["png", "svg"]) {
+		const file = path.join(
+			process.cwd(),
+			"public",
+			"images",
+			"works",
+			`${slug}.${ext}`,
+		);
+		if (fs.existsSync(file)) return `/images/works/${slug}.${ext}`;
+	}
+	return null;
 }
 
 type ProductFrontmatter = Omit<Product, "slug" | "body">;
@@ -80,7 +95,7 @@ export async function getProducts(): Promise<Products> {
 			} satisfies Product;
 		}),
 	);
-	const visible = !showDrafts ?products.filter((p) => !p.draft) : products;
+	const visible = !showDrafts ? products.filter((p) => !p.draft) : products;
 	return visible.sort(
 		(a, b) =>
 			new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
