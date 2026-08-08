@@ -12,7 +12,7 @@ function getHref(post: Post): string {
 	if (isPostWithUrl(post)) return post.url;
 	if (isPostWithPath(post))
 		return `https://zenn.dev${post.path.startsWith("/") ? "" : "/"}${post.path}`;
-	return `/blog/${post.id}`;
+	return `/writing/${post.id}`;
 }
 
 function isExternal(post: Post): boolean {
