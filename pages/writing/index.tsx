@@ -169,9 +169,15 @@ export const getStaticProps = async () => {
 	const blog: Post[] = await Promise.all(
 		[...localSlim, ...qiitaSlim, ...zennSlim].map(async (post) => {
 			const withImage = { ...post, image: null } as Post;
-			return isExternal(withImage)
-				? { ...withImage, image: await fetchOgImage(getHref(withImage)) }
-				: withImage;
+			if (isExternal(withImage)) {
+				return { ...withImage, image: await fetchOgImage(getHref(withImage)) };
+			}
+			// ローカル記事は自前の OGP 生成 API をサムネイルに使う
+			const local = post as BlogPost;
+			return {
+				...withImage,
+				image: `/api/og?title=${encodeURIComponent(local.title)}&date=${local.createdAt.slice(0, 10)}`,
+			};
 		}),
 	);
 	blog.sort(

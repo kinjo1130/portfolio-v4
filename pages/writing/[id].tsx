@@ -20,7 +20,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 				title="Blog"
 				titleTemplate={blog.title}
 				description={blog.description}
-				imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}`}
+				imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}&date=${blog.createdAt.slice(0, 10)}`}
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
