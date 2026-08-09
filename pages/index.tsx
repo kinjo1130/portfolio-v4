@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import SNS from "@/components/SNS";
 import { SeoHead } from "@/components/SeoHead";
 import { getBlogs, getProducts, getWorkLogo, getWorks } from "@/libs/content";
+import { type ExternalPost, getExternalPosts } from "@/libs/external-posts";
 import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
 import type { Work } from "@/types/work";
@@ -46,6 +47,7 @@ type Props = {
 	recentPosts: (Pick<BlogPost, "id" | "title" | "createdAt"> & {
 		image: string;
 	})[];
+	recentExternalPosts: ExternalPost[];
 	recentTalks: {
 		title: string;
 		event: string;
@@ -58,6 +60,7 @@ export default function Home({
 	featuredWorks,
 	featuredProducts,
 	recentPosts,
+	recentExternalPosts,
 	recentTalks,
 }: Props) {
 	return (
@@ -266,12 +269,82 @@ export default function Home({
 						</Link>
 					</section>
 
+					{/* Recent: External posts */}
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+						<header className="col-span-12 md:col-span-3">
+							<p className="text-sm font-medium text-ink-secondary">
+								外部の記事
+							</p>
+							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+								04 / {String(recentExternalPosts.length).padStart(2, "0")}
+							</p>
+						</header>
+						<ul className="col-span-12 md:col-span-9">
+							{recentExternalPosts.map((post, i) => (
+								<li
+									key={`${post.source}-${post.id}`}
+									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
+								>
+									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+										{String(i + 1).padStart(2, "0")}
+									</span>
+									<a
+										href={post.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+									>
+										{post.image ? (
+											<img
+												src={post.image}
+												alt={post.title}
+												loading="lazy"
+												decoding="async"
+												className="w-full h-full object-cover"
+											/>
+										) : (
+											<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
+												{post.source}
+											</span>
+										)}
+									</a>
+									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto">
+										<div className="flex items-baseline justify-between gap-4">
+											<a
+												href={post.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+											>
+												{post.title}
+											</a>
+											<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+												{year(post.publishedAt)}
+											</span>
+										</div>
+										<p className="mt-2">
+											<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+												{post.source}
+											</span>
+										</p>
+									</div>
+								</li>
+							))}
+						</ul>
+						<Link
+							href="/writing"
+							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
+						>
+							Qiita・Zenn の記事一覧へ →
+						</Link>
+					</section>
+
 					{/* Recent: Talks */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
 							<p className="text-sm font-medium text-ink-secondary">登壇</p>
 							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-								04 / {String(recentTalks.length).padStart(2, "0")}
+								05 / {String(recentTalks.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
@@ -382,6 +455,8 @@ export const getStaticProps = async () => {
 		image: `/api/og?title=${encodeURIComponent(p.title)}&date=${p.createdAt.slice(0, 10)}`,
 	}));
 
+	const recentExternalPosts = await getExternalPosts(3);
+
 	const talks = JSON.parse(
 		fs.readFileSync(path.join(process.cwd(), "content", "talks.json"), "utf-8"),
 	) as {
@@ -401,6 +476,14 @@ export const getStaticProps = async () => {
 		}));
 
 	return {
-		props: { featuredWorks, featuredProducts, recentPosts, recentTalks },
+		props: {
+			featuredWorks,
+			featuredProducts,
+			recentPosts,
+			recentExternalPosts,
+			recentTalks,
+		},
+		// Qiita / Zenn の新着を再デプロイなしで反映する (1時間ごと)
+		revalidate: 3600,
 	};
 };
