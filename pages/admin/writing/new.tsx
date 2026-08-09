@@ -27,6 +27,7 @@ export default function NewPost({ storeKind }: AdminPageProps) {
 		<AdminShell
 			title="新しい記事"
 			storeKind={storeKind}
+			fluid
 			actions={
 				<Link
 					href="/admin"

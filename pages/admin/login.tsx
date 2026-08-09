@@ -8,6 +8,17 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+/**
+ * `?next=` は URL に載るので外から自由に指定できる。ログイン直後に外部サイトへ
+ * 飛ばされないよう、管理画面の中を指すパスだけを通す。
+ * `//evil.example` はブラウザがプロトコル相対URLとして解釈するため弾く。
+ */
+function safeNext(value: unknown): string {
+	if (typeof value !== "string") return "/admin";
+	if (!value.startsWith("/admin") || value.startsWith("//")) return "/admin";
+	return value;
+}
+
 export default function AdminLogin() {
 	const router = useRouter();
 	const [password, setPassword] = useState("");
@@ -29,9 +40,7 @@ export default function AdminLogin() {
 			setError(data.error ?? "ログインできませんでした");
 			return;
 		}
-		const next =
-			typeof router.query.next === "string" ? router.query.next : "/admin";
-		router.replace(next);
+		router.replace(safeNext(router.query.next));
 	};
 
 	return (
