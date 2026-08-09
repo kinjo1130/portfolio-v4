@@ -27,12 +27,13 @@ export const Header: React.FC = () => {
 				>
 					kinjo.me
 				</Link>
-				<nav className="flex flex-wrap items-center gap-x-1 gap-y-1 -mx-2 md:mx-0 md:justify-end md:gap-x-4">
+				{/* モバイルでは折り返さず横スクロールさせる (2行になるのを防ぐ) */}
+				<nav className="flex items-center gap-x-1 flex-nowrap overflow-x-auto scrollbar-none -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible md:justify-end md:gap-x-4">
 					{NAV.map((item) => (
 						<Link
 							key={item.href}
 							href={item.href}
-							className={`text-sm font-medium no-underline rounded-button px-2 md:px-3 py-1.5 transition-colors ${
+							className={`text-xs md:text-sm font-medium no-underline rounded-button px-1.5 md:px-3 py-1.5 whitespace-nowrap shrink-0 transition-colors ${
 								isActive(item.href)
 									? "bg-surface-sunken text-ink-primary"
 									: "text-ink-secondary hover:text-ink-primary hover:bg-surface-sunken"
