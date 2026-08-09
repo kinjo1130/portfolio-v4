@@ -1,6 +1,11 @@
 import { SeoHead } from "@/components/SeoHead";
 import { getPublishedDate, isPostWithPath, isPostWithUrl } from "@/libs/common";
 import { getBlogs } from "@/libs/content";
+import {
+	fetchOgImage,
+	fetchQiitaPosts,
+	fetchZennPosts,
+} from "@/libs/external-posts";
 import type { QiitaPost } from "@/types/Qiita";
 import type { BlogPost } from "@/types/blog";
 import Link from "next/link";
@@ -174,47 +179,6 @@ export default function Blog({ blog }: { blog: Post[] }) {
 			</section>
 		</Layout>
 	);
-}
-
-const QIITA_USER = "abcshotaro616";
-const ZENN_USER = "kinjyo";
-
-async function fetchQiitaPosts(): Promise<QiitaPost[]> {
-	try {
-		const res = await fetch(
-			`https://qiita.com/api/v2/users/${QIITA_USER}/items?per_page=100`,
-		);
-		if (!res.ok) return [];
-		return (await res.json()) as QiitaPost[];
-	} catch {
-		return [];
-	}
-}
-
-async function fetchZennPosts(): Promise<ZennPost[]> {
-	try {
-		const res = await fetch(
-			`https://zenn.dev/api/articles?username=${ZENN_USER}&order=latest`,
-		);
-		if (!res.ok) return [];
-		const data = (await res.json()) as { articles: ZennPost[] };
-		return data.articles ?? [];
-	} catch {
-		return [];
-	}
-}
-
-// 記事ページの og:image をビルド/ISR時に取得する (Qiita/Zenn の API は画像を返さないため)
-async function fetchOgImage(url: string): Promise<string | null> {
-	try {
-		const res = await fetch(url);
-		if (!res.ok) return null;
-		const html = await res.text();
-		const match = html.match(/<meta property="og:image" content="([^"]+)"/);
-		return match ? match[1].replace(/&amp;/g, "&") : null;
-	} catch {
-		return null;
-	}
 }
 
 export const getStaticProps = async () => {
