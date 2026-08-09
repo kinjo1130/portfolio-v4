@@ -7,6 +7,8 @@ type Props = {
 	title: string;
 	storeKind?: "fs" | "github";
 	actions?: React.ReactNode;
+	// エディタは画面幅いっぱいまで使いたいので中央寄せの上限を外す
+	fluid?: boolean;
 };
 
 const STORE_LABEL: Record<"fs" | "github", string> = {
@@ -14,7 +16,14 @@ const STORE_LABEL: Record<"fs" | "github", string> = {
 	github: "GitHub にコミット",
 };
 
-export function AdminShell({ children, title, storeKind, actions }: Props) {
+export function AdminShell({
+	children,
+	title,
+	storeKind,
+	actions,
+	fluid = false,
+}: Props) {
+	const container = fluid ? "w-full" : "max-w-wide mx-auto";
 	const router = useRouter();
 
 	const signOut = async () => {
@@ -30,7 +39,9 @@ export function AdminShell({ children, title, storeKind, actions }: Props) {
 			</Head>
 
 			<header className="sticky top-0 z-20 border-b border-line bg-surface-page/95 backdrop-blur">
-				<div className="max-w-wide mx-auto px-6 md:px-10 h-14 flex items-center gap-4">
+				<div
+					className={`${container} px-6 md:px-8 h-14 flex items-center gap-4`}
+				>
 					<Link
 						href="/admin"
 						className="text-sm font-semibold text-ink-primary no-underline shrink-0"
@@ -62,7 +73,7 @@ export function AdminShell({ children, title, storeKind, actions }: Props) {
 				</div>
 			</header>
 
-			<main className="max-w-wide mx-auto px-6 md:px-10 py-8">{children}</main>
+			<main className={`${container} px-6 md:px-8 py-8`}>{children}</main>
 		</div>
 	);
 }

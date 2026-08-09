@@ -27,6 +27,7 @@ export default function EditPost({ storeKind }: AdminPageProps) {
 		<AdminShell
 			title={post?.title ?? "記事を編集"}
 			storeKind={storeKind}
+			fluid
 			actions={
 				<>
 					{id && (
