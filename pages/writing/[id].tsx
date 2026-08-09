@@ -84,12 +84,12 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 }
 
 export const getStaticPaths = async () => {
-	const paths = getBlogs().map((post) => `/writing/${post.id}`);
+	const paths = (await getBlogs()).map((post) => `/writing/${post.id}`);
 	return { paths, fallback: false };
 };
 
 export const getStaticProps = async (context: { params: { id: string } }) => {
-	const blog = getBlog(context.params.id);
+	const blog = await getBlog(context.params.id);
 	if (!blog) {
 		return { notFound: true as const };
 	}
