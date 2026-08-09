@@ -7,6 +7,8 @@ type Props = {
 	title: string;
 	storeKind?: "fs" | "github";
 	actions?: React.ReactNode;
+	// 保存やアップロードの結果。本文の下に置くと画面外に出てしまうのでヘッダーに出す
+	notice?: React.ReactNode;
 	// エディタは画面幅いっぱいまで使いたいので中央寄せの上限を外す
 	fluid?: boolean;
 };
@@ -21,6 +23,7 @@ export function AdminShell({
 	title,
 	storeKind,
 	actions,
+	notice,
 	fluid = false,
 }: Props) {
 	const container = fluid ? "w-full" : "max-w-wide mx-auto";
@@ -55,20 +58,23 @@ export function AdminShell({
 						{title}
 					</span>
 
-					<div className="ml-auto flex items-center gap-3 shrink-0">
-						{storeKind && (
-							<span className="hidden md:inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-								{STORE_LABEL[storeKind]}
-							</span>
-						)}
-						{actions}
-						<button
-							type="button"
-							onClick={signOut}
-							className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 hover:text-ink-primary hover:bg-surface-sunken transition-colors"
-						>
-							ログアウト
-						</button>
+					<div className="ml-auto flex items-center gap-3 min-w-0">
+						{notice}
+						<div className="flex items-center gap-3 shrink-0">
+							{storeKind && (
+								<span className="hidden md:inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+									{STORE_LABEL[storeKind]}
+								</span>
+							)}
+							{actions}
+							<button
+								type="button"
+								onClick={signOut}
+								className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 hover:text-ink-primary hover:bg-surface-sunken transition-colors"
+							>
+								ログアウト
+							</button>
+						</div>
 					</div>
 				</div>
 			</header>

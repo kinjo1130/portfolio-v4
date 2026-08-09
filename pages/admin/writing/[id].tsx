@@ -23,41 +23,32 @@ export default function EditPost({ storeKind }: AdminPageProps) {
 			.catch((e: Error) => setError(e.message));
 	}, [id]);
 
+	// 読み込めたらエディタが自分でヘッダーを持つ。ここは待っている間の器
+	if (post) {
+		return <PostEditor mode="edit" initial={post} storeKind={storeKind} />;
+	}
+
 	return (
 		<AdminShell
-			title={post?.title ?? "記事を編集"}
+			title="記事を編集"
 			storeKind={storeKind}
 			fluid
 			actions={
-				<>
-					{id && (
-						<a
-							href={`/writing/${id}`}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 no-underline"
-						>
-							公開ページ
-						</a>
-					)}
-					<Link
-						href="/admin"
-						className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 no-underline"
-					>
-						一覧へ
-					</Link>
-				</>
+				<Link
+					href="/admin"
+					className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 no-underline"
+				>
+					一覧へ
+				</Link>
 			}
 		>
-			{error && (
+			{error ? (
 				<p className="text-sm text-signal-critical" role="alert">
 					{error}
 				</p>
-			)}
-			{!post && !error && (
+			) : (
 				<p className="text-sm text-ink-secondary">読み込み中</p>
 			)}
-			{post && <PostEditor mode="edit" initial={post} />}
 		</AdminShell>
 	);
 }

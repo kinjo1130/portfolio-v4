@@ -53,8 +53,23 @@ type Props = {
 		event: string;
 		date: string;
 		url: string;
+		image: { url: string; width: number; height: number };
 	}[];
 };
+
+// リスト行は SP で 1 カラムに積み、md 以上で 12 カラムの罫線グリッドに戻す。
+// 行番号と年は SP ではメタ行としてまとめ、md 以上は `contents` でグリッドへ流す。
+const ROW =
+	"grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-3 border-b border-line py-6 md:py-5";
+const META = "flex items-baseline justify-between gap-3 md:contents";
+const INDEX =
+	"tnum small-caps text-sm font-medium text-ink-secondary md:col-start-1 md:col-span-1 md:row-start-1";
+const YEAR =
+	"tnum text-sm font-medium text-ink-secondary shrink-0 md:col-start-11 md:col-span-2 md:row-start-1 md:text-right";
+// サムネイルは SP では全幅、md 以上で行番号の右に 3 カラム分
+const THUMB =
+	"block border border-line rounded-card bg-surface-sunken overflow-hidden md:col-start-2 md:col-span-3 md:row-start-1";
+const THUMB_SIZES = "(min-width: 768px) 22vw, 100vw";
 
 export default function Home({
 	featuredWorks,
@@ -112,46 +127,42 @@ export default function Home({
 
 					{/* Featured: Products */}
 					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
+						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								プロダクト
 							</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 								01 / {String(featuredProducts.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{featuredProducts.map((product, i) => (
-								<li
-									key={product.slug}
-									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
-										{String(i + 1).padStart(2, "0")}
-									</span>
+								<li key={product.slug} className={ROW}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span className={YEAR}>{year(product.publishedAt)}</span>
+									</div>
 									<Link
 										href={`/products/${product.slug}`}
-										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+										className={`${THUMB} aspect-[1200/630]`}
 									>
 										<Image
 											src={product.image.url}
 											alt={product.title}
 											width={product.image.width}
 											height={product.image.height}
+											sizes={THUMB_SIZES}
 											className="w-full h-full object-contain"
 										/>
 									</Link>
-									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto flex items-baseline justify-between gap-4">
-										<Link
-											href={`/products/${product.slug}`}
-											className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
-										>
-											{product.title}
-										</Link>
-										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
-											{year(product.publishedAt)}
-										</span>
-									</div>
+									<Link
+										href={`/products/${product.slug}`}
+										className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary md:col-start-5 md:col-span-6 md:row-start-1"
+									>
+										{product.title}
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -165,22 +176,32 @@ export default function Home({
 
 					{/* Featured: Work */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
+						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">職歴</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 								02 / {String(featuredWorks.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{featuredWorks.map((work, i) => (
-								<li
-									key={work.slug}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
-										{String(i + 1).padStart(2, "0")}
-									</span>
-									<span className="col-span-7 md:col-span-7 flex items-center gap-3 min-w-0">
+								<li key={work.slug} className={`${ROW} md:items-baseline`}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span className="flex items-baseline gap-3 shrink-0 md:contents">
+											<span className="tnum text-sm font-medium text-ink-secondary md:col-start-9 md:col-span-2 md:row-start-1">
+												{year(work.fromAt)}—
+												{work.toAt ? year(work.toAt) : "現在"}
+											</span>
+											<span className="md:col-start-11 md:col-span-2 md:row-start-1 md:text-right">
+												<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+													{work.toAt ? "終了" : "継続中"}
+												</span>
+											</span>
+										</span>
+									</div>
+									<span className="flex items-center gap-3 min-w-0 md:col-start-2 md:col-span-7 md:row-start-1">
 										{work.logo ? (
 											<img
 												src={work.logo}
@@ -199,14 +220,6 @@ export default function Home({
 											{work.title}
 										</Link>
 									</span>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum hidden md:block">
-										{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "現在"}
-									</span>
-									<span className="col-span-4 md:col-span-2 text-right">
-										<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-											{work.toAt ? "終了" : "継続中"}
-										</span>
-									</span>
 								</li>
 							))}
 						</ul>
@@ -220,24 +233,24 @@ export default function Home({
 
 					{/* Recent: Blog */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
+						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">記事</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 								03 / {String(recentPosts.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{recentPosts.map((post, i) => (
-								<li
-									key={post.id}
-									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
-										{String(i + 1).padStart(2, "0")}
-									</span>
+								<li key={post.id} className={ROW}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span className={YEAR}>{year(post.createdAt)}</span>
+									</div>
 									<Link
 										href={`/writing/${post.id}`}
-										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+										className={`${THUMB} aspect-[1200/630]`}
 									>
 										<img
 											src={post.image}
@@ -247,17 +260,12 @@ export default function Home({
 											className="w-full h-full object-cover"
 										/>
 									</Link>
-									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto flex items-baseline justify-between gap-4">
-										<Link
-											href={`/writing/${post.id}`}
-											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary"
-										>
-											{post.title}
-										</Link>
-										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
-											{year(post.createdAt)}
-										</span>
-									</div>
+									<Link
+										href={`/writing/${post.id}`}
+										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary md:col-start-5 md:col-span-6 md:row-start-1"
+									>
+										{post.title}
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -271,28 +279,36 @@ export default function Home({
 
 					{/* Recent: External posts */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
+						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								外部の記事
 							</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 								04 / {String(recentExternalPosts.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{recentExternalPosts.map((post, i) => (
-								<li
-									key={`${post.source}-${post.id}`}
-									className="grid grid-cols-12 gap-3 md:gap-4 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
-										{String(i + 1).padStart(2, "0")}
-									</span>
+								<li key={`${post.source}-${post.id}`} className={ROW}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										{/* 出典と年は SP ではメタ行にまとめ、md 以上でグリッドへ流す */}
+										<span className="flex items-baseline gap-3 shrink-0 md:contents">
+											<span className="md:col-start-9 md:col-span-2 md:row-start-1">
+												<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+													{post.source}
+												</span>
+											</span>
+											<span className={YEAR}>{year(post.publishedAt)}</span>
+										</span>
+									</div>
 									<a
 										href={post.url}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="col-span-11 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+										className={`${THUMB} aspect-[1200/630]`}
 									>
 										{post.image ? (
 											<img
@@ -308,26 +324,14 @@ export default function Home({
 											</span>
 										)}
 									</a>
-									<div className="col-span-11 col-start-2 md:col-span-8 md:col-start-auto">
-										<div className="flex items-baseline justify-between gap-4">
-											<a
-												href={post.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
-											>
-												{post.title}
-											</a>
-											<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
-												{year(post.publishedAt)}
-											</span>
-										</div>
-										<p className="mt-2">
-											<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-												{post.source}
-											</span>
-										</p>
-									</div>
+									<a
+										href={post.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline md:col-start-5 md:col-span-4 md:row-start-1"
+									>
+										{post.title}
+									</a>
 								</li>
 							))}
 						</ul>
@@ -341,22 +345,37 @@ export default function Home({
 
 					{/* Recent: Talks */}
 					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
-						<header className="col-span-12 md:col-span-3">
+						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">登壇</p>
-							<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 								05 / {String(recentTalks.length).padStart(2, "0")}
 							</p>
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{recentTalks.map((talk, i) => (
-								<li
-									key={`${talk.date}-${talk.title}`}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
-										{String(i + 1).padStart(2, "0")}
-									</span>
-									<div className="col-span-9">
+								<li key={`${talk.date}-${talk.title}`} className={ROW}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span className={YEAR}>{year(talk.date)}</span>
+									</div>
+									<a
+										href={talk.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className={`${THUMB} aspect-video`}
+									>
+										<Image
+											src={talk.image.url}
+											alt={talk.title}
+											width={talk.image.width}
+											height={talk.image.height}
+											sizes={THUMB_SIZES}
+											className="w-full h-full object-cover"
+										/>
+									</a>
+									<div className="md:col-start-5 md:col-span-6 md:row-start-1">
 										<a
 											href={talk.url}
 											target="_blank"
@@ -369,9 +388,6 @@ export default function Home({
 											{talk.event}
 										</p>
 									</div>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-										{year(talk.date)}
-									</span>
 								</li>
 							))}
 						</ul>
@@ -390,24 +406,21 @@ export default function Home({
 						</header>
 						<ul className="col-span-12 md:col-span-9">
 							{ACHIEVEMENTS.map((a, i) => (
-								<li
-									key={a.title}
-									className="grid grid-cols-12 items-baseline gap-3 border-b border-line py-5"
-								>
-									<span className="col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
-										{String(i + 1).padStart(2, "0")}
-									</span>
+								<li key={a.title} className={`${ROW} md:items-baseline`}>
+									<div className={META}>
+										<span className={INDEX}>
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span className={YEAR}>{a.year}</span>
+									</div>
 									<a
 										href={a.url}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="col-span-9 link-draw text-base md:text-lg font-medium text-ink-primary"
+										className="link-draw text-base md:text-lg font-medium text-ink-primary md:col-start-2 md:col-span-9 md:row-start-1"
 									>
 										{a.title}
 									</a>
-									<span className="col-span-2 text-sm font-medium text-ink-secondary tnum text-right">
-										{a.year}
-									</span>
 								</li>
 							))}
 						</ul>
@@ -464,6 +477,7 @@ export const getStaticProps = async () => {
 		event: string;
 		date: string;
 		links: { url: string }[];
+		image: { url: string; width: number; height: number };
 	}[];
 	const recentTalks = [...talks]
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -473,6 +487,7 @@ export const getStaticProps = async () => {
 			event: t.event,
 			date: t.date,
 			url: t.links[0].url,
+			image: t.image,
 		}));
 
 	return {
