@@ -16,19 +16,19 @@ const monogram = (title: string) =>
 
 export default function Work({ works }: { works: WorkWithLogo[] }) {
 	return (
-		<Layout title="Work">
+		<Layout title="職歴">
 			<SeoHead
-				title="Work"
-				titleTemplate="Work"
-				description="Work List"
+				title="職歴"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
+				description="これまでに関わった会社と案件の一覧です。"
 				imgUrl="/favicon.ico"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary">Index</p>
+					<p className="text-sm font-medium text-ink-secondary">一覧</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{String(works.length).padStart(2, "0")} entries
+						{works.length}件
 					</p>
 				</header>
 
@@ -77,7 +77,7 @@ export default function Work({ works }: { works: WorkWithLogo[] }) {
 								</p>
 								<p className="mt-2">
 									<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-										{work.toAt ? "closed" : "ongoing"}
+										{work.toAt ? "終了" : "継続中"}
 									</span>
 								</p>
 								{work.link && (
@@ -87,7 +87,7 @@ export default function Work({ works }: { works: WorkWithLogo[] }) {
 										rel="noopener noreferrer"
 										className="text-sm font-medium text-ink-primary link-draw mt-2 inline-block no-underline"
 									>
-										company →
+										会社サイト →
 									</a>
 								)}
 							</div>

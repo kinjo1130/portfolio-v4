@@ -25,19 +25,19 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 export default function Talks({ talks }: { talks: Talk[] }) {
 	return (
-		<Layout title="Talks">
+		<Layout title="登壇">
 			<SeoHead
-				title="Talks"
-				titleTemplate="Top"
-				description="登壇・発表の一覧ページです"
+				title="登壇"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
+				description="イベントでの登壇と発表の一覧です。"
 				imgUrl="/favicon.ico"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary">Index</p>
+					<p className="text-sm font-medium text-ink-secondary">一覧</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{String(talks.length).padStart(2, "0")} entries
+						{talks.length}件
 					</p>
 				</header>
 
@@ -108,7 +108,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 						rel="noopener noreferrer"
 						className="link-draw text-ink-primary"
 					>
-						see all slides on Speaker Deck →
+						Speaker Deck で他のスライドを見る →
 					</a>
 				</p>
 			</section>

@@ -4,10 +4,10 @@ import Layout from "./layout";
 
 export default function AboutPage({ about }: { about: About }) {
 	return (
-		<Layout title="About">
+		<Layout title="自己紹介">
 			<SeoHead
-				title="About"
-				titleTemplate="About"
+				title="自己紹介"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="About me"
 				imgUrl="/favicon.ico"
 			/>
@@ -17,19 +17,21 @@ export default function AboutPage({ about }: { about: About }) {
 					<p className="text-sm font-medium text-ink-secondary mb-6">Profile</p>
 					<dl className="space-y-4 text-base">
 						<div>
-							<dt className="text-sm font-medium text-ink-secondary">Name</dt>
+							<dt className="text-sm font-medium text-ink-secondary">名前</dt>
 							<dd className="font-semibold text-ink-primary mt-1">
 								{about.name}
 							</dd>
 						</div>
 						<div>
-							<dt className="text-sm font-medium text-ink-secondary">Birth</dt>
+							<dt className="text-sm font-medium text-ink-secondary">
+								生年月日
+							</dt>
 							<dd className="font-semibold text-ink-primary mt-1 tnum">
 								{about.birth}
 							</dd>
 						</div>
 						<div>
-							<dt className="text-sm font-medium text-ink-secondary">Origin</dt>
+							<dt className="text-sm font-medium text-ink-secondary">出身</dt>
 							<dd className="font-semibold text-ink-primary mt-1">
 								{about.origin}
 							</dd>

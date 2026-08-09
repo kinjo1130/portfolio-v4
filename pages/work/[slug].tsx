@@ -10,10 +10,10 @@ import Layout from "../layout";
 export default function WorkDetail({ work }: { work: Work }) {
 	const toc = renderToc(work.body);
 	return (
-		<Layout title={work.title} eyebrow="Work">
+		<Layout title={work.title} eyebrow="職歴">
 			<SeoHead
-				title="Work"
-				titleTemplate={work.title}
+				title={work.title}
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description={work.description}
 				imgUrl="/favicon.ico"
 			/>
@@ -34,7 +34,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 							{work.position.length > 0 && (
 								<div>
 									<dt className="text-sm font-medium text-ink-secondary">
-										Role
+										担当
 									</dt>
 									<dd className="font-semibold text-ink-primary mt-1">
 										{work.position.join(" / ")}
@@ -70,7 +70,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 						{toc.length >= 4 && (
 							<div>
 								<p className="text-sm font-medium text-ink-secondary mb-2">
-									Contents
+									目次
 								</p>
 								<TableOfContents toc={toc} />
 							</div>
@@ -92,7 +92,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 							href="/work"
 							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
-							← Back to index
+							← 職歴一覧へ
 						</Link>
 					</div>
 				</article>

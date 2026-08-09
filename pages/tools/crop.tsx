@@ -129,12 +129,12 @@ export default function CropPage() {
 	return (
 		<>
 			<SeoHead
-				title="Image Crop"
-				titleTemplate="Image Crop"
+				title="画像を切り抜く"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="サムネイル・OGP・SNSアイコン用の画像を素早くトリミング"
 				imgUrl="/favicon.ico"
 			/>
-			<Layout title="Image crop">
+			<Layout title="画像を切り抜く" eyebrow="ツール">
 				<div className="mb-6">
 					<p className="text-sm text-ink-secondary">
 						画像はあなたのブラウザ内だけで処理されます。サーバーには送信されません。
