@@ -8,6 +8,7 @@ import {
 	serializePost,
 	toSummary,
 } from "@/libs/admin/posts";
+import { buildSlug } from "@/libs/admin/slug";
 import { getContentStore } from "@/libs/admin/store";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -41,21 +42,36 @@ export default async function handler(
 	if (req.method === "POST") {
 		try {
 			const input = req.body as Partial<PostDoc>;
-			const id = assertValidId(String(input.id ?? ""));
+			const now = new Date().toISOString();
+			const title = input.title?.trim() || "無題";
+
+			// スラッグが空ならタイトルと公開日から作る。既存と重ならない形はここで
+			// 確定させる (ブラウザ側の生成は入力欄に先回りで出しているだけ)
+			let id: string;
+			if (input.id) {
+				id = assertValidId(String(input.id));
+			} else {
+				const taken = (await store.list(BLOG_DIR))
+					.filter((name) => name.endsWith(".md"))
+					.map((name) => name.replace(/\.md$/, ""));
+				id = assertValidId(
+					buildSlug(title, input.publishedAt ?? input.createdAt ?? now, taken),
+				);
+			}
+
 			if (await store.read(postPath(id))) {
 				return res
 					.status(409)
 					.json({ error: `スラッグ ${id} の記事はすでにあります` });
 			}
-			const now = new Date().toISOString();
 			const post: PostDoc = {
 				id,
-				title: input.title?.trim() || "無題",
+				title,
 				description: input.description ?? "",
 				createdAt: input.createdAt ?? now,
 				updatedAt: now,
 				publishedAt: input.publishedAt ?? input.createdAt ?? now,
-				heroImage: input.heroImage,
+				heroImage: input.heroImage ?? undefined,
 				draft: input.draft ?? true,
 				body: input.body ?? "",
 			};

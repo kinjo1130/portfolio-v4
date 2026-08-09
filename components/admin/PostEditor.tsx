@@ -1,3 +1,4 @@
+import { AdminShell } from "@/components/admin/AdminShell";
 import {
 	BODY_PRESETS,
 	COVER_PRESETS,
@@ -7,6 +8,8 @@ import {
 import { ImageDropzone } from "@/components/admin/ImageDropzone";
 import { SplitPane } from "@/components/admin/SplitPane";
 import type { PostDoc } from "@/libs/admin/posts";
+import { buildSlug } from "@/libs/admin/slug";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -15,6 +18,7 @@ export type EditorMode = "create" | "edit";
 type Props = {
 	mode: EditorMode;
 	initial: PostDoc;
+	storeKind?: "fs" | "github";
 };
 
 /** 本文に差し込む画像の長辺。記事の表示幅の2倍あれば足りる */
@@ -26,6 +30,8 @@ type PendingImage = {
 	kind: "cover" | "body";
 };
 
+type Message = { kind: "error" | "info"; text: string };
+
 const toDateInput = (iso: string | undefined) =>
 	iso ? new Date(iso).toISOString().slice(0, 10) : "";
 
@@ -35,24 +41,58 @@ const fromDateInput = (value: string) =>
 const field =
 	"w-full border border-line rounded-input bg-surface-page px-3 py-2 text-base";
 const label = "block text-sm font-medium text-ink-secondary mb-1.5";
+const headerLink =
+	"text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1.5 no-underline hover:text-ink-primary hover:bg-surface-sunken transition-colors";
 
-export function PostEditor({ mode, initial }: Props) {
+export function PostEditor({ mode, initial, storeKind }: Props) {
 	const router = useRouter();
 	const [post, setPost] = useState<PostDoc>(initial);
 	const [html, setHtml] = useState("");
-	const [status, setStatus] = useState<string | null>(null);
-	const [error, setError] = useState<string | null>(null);
+	const [message, setMessage] = useState<Message | null>(null);
 	const [saving, setSaving] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [pending, setPending] = useState<PendingImage | null>(null);
 	const [bodyOver, setBodyOver] = useState(false);
+	// 作成に成功したら、そのまま編集画面として振る舞う。ページ遷移すると
+	// エディタが作り直されて「保存しました」が消えてしまうため
+	const [editing, setEditing] = useState(mode === "edit");
+	// 公開済みのURLを動かさないため、編集中はスラッグを固定する
+	const [slugPinned, setSlugPinned] = useState(mode === "edit");
+	const [takenSlugs, setTakenSlugs] = useState<string[]>([]);
 	const dirty = useRef(false);
 	const bodyRef = useRef<HTMLTextAreaElement>(null);
+	const bodyFileRef = useRef<HTMLInputElement>(null);
 
 	const update = <K extends keyof PostDoc>(key: K, value: PostDoc[K]) => {
 		dirty.current = true;
 		setPost((prev) => ({ ...prev, [key]: value }));
 	};
+
+	// 連番を振るために既存のスラッグを控えておく。取れなくても生成はできる
+	useEffect(() => {
+		if (mode !== "create") return;
+		let alive = true;
+		fetch("/api/admin/posts")
+			.then((res) => (res.ok ? res.json() : { posts: [] }))
+			.then((data: { posts: { id: string }[] }) => {
+				if (alive) setTakenSlugs(data.posts.map((p) => p.id));
+			})
+			.catch(() => {});
+		return () => {
+			alive = false;
+		};
+	}, [mode]);
+
+	// スラッグはタイトルと公開日から作る。自分で書き換えたらそれ以降は追随しない
+	useEffect(() => {
+		if (slugPinned) return;
+		const next = buildSlug(
+			post.title,
+			post.publishedAt ?? post.createdAt,
+			takenSlugs,
+		);
+		setPost((prev) => (prev.id === next ? prev : { ...prev, id: next }));
+	}, [slugPinned, takenSlugs, post.title, post.publishedAt, post.createdAt]);
 
 	// 本文プレビューは公開ページと同じ変換をサーバー側で通す
 	useEffect(() => {
@@ -78,34 +118,55 @@ export function PostEditor({ mode, initial }: Props) {
 		return () => window.removeEventListener("beforeunload", warn);
 	}, []);
 
+	const canSave = !saving && Boolean(post.title.trim()) && Boolean(post.id);
+
 	const save = useCallback(async () => {
+		if (!canSave) return;
 		setSaving(true);
-		setError(null);
-		setStatus(null);
+		setMessage(null);
 		const res = await fetch(
-			mode === "create" ? "/api/admin/posts" : `/api/admin/posts/${post.id}`,
+			editing ? `/api/admin/posts/${post.id}` : "/api/admin/posts",
 			{
-				method: mode === "create" ? "POST" : "PUT",
+				method: editing ? "PUT" : "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(post),
+				// カバー画像を外したことを伝えるには null を送る必要がある
+				// (undefined は JSON.stringify が落としてしまう)
+				body: JSON.stringify({ ...post, heroImage: post.heroImage ?? null }),
 			},
 		);
 		setSaving(false);
 		if (!res.ok) {
 			const data = (await res.json().catch(() => ({}))) as { error?: string };
-			setError(data.error ?? "保存できませんでした");
+			setMessage({ kind: "error", text: data.error ?? "保存できませんでした" });
 			return;
 		}
 		const data = (await res.json()) as { post: PostDoc; committed: boolean };
 		dirty.current = false;
 		setPost(data.post);
-		setStatus(
-			data.committed
-				? "GitHub にコミットしました。反映まで少し待ってください。"
-				: "ローカルのファイルに保存しました。",
-		);
-		if (mode === "create") router.replace(`/admin/writing/${data.post.id}`);
-	}, [mode, post, router]);
+		setSlugPinned(true);
+		setMessage({
+			kind: "info",
+			text: data.committed
+				? "GitHub にコミットしました"
+				: "ローカルのファイルに保存しました",
+		});
+		if (!editing) {
+			setEditing(true);
+			// router.replace はページを作り直してしまうので、URL だけ差し替える
+			window.history.replaceState(null, "", `/admin/writing/${data.post.id}`);
+		}
+	}, [canSave, editing, post]);
+
+	// エディタは縦に長いので、キーボードからも保存できるようにする
+	useEffect(() => {
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (!(event.metaKey || event.ctrlKey) || event.key !== "s") return;
+			event.preventDefault();
+			void save();
+		};
+		window.addEventListener("keydown", onKeyDown);
+		return () => window.removeEventListener("keydown", onKeyDown);
+	}, [save]);
 
 	const remove = async () => {
 		if (!window.confirm(`記事「${post.title}」を削除します。よろしいですか？`))
@@ -115,7 +176,7 @@ export function PostEditor({ mode, initial }: Props) {
 		});
 		if (!res.ok) {
 			const data = (await res.json().catch(() => ({}))) as { error?: string };
-			setError(data.error ?? "削除できませんでした");
+			setMessage({ kind: "error", text: data.error ?? "削除できませんでした" });
 			return;
 		}
 		dirty.current = false;
@@ -125,10 +186,13 @@ export function PostEditor({ mode, initial }: Props) {
 	// 画像は記事のスラッグごとのフォルダに置くので、スラッグが決まる前は受け取れない
 	const openCropper = (file: File, kind: PendingImage["kind"]) => {
 		if (!post.id) {
-			setError("画像を入れる前にスラッグを決めてください");
+			setMessage({
+				kind: "error",
+				text: "画像を入れる前にスラッグを決めてください",
+			});
 			return;
 		}
-		setError(null);
+		setMessage(null);
 		const reader = new FileReader();
 		reader.onload = () =>
 			setPending({ src: reader.result as string, name: file.name, kind });
@@ -152,7 +216,7 @@ export function PostEditor({ mode, initial }: Props) {
 	const uploadCropped = async (image: CroppedImage) => {
 		if (!pending) return;
 		setUploading(true);
-		setError(null);
+		setMessage(null);
 		const res = await fetch("/api/admin/upload", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -166,10 +230,16 @@ export function PostEditor({ mode, initial }: Props) {
 		setUploading(false);
 		if (!res.ok) {
 			const data = (await res.json().catch(() => ({}))) as { error?: string };
-			setError(data.error ?? "アップロードできませんでした");
+			setMessage({
+				kind: "error",
+				text: data.error ?? "アップロードできませんでした",
+			});
 			return;
 		}
 		const { url } = (await res.json()) as { url: string };
+		// 置いた画像はスラッグ名のフォルダに入る。あとからタイトルを直しても
+		// フォルダと記事がずれないよう、ここでスラッグを確定させる
+		setSlugPinned(true);
 		if (pending.kind === "cover") {
 			update("heroImage", {
 				url,
@@ -203,15 +273,28 @@ export function PostEditor({ mode, initial }: Props) {
 				<input
 					id="post-id"
 					value={post.id}
-					onChange={(e) => update("id", e.target.value)}
-					readOnly={mode === "edit"}
-					className={`${field} font-mono text-sm ${mode === "edit" ? "text-ink-tertiary" : ""}`}
+					onChange={(e) => {
+						setSlugPinned(true);
+						update("id", e.target.value);
+					}}
+					readOnly={editing}
+					className={`${field} font-mono text-sm ${editing ? "text-ink-tertiary" : ""}`}
 				/>
 				<p className="text-xs text-ink-tertiary mt-1">
 					公開URLは /writing/{post.id || "..."} になります
-					{mode === "edit" &&
-						"。あとから変更するとリンクが切れるため固定しています"}
+					{editing
+						? "。あとから変更するとリンクが切れるため固定しています"
+						: "。タイトルから自動で作ります"}
 				</p>
+				{!editing && slugPinned && (
+					<button
+						type="button"
+						onClick={() => setSlugPinned(false)}
+						className="text-xs text-ink-secondary underline mt-1"
+					>
+						タイトルから作り直す
+					</button>
+				)}
 			</div>
 
 			<div>
@@ -267,9 +350,31 @@ export function PostEditor({ mode, initial }: Props) {
 			</div>
 
 			<div>
-				<label className={label} htmlFor="post-body">
-					本文
-				</label>
+				<div className="flex items-baseline justify-between mb-1.5">
+					<label className={`${label} mb-0`} htmlFor="post-body">
+						本文
+					</label>
+					<button
+						type="button"
+						onClick={() => bodyFileRef.current?.click()}
+						disabled={uploading}
+						className="text-xs font-medium text-ink-secondary border border-line rounded-button px-2.5 py-1 hover:text-ink-primary hover:bg-surface-sunken transition-colors"
+					>
+						画像を挿入
+					</button>
+				</div>
+				<input
+					ref={bodyFileRef}
+					type="file"
+					accept="image/*"
+					className="sr-only"
+					onChange={(e) => {
+						const file = e.target.files?.[0];
+						// 同じファイルを続けて選べるように毎回クリアする
+						e.target.value = "";
+						if (file) openCropper(file, "body");
+					}}
+				/>
 				<textarea
 					id="post-body"
 					ref={bodyRef}
@@ -294,36 +399,9 @@ export function PostEditor({ mode, initial }: Props) {
 					}`}
 				/>
 				<p className="text-xs text-ink-tertiary mt-1">
-					Markdown で書けます。画像はここに直接ドラッグ＆ドロップすると、
-					トリミングしてからカーソル位置に差し込みます
+					Markdown で書けます。画像はここに直接ドラッグ＆ドロップするか、
+					画像を挿入から選ぶと、トリミングしてカーソル位置に差し込みます
 				</p>
-			</div>
-
-			{error && (
-				<p className="text-sm text-signal-critical" role="alert">
-					{error}
-				</p>
-			)}
-			{status && <p className="text-sm text-ink-secondary">{status}</p>}
-
-			<div className="flex items-center gap-3 pt-6 border-t border-line">
-				<button
-					type="button"
-					onClick={save}
-					disabled={saving || !post.title || !post.id}
-					className="text-sm font-medium bg-ink-primary text-paper rounded-button px-4 py-2"
-				>
-					{saving ? "保存中" : "保存"}
-				</button>
-				{mode === "edit" && (
-					<button
-						type="button"
-						onClick={remove}
-						className="text-sm font-medium text-signal-critical border border-line rounded-button px-4 py-2 hover:bg-surface-sunken transition-colors"
-					>
-						削除
-					</button>
-				)}
 			</div>
 		</div>
 	);
@@ -357,8 +435,64 @@ export function PostEditor({ mode, initial }: Props) {
 		</div>
 	);
 
-	return (
+	const noticeText = uploading ? "アップロード中" : message?.text;
+	const noticeIsError = !uploading && message?.kind === "error";
+	const notice = noticeText && (
+		<span
+			role={noticeIsError ? "alert" : "status"}
+			title={noticeText}
+			className={`text-xs truncate ${
+				noticeIsError ? "text-signal-critical" : "text-ink-secondary"
+			}`}
+		>
+			{noticeText}
+		</span>
+	);
+
+	const actions = (
 		<>
+			{editing && (
+				<a
+					href={`/writing/${post.id}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					className={`hidden sm:inline-block ${headerLink}`}
+				>
+					公開ページ
+				</a>
+			)}
+			<Link href="/admin" className={`hidden sm:inline-block ${headerLink}`}>
+				一覧へ
+			</Link>
+			{editing && (
+				<button
+					type="button"
+					onClick={remove}
+					className="text-xs font-medium text-signal-critical border border-line rounded-button px-2.5 py-1.5 hover:bg-surface-sunken transition-colors"
+				>
+					削除
+				</button>
+			)}
+			<button
+				type="button"
+				onClick={save}
+				disabled={!canSave}
+				title="Cmd+S でも保存できます"
+				className="text-xs font-medium bg-ink-primary text-paper rounded-button px-3 py-1.5"
+			>
+				{saving ? "保存中" : "保存"}
+			</button>
+		</>
+	);
+
+	return (
+		<AdminShell
+			title={editing ? post.title || "記事を編集" : "新しい記事"}
+			storeKind={storeKind}
+			fluid
+			notice={notice}
+			actions={actions}
+		>
 			<SplitPane
 				left={editor}
 				right={preview}
@@ -377,6 +511,6 @@ export function PostEditor({ mode, initial }: Props) {
 					onConfirm={uploadCropped}
 				/>
 			)}
-		</>
+		</AdminShell>
 	);
 }
