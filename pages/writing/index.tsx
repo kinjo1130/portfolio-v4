@@ -9,8 +9,8 @@ import Layout from "../layout";
 
 type Post = (BlogPost | QiitaPost | ZennPost) & { image: string | null };
 
-const FILTERS = ["All", "kinjo.me", "Qiita", "Zenn"] as const;
-type Filter = (typeof FILTERS)[number];
+const SERVICES = ["すべて", "Qiita", "Zenn"] as const;
+type Service = (typeof SERVICES)[number];
 
 function getHref(post: Post): string {
 	if (isPostWithUrl(post)) return post.url;
@@ -29,106 +29,147 @@ function getSource(post: Post): "Qiita" | "Zenn" | null {
 	return null;
 }
 
+function Thumbnail({ post }: { post: Post }) {
+	return post.image ? (
+		<img
+			src={post.image}
+			alt={post.title}
+			loading="lazy"
+			decoding="async"
+			className="w-full h-full object-cover"
+		/>
+	) : (
+		<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
+			kinjo.me
+		</span>
+	);
+}
+
 export default function Blog({ blog }: { blog: Post[] }) {
-	const [filter, setFilter] = useState<Filter>("All");
-	const sourceName = (post: Post) => getSource(post) ?? "kinjo.me";
-	const filtered =
-		filter === "All"
-			? blog
-			: blog.filter((post) => sourceName(post) === filter);
+	const [service, setService] = useState<Service>("すべて");
+	const own = blog.filter((post) => !isExternal(post));
+	const external = blog
+		.filter(isExternal)
+		.filter((post) => service === "すべて" || getSource(post) === service);
+
 	return (
-		<Layout title="Writing">
+		<Layout title="記事">
 			<SeoHead
-				title="Writing"
-				titleTemplate="Top"
-				description="記事の一覧ページです"
+				title="記事"
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
+				description="このサイトに書いた記事と、Qiita・Zennに投稿した記事の一覧です。"
 				imgUrl="/favicon.ico"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary">Index</p>
+					<p className="text-sm font-medium text-ink-secondary">
+						このサイトの記事
+					</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{String(filtered.length).padStart(2, "0")} entries
+						{own.length}件
+					</p>
+				</header>
+
+				<ul className="col-span-12 md:col-span-9">
+					{own.map((post, i) => (
+						<li
+							key={post.id}
+							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+						>
+							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<Link
+								href={getHref(post)}
+								className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+							>
+								<Thumbnail post={post} />
+							</Link>
+							<div className="col-span-12 md:col-span-8">
+								<div className="flex items-baseline justify-between gap-4">
+									<Link
+										href={getHref(post)}
+										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+									>
+										{post.title}
+									</Link>
+									<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+										{getPublishedDate(post).toLocaleDateString("ja-JP")}
+									</span>
+								</div>
+							</div>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-16 lg:pt-20">
+				<header className="col-span-12 md:col-span-3">
+					<p className="text-sm font-medium text-ink-secondary">
+						外部サービスへの投稿
+					</p>
+					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+						{external.length}件
 					</p>
 					<div className="flex flex-wrap md:flex-col items-start gap-2 mt-4">
-						{FILTERS.map((f) => (
+						{SERVICES.map((s) => (
 							<button
 								type="button"
-								key={f}
-								onClick={() => setFilter(f)}
-								aria-pressed={filter === f}
+								key={s}
+								onClick={() => setService(s)}
+								aria-pressed={service === s}
 								className={`text-xs font-medium border rounded-badge px-3 py-1 transition-colors ${
-									filter === f
+									service === s
 										? "bg-ink-primary text-paper border-ink-primary"
 										: "text-ink-secondary border-line hover:text-ink-primary hover:bg-surface-sunken"
 								}`}
 							>
-								{f}
+								{s}
 							</button>
 						))}
 					</div>
 				</header>
 
 				<ul className="col-span-12 md:col-span-9">
-					{filtered.map((post, i) => {
-						const external = isExternal(post);
-						const href = getHref(post);
-						const published = getPublishedDate(post);
-						const source = getSource(post);
-						return (
-							<li
-								key={`${source ?? "blog"}-${post.id}`}
-								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+					{external.map((post, i) => (
+						<li
+							key={`${getSource(post)}-${post.id}`}
+							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+						>
+							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<a
+								href={getHref(post)}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 							>
-								<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
-									{String(i + 1).padStart(2, "0")}
-								</span>
-								<Link
-									href={href}
-									target={external ? "_blank" : undefined}
-									rel={external ? "noopener noreferrer" : undefined}
-									className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
-								>
-									{post.image ? (
-										<img
-											src={post.image}
-											alt={post.title}
-											loading="lazy"
-											decoding="async"
-											className="w-full h-full object-cover"
-										/>
-									) : (
-										<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
-											kinjo.me
-										</span>
-									)}
-								</Link>
-								<div className="col-span-12 md:col-span-8">
-									<div className="flex items-baseline justify-between gap-4">
-										<Link
-											href={href}
-											target={external ? "_blank" : undefined}
-											rel={external ? "noopener noreferrer" : undefined}
-											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
-										>
-											{post.title}
-										</Link>
-										<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
-											{published.toLocaleDateString("ja-JP")}
-										</span>
-									</div>
-									{source && (
-										<p className="mt-2">
-											<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-												{source}
-											</span>
-										</p>
-									)}
+								<Thumbnail post={post} />
+							</a>
+							<div className="col-span-12 md:col-span-8">
+								<div className="flex items-baseline justify-between gap-4">
+									<a
+										href={getHref(post)}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
+									>
+										{post.title}
+									</a>
+									<span className="text-sm font-medium text-ink-secondary tnum shrink-0">
+										{getPublishedDate(post).toLocaleDateString("ja-JP")}
+									</span>
 								</div>
-							</li>
-						);
-					})}
+								<p className="mt-2">
+									<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
+										{getSource(post)}
+									</span>
+								</p>
+							</div>
+						</li>
+					))}
 				</ul>
 			</section>
 		</Layout>

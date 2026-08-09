@@ -15,10 +15,10 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 			: "https://kinjo.me";
 
 	return (
-		<Layout title={blog.title} eyebrow="Writing">
+		<Layout title={blog.title} eyebrow="記事">
 			<SeoHead
-				title="Blog"
-				titleTemplate={blog.title}
+				title={blog.title}
+				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description={blog.description}
 				imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}&date=${blog.createdAt.slice(0, 10)}`}
 			/>
@@ -29,7 +29,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 						<dl className="space-y-4 text-sm">
 							<div>
 								<dt className="text-sm font-medium text-ink-secondary">
-									Published
+									公開日
 								</dt>
 								<dd className="font-semibold text-ink-primary mt-1 tnum">
 									{formatDate(blog.createdAt)}
@@ -38,7 +38,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 							{blog.updatedAt && blog.updatedAt !== blog.createdAt && (
 								<div>
 									<dt className="text-sm font-medium text-ink-secondary">
-										Updated
+										更新日
 									</dt>
 									<dd className="font-semibold text-ink-primary mt-1 tnum">
 										{formatDate(blog.updatedAt)}
@@ -49,7 +49,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 						{toc.length > 0 && (
 							<div>
 								<p className="text-sm font-medium text-ink-secondary mb-2">
-									Contents
+									目次
 								</p>
 								<TableOfContents toc={toc} />
 							</div>
@@ -74,7 +74,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 							href="/writing"
 							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
-							← Back to index
+							← 記事一覧へ
 						</Link>
 					</div>
 				</article>
