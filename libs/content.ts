@@ -15,24 +15,33 @@ const CONTENT_DIR = path.join(process.cwd(), "content");
 // draft はデフォルトで常に非表示。 SHOW_DRAFTS=true を渡したときだけ表示。
 const showDrafts = process.env.SHOW_DRAFTS === "true";
 
-function readJson<T>(file: string): T {
-	const fullPath = path.join(CONTENT_DIR, file);
-	const raw = fs.readFileSync(fullPath, "utf-8");
-	return JSON.parse(raw) as T;
-}
+type BlogFrontmatter = Omit<BlogPost, "id" | "body">;
 
-export function getBlogs(): BlogPosts {
-	const posts = readJson<BlogPosts>("blogs.json");
+export async function getBlogs(): Promise<BlogPosts> {
+	const dir = path.join(CONTENT_DIR, "blogs");
+	const files = listMarkdownFiles(dir);
+	const posts = await Promise.all(
+		files.map(async (file) => {
+			const { data, content } = readMarkdownFile<BlogFrontmatter>(file);
+			const body = await renderMarkdown(content);
+			return {
+				id: slugFromPath(file),
+				...data,
+				body,
+			} satisfies BlogPost;
+		}),
+	);
 	const visible = !showDrafts ? posts.filter((p) => !p.draft) : posts;
-	return [...visible].sort(
+	return visible.sort(
 		(a, b) =>
 			new Date(b.publishedAt ?? b.createdAt).getTime() -
 			new Date(a.publishedAt ?? a.createdAt).getTime(),
 	);
 }
 
-export function getBlog(id: string): BlogPost | undefined {
-	return getBlogs().find((post) => post.id === id);
+export async function getBlog(id: string): Promise<BlogPost | undefined> {
+	const posts = await getBlogs();
+	return posts.find((post) => post.id === id);
 }
 
 type WorkFrontmatter = Omit<Work, "slug" | "body">;

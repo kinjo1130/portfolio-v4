@@ -223,7 +223,7 @@ export const getStaticProps = async () => {
 		fetchZennPosts(),
 	]);
 	// 一覧表示に使うフィールドだけ残す (本文まで含めるとページデータが肥大するため)
-	const localSlim = getBlogs().map(
+	const localSlim = (await getBlogs()).map(
 		({ id, title, createdAt }) => ({ id, title, createdAt }) as BlogPost,
 	);
 	const qiitaSlim = qiita.map(

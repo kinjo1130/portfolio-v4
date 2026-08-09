@@ -13,7 +13,7 @@ export default async function handler(
 		feed_url: "フィードページのURL",
 		language: "ja",
 	});
-	const blogs = getBlogs();
+	const blogs = await getBlogs();
 	for (const post of blogs) {
 		feed.item({
 			title: post.title,

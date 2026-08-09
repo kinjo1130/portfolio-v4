@@ -355,7 +355,7 @@ export default function Home({
 export const getStaticProps = async () => {
 	const works = await getWorks();
 	const products = await getProducts();
-	const blogs = getBlogs();
+	const blogs = await getBlogs();
 
 	const ongoing = works.filter((w) => !w.toAt);
 	const closed = works.filter((w) => w.toAt);
