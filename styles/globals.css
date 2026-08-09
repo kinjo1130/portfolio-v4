@@ -302,3 +302,13 @@
   transform: scaleX(1);
   transform-origin: left center;
 }
+
+/* 横スクロールするナビでスクロールバーを隠す */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
