@@ -294,14 +294,14 @@ export default function Home({
 										<span className={INDEX}>
 											{String(i + 1).padStart(2, "0")}
 										</span>
-										{/* 出典と年は SP ではメタ行にまとめ、md 以上でグリッドへ流す */}
-										<span className="flex items-baseline gap-3 shrink-0 md:contents">
-											<span className="md:col-start-9 md:col-span-2 md:row-start-1">
-												<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-													{post.source}
-												</span>
+										{/* 出典は年と同じセルに入れる。タイトルの幅を他のセクションと揃えるため */}
+										<span
+											className={`${YEAR} flex items-baseline justify-end gap-2`}
+										>
+											<span className="text-xs font-medium border border-line rounded-badge px-2 py-0.5">
+												{post.source}
 											</span>
-											<span className={YEAR}>{year(post.publishedAt)}</span>
+											{year(post.publishedAt)}
 										</span>
 									</div>
 									<a
@@ -328,7 +328,7 @@ export default function Home({
 										href={post.url}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline md:col-start-5 md:col-span-4 md:row-start-1"
+										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline md:col-start-5 md:col-span-6 md:row-start-1"
 									>
 										{post.title}
 									</a>
