@@ -26,7 +26,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 				imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}&date=${blog.createdAt.slice(0, 10)}`}
 			/>
 
-			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-8">
+			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-6 md:pt-8">
 				<aside className="col-span-12 md:col-span-3">
 					<div className="md:sticky md:top-10 space-y-6">
 						<dl className="space-y-4 text-sm">

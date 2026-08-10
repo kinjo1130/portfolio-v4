@@ -66,12 +66,12 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-8">
-				<header className="col-span-12 md:col-span-3">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-6 md:pt-8">
+				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 					<p className="text-sm font-medium text-ink-secondary">
 						このサイトの記事
 					</p>
-					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 						{own.length}件
 					</p>
 				</header>
@@ -109,14 +109,16 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				</ul>
 			</section>
 
-			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-16 lg:pt-20">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-16 lg:pt-20">
 				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary">
-						外部サービスへの投稿
-					</p>
-					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
-						{external.length}件
-					</p>
+					<div className="flex items-baseline gap-3 md:block">
+						<p className="text-sm font-medium text-ink-secondary">
+							外部サービスへの投稿
+						</p>
+						<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
+							{external.length}件
+						</p>
+					</div>
 					<div className="flex flex-wrap md:flex-col items-start gap-2 mt-4">
 						{SERVICES.map((s) => (
 							<button
