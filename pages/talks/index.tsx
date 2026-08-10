@@ -30,7 +30,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 				title="登壇"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="イベントでの登壇と発表の一覧です。"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">

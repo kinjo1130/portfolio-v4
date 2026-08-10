@@ -132,7 +132,7 @@ export default function CropPage() {
 				title="画像を切り抜く"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="サムネイル・OGP・SNSアイコン用の画像を素早くトリミング"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 			<Layout title="画像を切り抜く" eyebrow="ツール">
 				<div className="mb-6">

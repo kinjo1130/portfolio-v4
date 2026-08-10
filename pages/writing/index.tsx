@@ -63,7 +63,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				title="記事"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="このサイトに書いた記事と、Qiita・Zennに投稿した記事の一覧です。"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">

@@ -9,7 +9,7 @@ export default function AboutPage({ about }: { about: About }) {
 				title="自己紹介"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="About me"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">

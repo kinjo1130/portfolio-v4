@@ -33,7 +33,7 @@ export default function ToolsIndex() {
 				title="ツール"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="ブラウザ内で完結する自作ユーティリティツール。"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
