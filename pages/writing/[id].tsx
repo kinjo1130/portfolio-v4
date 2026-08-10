@@ -1,6 +1,7 @@
 import { SeoHead } from "@/components/SeoHead";
+import { ShareLinks } from "@/components/ShareLinks";
 import { TableOfContents } from "@/components/TableOfContents";
-import { formatDate } from "@/libs/common";
+import { formatDate, isDev } from "@/libs/common";
 import { getBlog, getBlogs } from "@/libs/content";
 import { renderToc } from "@/libs/renderDoc";
 import type { BlogPost } from "@/types/blog";
@@ -13,6 +14,8 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 		process.env.NODE_ENV === "development"
 			? "http://localhost:3000"
 			: "https://kinjo.me";
+	// シェア先には canonical と同じ URL を渡す (プレビュー URL を共有させない)
+	const shareUrl = `${isDev}/writing/${blog.id}`;
 
 	return (
 		<Layout title={blog.title} eyebrow="記事">
@@ -23,7 +26,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 				imgUrl={`${isDevImageUrl}/api/og?title=${encodeURIComponent(blog.title)}&date=${blog.createdAt.slice(0, 10)}`}
 			/>
 
-			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
+			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-6 md:pt-8">
 				<aside className="col-span-12 md:col-span-3">
 					<div className="md:sticky md:top-10 space-y-6">
 						<dl className="space-y-4 text-sm">
@@ -59,7 +62,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 
 				<article className="col-span-12 md:col-span-9">
 					{blog.description && (
-						<p className="text-lg md:text-xl font-medium leading-relaxed mb-10">
+						<p className="text-lg md:text-xl font-medium leading-relaxed mb-6">
 							{blog.description}
 						</p>
 					)}
@@ -69,13 +72,14 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 						dangerouslySetInnerHTML={{ __html: blog.body }}
 					/>
 
-					<div className="mt-16 pt-6 border-t border-line">
+					<div className="mt-8 pt-5 border-t border-line flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 						<Link
 							href="/writing"
 							className="text-sm font-medium text-ink-primary link-draw no-underline"
 						>
 							← 記事一覧へ
 						</Link>
+						<ShareLinks title={blog.title} url={shareUrl} />
 					</div>
 				</article>
 			</section>

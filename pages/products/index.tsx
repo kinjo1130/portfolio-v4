@@ -17,10 +17,10 @@ export default function Product({ products }: { products: Products }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
-				<header className="col-span-12 md:col-span-3">
+			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-6 md:pt-8">
+				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 					<p className="text-sm font-medium text-ink-secondary">一覧</p>
-					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
+					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
 						{products.length}件
 					</p>
 				</header>

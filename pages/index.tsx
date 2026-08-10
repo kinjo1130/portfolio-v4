@@ -106,7 +106,7 @@ export default function Home({
 							Shotaro Kinjo
 						</p>
 
-						<div className="mt-12 grid grid-cols-12 gap-6">
+						<div className="mt-12 grid grid-cols-12 gap-y-6 md:gap-6">
 							<p className="col-span-12 md:col-span-7 text-lg md:text-xl font-medium leading-relaxed">
 								ソフトウェアで少しの役立つものをつくるために
 								<br className="hidden md:inline" />
@@ -126,7 +126,7 @@ export default function Home({
 					<span className="rule-line" />
 
 					{/* Featured: Products */}
-					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								プロダクト
@@ -175,7 +175,7 @@ export default function Home({
 					</section>
 
 					{/* Featured: Work */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">職歴</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -232,7 +232,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: Blog */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">記事</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -278,7 +278,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: External posts */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								外部の記事
@@ -344,7 +344,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: Talks */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">登壇</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -400,7 +400,7 @@ export default function Home({
 					</section>
 
 					{/* Awards */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
 						<header className="col-span-12 md:col-span-3">
 							<p className="text-sm font-medium text-ink-secondary">受賞</p>
 						</header>
