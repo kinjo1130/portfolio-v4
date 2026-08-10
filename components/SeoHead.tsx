@@ -18,7 +18,8 @@ export const SeoHead = ({
 	favicon,
 }: MetaTypes) => {
 	const router = useRouter();
-	const siteUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}`;
+	const siteUrl =
+		process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || "https://www.kinjo.me";
 	const Url = `${siteUrl}${router.asPath}`;
 	const siteTitle = titleTemplate ? `${title} - ${titleTemplate}` : title;
 	// OGP 仕様上 og:image は絶対 URL が必須
