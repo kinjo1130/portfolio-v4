@@ -33,7 +33,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
+			<section className="grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8 pt-8">
 				<header className="col-span-12 md:col-span-3">
 					<p className="text-sm font-medium text-ink-secondary">一覧</p>
 					<p className="tnum text-sm font-medium text-ink-secondary mt-2">
