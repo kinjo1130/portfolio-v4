@@ -36,10 +36,10 @@ export default function Layout({
 				<Header />
 			</div>
 
-			<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
+			<main className="px-6 md:px-12 lg:px-20 pb-8 max-w-wide mx-auto w-full">
 				{/* Title block */}
 				{!hideTitleBlock && title && (
-					<section className="pt-12 md:pt-16 pb-8 lg:pb-12 border-b border-line">
+					<section className="pt-7 md:pt-8 pb-6 lg:pb-7 border-b border-line">
 						<div className="flex items-start justify-between gap-6">
 							<div>
 								{eyebrow && (
