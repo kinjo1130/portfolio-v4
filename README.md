@@ -1,53 +1,31 @@
-## ポートフォリオv4
+# portfolio-v4
 
-記事の書き方と管理画面のセットアップは [docs/admin.md](docs/admin.md) を参照。
+金城翔太郎のポートフォリオサイト。
 
-##　欲しい機能一覧
-- [ ] ブログページ
-- [ ] プロダクトページ
-- [ ] 自己紹介ページ
-- [ ] worksページ
-- [ ] 記事にいいねをつけれる(何回でも)
-- [ ] githubで.mdファイルで構成することができるようにしたい(誰でも、編集のPRを立てることができるようにしたい)
-- [ ] パンくずリストを表示したい
+https://www.kinjo.me
 
-企業のロゴで参考にしたサイト: https://qiita.com/Ry0xi/items/857687c892f783955fe1
+## 技術スタック
 
-aboutページでもう少し画像を入れたい
+- Next.js (Pages Router) / React / TypeScript
+- Tailwind CSS
+- Biome (lint / format)
+- Vercel (ホスティング / `@vercel/og` による OG 画像生成)
 
-書く内容を箇条書きにして、書き出すのが良さそう
-RSSのサムネイルが出るようにしたい
+## 開発
 
+```sh
+pnpm install
+pnpm dev
+```
 
+| コマンド | 内容 |
+| --- | --- |
+| `pnpm dev` | 開発サーバーを起動 |
+| `pnpm lint` | Biome によるチェック |
+| `pnpm build` | 本番ビルド |
 
+## ドキュメント
 
-
-productsページにはgithubのリンクか、プロダクトのリンクか、スライドのリンクがあればいいなって思っている
-
-- [ ]ショートカットキーを導入したい
-- [ ] 技術スタックのアイコンを導入したいな
-- [ ] ブログの表記をいい感じにしたい
-- [ ] 目次のタイトルをクリックすると、そのsectionまでスクロールされる
-
-
-
-
-
- ==================== Emojis ====================
- 🎉  :tada: 初めてのコミット（Initial Commit）
- 🔖  :bookmark: バージョンタグ（Version Tag）
- ✨  :sparkles: 新機能（New Feature）
- 🐛  :bug: バグ修正（Bugfix）
- ♻️  :recycle: リファクタリング(Refactoring)
- 📚  :books: ドキュメント（Documentation）
- 🎨  :art: デザインUI/UX(Accessibility)
- 🐎  :horse: パフォーマンス（Performance）
- 🔧  :wrench: ツール（Tooling）
- 🚨  :rotating_light: テスト（Tests）
- 💩  :hankey: 非推奨追加（Deprecation）
- 🗑️  :wastebasket: 削除（Removal）
- 🚧  :construction: WIP(Work In Progress)
-
-#### コミットメッセージに絵文字を追加してみたいので、READMEに置いておく
-
-
+- [DESIGN.md](DESIGN.md) — デザインシステムの Single Source of Truth。UI・トークン・コピーの変更時は必ず参照する
+- [docs/design-gap.md](docs/design-gap.md) — 既存コードと DESIGN.md の乖離の記録
+- [docs/admin.md](docs/admin.md) — 記事の書き方と管理画面のセットアップ
