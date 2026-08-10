@@ -84,7 +84,7 @@ export default function Home({
 				title="Home"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="A product engineer's portfolio."
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 			<div className="home-plain-paper min-h-screen text-ink-primary">
 				<div className="flex justify-center">

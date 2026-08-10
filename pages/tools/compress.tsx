@@ -127,7 +127,7 @@ export default function CompressPage() {
 				title="画像を圧縮する"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="画像をブラウザ内で圧縮・形式変換 (WebP / AVIF / JPG / PNG)"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 			<Layout title="画像を圧縮する" eyebrow="ツール">
 				<div className="mb-6">

@@ -21,6 +21,8 @@ export const SeoHead = ({
 	const siteUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}`;
 	const Url = `${siteUrl}${router.asPath}`;
 	const siteTitle = titleTemplate ? `${title} - ${titleTemplate}` : title;
+	// OGP 仕様上 og:image は絶対 URL が必須
+	const ogImageUrl = imgUrl?.startsWith("/") ? `${siteUrl}${imgUrl}` : imgUrl;
 	const faviconUrl = favicon ? favicon : "/favicon.ico";
 	return (
 		<Head>
@@ -28,7 +30,7 @@ export const SeoHead = ({
 			<title>{siteTitle}</title>
 			<link href={Url} rel="canonical" />
 			<meta name="twitter:card" content={"summary_large_image"} />
-			<meta property="og:image" content={imgUrl} />
+			<meta property="og:image" content={ogImageUrl} />
 			<meta property="og:title" content={siteTitle} />
 			<meta property="og:url" content={Url} />
 			<meta name="description" content={description} />

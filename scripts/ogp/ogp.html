@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<!--
+  デフォルト OGP 画像 (public/ogp.png) の生成ソース。
+  デザイン: DESIGN.md v2 のモノクロームランプに準拠した Portrait split。
+  再生成: scripts/ogp/generate.sh を実行する。
+-->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=block");
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    display: flex;
+    background: #fafafa;
+    color: #1b1a1a;
+    font-family: "Inter", "Noto Sans JP", sans-serif;
+  }
+  .text {
+    flex: 1 1 62%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 65px 65px 65px 80px;
+    border-right: 2px solid #dfdedd;
+  }
+  .site { font-size: 34px; font-weight: 700; }
+  .center { display: flex; flex-direction: column; gap: 20px; }
+  .name { font-size: 86px; font-weight: 700; line-height: 1.2; }
+  .romaji { font-size: 28px; font-weight: 400; color: #878684; letter-spacing: 0.06em; }
+  .role { font-size: 26px; font-weight: 400; color: #4e4d4c; }
+  .photo { flex: 1 1 38%; min-width: 0; }
+  .photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(1) sepia(0.14) contrast(1.02);
+  }
+</style>
+</head>
+<body>
+  <div class="text">
+    <span class="site">kinjo.me</span>
+    <div class="center">
+      <span class="name">金城翔太郎</span>
+      <span class="romaji">SHOTARO KINJO</span>
+    </div>
+    <span class="role">A product engineer&rsquo;s portfolio.</span>
+  </div>
+  <div class="photo"><img src="../../public/profile.jpg" alt="" /></div>
+</body>
+</html>

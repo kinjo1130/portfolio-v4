@@ -14,7 +14,7 @@ export default function Product({ products }: { products: Products }) {
 				title="プロダクト"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="個人でつくったプロダクトの一覧です。"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">

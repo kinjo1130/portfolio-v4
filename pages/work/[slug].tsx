@@ -15,7 +15,7 @@ export default function WorkDetail({ work }: { work: Work }) {
 				title={work.title}
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description={work.description}
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">

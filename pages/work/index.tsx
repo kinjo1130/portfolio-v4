@@ -21,7 +21,7 @@ export default function Work({ works }: { works: WorkWithLogo[] }) {
 				title="職歴"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
 				description="これまでに関わった会社と案件の一覧です。"
-				imgUrl="/favicon.ico"
+				imgUrl="/ogp.png"
 			/>
 
 			<section className="grid grid-cols-12 gap-6 lg:gap-8 pt-8">
