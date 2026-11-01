@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
 
 	return (
 		<header className="w-full border-b border-line">
-			<div className="max-w-wide mx-auto px-6 md:px-12 lg:px-20 py-4 flex flex-col gap-y-2 md:flex-row md:items-center md:justify-between md:gap-x-6">
+			<div className="max-w-wide mx-auto px-6 md:px-12 py-4 flex flex-col gap-y-2 md:flex-row md:items-center md:justify-between md:gap-x-6">
 				<Link
 					href="/"
 					className="text-base font-semibold text-ink-primary no-underline link-draw self-start shrink-0"

@@ -33,7 +33,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-6 md:pt-8">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
 				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 					<p className="text-sm font-medium text-ink-secondary">一覧</p>
 					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -47,7 +47,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 						return (
 							<li
 								key={`${talk.date}-${talk.title}`}
-								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 							>
 								<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 									{String(i + 1).padStart(2, "0")}

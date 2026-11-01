@@ -66,7 +66,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-6 md:pt-8">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
 				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 					<p className="text-sm font-medium text-ink-secondary">
 						このサイトの記事
@@ -80,7 +80,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 					{own.map((post, i) => (
 						<li
 							key={post.id}
-							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 						>
 							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 								{String(i + 1).padStart(2, "0")}
@@ -109,7 +109,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				</ul>
 			</section>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-16 lg:pt-20">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-16 lg:pt-8">
 				<header className="col-span-12 md:col-span-3">
 					<div className="flex items-baseline gap-3 md:block">
 						<p className="text-sm font-medium text-ink-secondary">
@@ -142,7 +142,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 					{external.map((post, i) => (
 						<li
 							key={`${getSource(post)}-${post.id}`}
-							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6"
+							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 						>
 							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 								{String(i + 1).padStart(2, "0")}
