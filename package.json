@@ -9,12 +9,12 @@
 		"lint": "biome check ."
 	},
 	"dependencies": {
-		"@next/third-parties": "^16.3.0",
+		"@next/third-parties": "^16.4.3",
 		"@vercel/analytics": "^2.0.1",
-		"@vercel/og": "^0.6.2",
+		"@vercel/og": "^1.0.3",
 		"gray-matter": "^4.0.3",
 		"lucide-react": "^1.29.0",
-		"next": "16.3.0",
+		"next": "16.4.3",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8",
 		"react-easy-crop": "^5.5.7",
@@ -42,13 +42,15 @@
 		"typescript": "^5"
 	},
 	"volta": {
-		"node": "20.11.0",
+		"node": "26.12.1",
 		"pnpm": "8.15.3"
 	},
 	"pnpm": {
 		"overrides": {
-			"js-yaml@^3.0.0": "^3.15.1",
-			"brace-expansion@^2.0.0": "^2.1.4",
+			"js-yaml@^3.0.0": "^3.15.2",
+			"brace-expansion@^2.0.0": "^2.1.7",
+			"fflate@^0.7.0": "^0.7.5",
+			"postcss-selector-parser@^6.0.0": "^6.1.5",
 			"glob@^10.0.0": "^10.5.0",
 			"minimatch@^9.0.0": "^9.0.7",
 			"picomatch@^2.0.0": "^2.3.2"
