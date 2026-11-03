@@ -17,15 +17,13 @@ export default function Product({ products }: { products: Products }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-6 md:gap-6 pt-6 md:pt-8 lg:pt-6">
-				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-					<p className="text-sm font-medium text-ink-secondary">一覧</p>
-					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-						{products.length}件
-					</p>
-				</header>
+			{/* 件数はカードの上に 1 行で置き、カードには全幅を使う */}
+			<section className="grid gap-5 pt-6 md:pt-8 lg:pt-6">
+				<p className="tnum text-sm font-medium text-ink-secondary">
+					{products.length}件
+				</p>
 
-				<ul className="col-span-12 md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-7">
 					{products.map((product, i) => (
 						<li key={product.slug}>
 							<div className="border border-line rounded-card bg-surface-card shadow-sm hover:shadow-md transition-shadow overflow-hidden">

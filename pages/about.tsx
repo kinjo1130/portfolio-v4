@@ -12,10 +12,10 @@ export default function AboutPage({ about }: { about: About }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-6 md:gap-6 pt-6 md:pt-8 lg:pt-6">
-				<header className="col-span-12 md:col-span-3">
-					<p className="text-sm font-medium text-ink-secondary mb-6">Profile</p>
-					<dl className="space-y-4 text-base">
+			<section className="grid gap-6 pt-6 md:pt-8 lg:pt-6">
+				<header>
+					<h2 className="sr-only">Profile</h2>
+					<dl className="flex flex-wrap gap-x-7 gap-y-4 text-base">
 						<div>
 							<dt className="text-sm font-medium text-ink-secondary">名前</dt>
 							<dd className="font-semibold text-ink-primary mt-1">
@@ -40,7 +40,7 @@ export default function AboutPage({ about }: { about: About }) {
 				</header>
 
 				<article
-					className="col-span-12 md:col-span-9 prose prose-editorial max-w-none"
+					className="prose prose-editorial max-w-prose"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: rendered markdown
 					dangerouslySetInnerHTML={{ __html: about.body }}
 				/>

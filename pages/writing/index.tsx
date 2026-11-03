@@ -66,32 +66,32 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
-				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-					<p className="text-sm font-medium text-ink-secondary">
+			<section className="grid gap-4 pt-6 md:pt-8 lg:pt-6">
+				<header className="flex items-baseline gap-3">
+					<h2 className="text-sm font-medium text-ink-secondary">
 						このサイトの記事
-					</p>
-					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
+					</h2>
+					<p className="tnum text-sm font-medium text-ink-secondary">
 						{own.length}件
 					</p>
 				</header>
 
-				<ul className="col-span-12 md:col-span-9">
+				<ul>
 					{own.map((post, i) => (
 						<li
 							key={post.id}
-							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
+							className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[2.5rem_16rem_minmax(0,1fr)] gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 						>
-							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+							<span className="tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 								{String(i + 1).padStart(2, "0")}
 							</span>
 							<Link
 								href={getHref(post)}
-								className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+								className="block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 							>
 								<Thumbnail post={post} />
 							</Link>
-							<div className="col-span-12 md:col-span-8">
+							<div className="min-w-0">
 								<div className="flex items-baseline justify-between gap-4">
 									<Link
 										href={getHref(post)}
@@ -109,17 +109,17 @@ export default function Blog({ blog }: { blog: Post[] }) {
 				</ul>
 			</section>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-16 lg:pt-8">
-				<header className="col-span-12 md:col-span-3">
-					<div className="flex items-baseline gap-3 md:block">
-						<p className="text-sm font-medium text-ink-secondary">
+			<section className="grid gap-4 pt-16 lg:pt-8">
+				<header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+					<div className="flex items-baseline gap-3">
+						<h2 className="text-sm font-medium text-ink-secondary">
 							外部サービスへの投稿
-						</p>
-						<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
+						</h2>
+						<p className="tnum text-sm font-medium text-ink-secondary">
 							{external.length}件
 						</p>
 					</div>
-					<div className="flex flex-wrap md:flex-col items-start gap-2 mt-4">
+					<div className="flex flex-wrap items-start gap-2">
 						{SERVICES.map((s) => (
 							<button
 								type="button"
@@ -138,24 +138,24 @@ export default function Blog({ blog }: { blog: Post[] }) {
 					</div>
 				</header>
 
-				<ul className="col-span-12 md:col-span-9">
+				<ul>
 					{external.map((post, i) => (
 						<li
 							key={`${getSource(post)}-${post.id}`}
-							className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
+							className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[2.5rem_16rem_minmax(0,1fr)] gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 						>
-							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+							<span className="tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 								{String(i + 1).padStart(2, "0")}
 							</span>
 							<a
 								href={getHref(post)}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="col-span-12 md:col-span-3 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
+								className="block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-[1200/630]"
 							>
 								<Thumbnail post={post} />
 							</a>
-							<div className="col-span-12 md:col-span-8">
+							<div className="min-w-0">
 								<div className="flex items-baseline justify-between gap-4">
 									<a
 										href={getHref(post)}
@@ -210,7 +210,7 @@ export const getStaticProps = async () => {
 			const local = post as BlogPost;
 			return {
 				...withImage,
-				image: `/api/og?title=${encodeURIComponent(local.title)}&date=${local.createdAt.slice(0, 10)}`,
+				image: `/api/og?variant=thumb&title=${encodeURIComponent(local.title)}&date=${local.createdAt.slice(0, 10)}`,
 			};
 		}),
 	);
