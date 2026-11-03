@@ -48,6 +48,9 @@ export default async function handler(req: Request) {
 	const title = searchParams.get("title")?.slice(0, 80) || SITE;
 	const date = searchParams.get("date")?.slice(0, 10).replaceAll("-", ".");
 	const label = searchParams.get("label")?.slice(0, 20) || "Writing";
+	// サイト内のサムネイル用。サイト名・ラベル・著者名を省き、タイトルと日付だけを描く。
+	// SNS で共有される OGP はどこの何かを示すため、これらを残した通常版を使う
+	const thumb = searchParams.get("variant") === "thumb";
 
 	const subsetText = `${title}${SITE}${AUTHOR}${label}0123456789.`;
 	const [regular, bold] = await Promise.all([
@@ -62,6 +65,61 @@ export default async function handler(req: Request) {
 			? [{ name: "Noto Sans JP", data: bold, weight: 700 as const }]
 			: []),
 	];
+
+	if (thumb) {
+		return new ImageResponse(
+			<div
+				style={{
+					width: "100%",
+					height: "100%",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
+					backgroundColor: PAPER_50,
+					padding: "80px",
+					fontFamily: '"Noto Sans JP"',
+				}}
+			>
+				<div
+					style={{
+						flex: 1,
+						display: "flex",
+						alignItems: "center",
+						minHeight: 0,
+					}}
+				>
+					<div
+						style={{
+							fontSize: 68,
+							fontWeight: 700,
+							lineHeight: 1.4,
+							color: INK_900,
+							lineClamp: 3,
+						}}
+					>
+						{title}
+					</div>
+				</div>
+				{date && (
+					<span
+						style={{
+							fontSize: 28,
+							fontWeight: 400,
+							color: INK_500,
+							fontVariantNumeric: "tabular-nums",
+						}}
+					>
+						{date}
+					</span>
+				)}
+			</div>,
+			{
+				width: 1200,
+				height: 630,
+				fonts: fonts.length > 0 ? fonts : undefined,
+			},
+		);
+	}
 
 	return new ImageResponse(
 		<div

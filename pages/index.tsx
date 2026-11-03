@@ -2,6 +2,17 @@ import fs from "node:fs";
 import path from "node:path";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import {
+	Badge,
+	IndexRow,
+	IndexSection,
+	StatusBadge,
+	THUMB_IMG,
+	THUMB_SIZES,
+	ThumbRow,
+	order,
+} from "@/components/IndexList";
+import { ProfileFlipCard } from "@/components/ProfileFlipCard";
 import SNS from "@/components/SNS";
 import { SeoHead } from "@/components/SeoHead";
 import { getBlogs, getProducts, getWorkLogo, getWorks } from "@/libs/content";
@@ -10,7 +21,6 @@ import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
 import type { Work } from "@/types/work";
 import Image from "next/image";
-import Link from "next/link";
 
 const ACHIEVEMENTS = [
 	{
@@ -30,6 +40,15 @@ const ACHIEVEMENTS = [
 	},
 ];
 
+const NAME = "金城翔太郎";
+// プロダクト / 職歴 / 記事 / 外部の記事 / 登壇 / 受賞 / SNS
+const SECTION_COUNT = 7;
+
+// トップに出す職歴。この順に並べる
+const FEATURED_WORK_SLUGS = ["moji", "helpfeel", "tavern"];
+// プロダクトは新しい順に 2 件、3 件目はこれに固定する
+const PINNED_PRODUCT_SLUG = "psynaut";
+
 const year = (iso: string) => new Date(iso).getFullYear();
 
 // ロゴがない会社は法人格を除いた頭文字をモノグラム表示する
@@ -38,12 +57,19 @@ const monogram = (title: string) =>
 		.replace(/^(株式会社|合同会社|有限会社|NPO法人)/, "")
 		.charAt(0)
 		.toUpperCase();
+const date = (iso: string) => iso.slice(0, 10).replaceAll("-", ".");
 
 type Props = {
-	featuredWorks: (Pick<Work, "slug" | "title" | "fromAt" | "toAt"> & {
-		logo: string | null;
+	featuredWorks: (Pick<
+		Work,
+		"slug" | "title" | "description" | "fromAt" | "toAt"
+	> & { logo: string | null })[];
+	featuredProducts: (Pick<
+		Product,
+		"slug" | "title" | "publishedAt" | "image"
+	> & {
+		description: string;
 	})[];
-	featuredProducts: Pick<Product, "slug" | "title" | "publishedAt" | "image">[];
 	recentPosts: (Pick<BlogPost, "id" | "title" | "createdAt"> & {
 		image: string;
 	})[];
@@ -56,20 +82,6 @@ type Props = {
 		image: { url: string; width: number; height: number };
 	}[];
 };
-
-// リスト行は SP で 1 カラムに積み、md 以上で 12 カラムの罫線グリッドに戻す。
-// 行番号と年は SP ではメタ行としてまとめ、md 以上は `contents` でグリッドへ流す。
-const ROW =
-	"grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-3 border-b border-line py-6 md:py-5 lg:py-4";
-const META = "flex items-baseline justify-between gap-3 md:contents";
-const INDEX =
-	"tnum small-caps text-sm font-medium text-ink-secondary md:col-start-1 md:col-span-1 md:row-start-1";
-const YEAR =
-	"tnum text-sm font-medium text-ink-secondary shrink-0 md:col-start-11 md:col-span-2 md:row-start-1 md:text-right";
-// サムネイルは SP では全幅、md 以上で行番号の右に 3 カラム分
-const THUMB =
-	"block border border-line rounded-card bg-surface-sunken overflow-hidden md:col-start-2 md:col-span-3 md:row-start-1";
-const THUMB_SIZES = "(min-width: 768px) 22vw, 100vw";
 
 export default function Home({
 	featuredWorks,
@@ -94,342 +106,222 @@ export default function Home({
 				<main className="px-6 md:px-12 pb-32 lg:pb-8 max-w-wide mx-auto w-full">
 					{/* Cover */}
 					<section className="pt-16 md:pt-24 lg:pt-8 pb-16 lg:pb-8">
-						<p className="text-sm font-medium text-ink-secondary mb-6 ink-settle">
-							プロダクトエンジニアのポートフォリオ
-						</p>
+						{/* 1 行目: 名前とカード / 2 行目: キャッチコピーとバッジ (全幅) */}
+						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-5 md:gap-x-6">
+							<div>
+								<h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
+									<span className="sr-only">{NAME}</span>
+									{[...NAME].map((char, i) => (
+										<span key={char} className="reveal-char" aria-hidden>
+											<span style={order(i)}>{char}</span>
+										</span>
+									))}
+								</h1>
 
-						<h1 className="jp-display text-5xl md:text-7xl font-bold leading-tight tracking-tight ink-settle">
-							金城翔太郎
-						</h1>
+								<p
+									className="rise text-xl font-semibold mt-2 tracking-snug text-ink-secondary"
+									style={order(1)}
+								>
+									Shotaro Kinjo
+								</p>
+							</div>
+							<div className="rise" style={order(3)}>
+								<ProfileFlipCard />
+							</div>
 
-						<p className="text-xl md:text-3xl font-semibold mt-4 tracking-tight text-ink-secondary ink-settle">
-							Shotaro Kinjo
-						</p>
-
-						<div className="mt-12 grid grid-cols-12 gap-y-6 md:gap-6">
-							<p className="col-span-12 md:col-span-7 text-lg md:text-xl font-medium leading-relaxed">
-								ソフトウェアで少しの役立つものをつくるために
-								<br className="hidden md:inline" />
-								コードを書くということをしています。
-							</p>
-							<div className="col-span-12 md:col-span-4 md:col-start-9 self-end flex flex-wrap gap-2">
-								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
-									Product Engineer
-								</span>
-								<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
-									Based in Kyoto
-								</span>
+							<div
+								className="rise col-span-2 mt-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-4"
+								style={order(2)}
+							>
+								<p className="text-lg font-medium leading-relaxed max-w-[30em]">
+									ソフトウェアで少しの役立つものをつくるために、コードを書くということをしています。
+								</p>
+								<div className="flex flex-wrap gap-2">
+									<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
+										Product Engineer
+									</span>
+									<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
+										Based in Kyoto
+									</span>
+								</div>
 							</div>
 						</div>
 					</section>
 
-					<span className="rule-line" />
+					<IndexSection
+						number={1}
+						total={SECTION_COUNT}
+						label="プロダクト"
+						more={{ href: "/products", label: "プロダクト一覧へ" }}
+					>
+						{featuredProducts.map((product, i) => (
+							<ThumbRow
+								key={product.slug}
+								href={`/products/${product.slug}`}
+								index={i + 1}
+								title={product.title}
+								description={product.description}
+								meta={year(product.publishedAt)}
+								thumb={
+									<Image
+										src={product.image.url}
+										alt=""
+										width={product.image.width}
+										height={product.image.height}
+										sizes={THUMB_SIZES}
+										className={`${THUMB_IMG} object-contain`}
+									/>
+								}
+							/>
+						))}
+					</IndexSection>
 
-					{/* Featured: Products */}
-					<section className="pt-16 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-							<p className="text-sm font-medium text-ink-secondary">
-								プロダクト
-							</p>
-							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-								01 / {String(featuredProducts.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{featuredProducts.map((product, i) => (
-								<li key={product.slug} className={ROW}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
-										</span>
-										<span className={YEAR}>{year(product.publishedAt)}</span>
-									</div>
-									<Link
-										href={`/products/${product.slug}`}
-										className={`${THUMB} aspect-[1200/630]`}
-									>
-										<Image
-											src={product.image.url}
-											alt={product.title}
-											width={product.image.width}
-											height={product.image.height}
-											sizes={THUMB_SIZES}
-											className="w-full h-full object-contain"
+					<IndexSection
+						number={2}
+						total={SECTION_COUNT}
+						label="職歴"
+						more={{ href: "/work", label: "職歴一覧へ" }}
+					>
+						{featuredWorks.map((work, i) => (
+							<IndexRow
+								key={work.slug}
+								href={`/work/${work.slug}`}
+								index={i + 1}
+								title={work.title}
+								description={work.description}
+								icon={
+									work.logo ? (
+										<img
+											src={work.logo}
+											alt=""
+											className="w-[28px] h-[28px] rounded-md border border-line bg-surface-card object-contain shrink-0"
 										/>
-									</Link>
-									<Link
-										href={`/products/${product.slug}`}
-										className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary md:col-start-5 md:col-span-6 md:row-start-1"
-									>
-										{product.title}
-									</Link>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/products"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							プロダクト一覧へ →
-						</Link>
-					</section>
+									) : (
+										<span className="w-[28px] h-[28px] rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0">
+											{monogram(work.title)}
+										</span>
+									)
+								}
+								meta={
+									<>
+										<span>
+											{year(work.fromAt)}—{work.toAt ? year(work.toAt) : "現在"}
+										</span>
+										<StatusBadge ongoing={!work.toAt} />
+									</>
+								}
+							/>
+						))}
+					</IndexSection>
 
-					{/* Featured: Work */}
-					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-							<p className="text-sm font-medium text-ink-secondary">職歴</p>
-							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-								02 / {String(featuredWorks.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{featuredWorks.map((work, i) => (
-								<li key={work.slug} className={`${ROW} md:items-baseline`}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
-										</span>
-										<span className="flex items-baseline gap-3 shrink-0 md:contents">
-											<span className="tnum text-sm font-medium text-ink-secondary md:col-start-9 md:col-span-2 md:row-start-1">
-												{year(work.fromAt)}—
-												{work.toAt ? year(work.toAt) : "現在"}
-											</span>
-											<span className="md:col-start-11 md:col-span-2 md:row-start-1 md:text-right">
-												<span className="inline-block text-xs font-medium text-ink-secondary border border-line rounded-badge px-2 py-0.5">
-													{work.toAt ? "終了" : "継続中"}
-												</span>
-											</span>
-										</span>
-									</div>
-									<span className="flex items-center gap-3 min-w-0 md:col-start-2 md:col-span-7 md:row-start-1">
-										{work.logo ? (
-											<img
-												src={work.logo}
-												alt=""
-												className="w-7 h-7 rounded-md border border-line bg-surface-card object-contain shrink-0"
-											/>
-										) : (
-											<span className="w-7 h-7 rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0">
-												{monogram(work.title)}
-											</span>
-										)}
-										<Link
-											href={`/work/${work.slug}`}
-											className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary"
-										>
-											{work.title}
-										</Link>
-									</span>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/work"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							職歴一覧へ →
-						</Link>
-					</section>
+					<IndexSection
+						number={3}
+						total={SECTION_COUNT}
+						label="記事"
+						more={{ href: "/writing", label: "記事一覧へ" }}
+					>
+						{recentPosts.map((post, i) => (
+							<ThumbRow
+								key={post.id}
+								href={`/writing/${post.id}`}
+								index={i + 1}
+								title={post.title}
+								meta={date(post.createdAt)}
+								thumb={
+									<img
+										src={post.image}
+										alt=""
+										loading="lazy"
+										decoding="async"
+										className={`${THUMB_IMG} object-cover`}
+									/>
+								}
+							/>
+						))}
+					</IndexSection>
 
-					{/* Recent: Blog */}
-					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-							<p className="text-sm font-medium text-ink-secondary">記事</p>
-							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-								03 / {String(recentPosts.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{recentPosts.map((post, i) => (
-								<li key={post.id} className={ROW}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
-										</span>
-										<span className={YEAR}>{year(post.createdAt)}</span>
-									</div>
-									<Link
-										href={`/writing/${post.id}`}
-										className={`${THUMB} aspect-[1200/630]`}
-									>
+					<IndexSection
+						number={4}
+						total={SECTION_COUNT}
+						label="外部の記事"
+						more={{ href: "/writing", label: "Qiita・Zenn の記事一覧へ" }}
+					>
+						{recentExternalPosts.map((post, i) => (
+							<ThumbRow
+								key={`${post.source}-${post.id}`}
+								href={post.url}
+								external
+								index={i + 1}
+								title={post.title}
+								meta={
+									<>
+										<Badge>{post.source}</Badge>
+										<span>{date(post.publishedAt)}</span>
+									</>
+								}
+								thumb={
+									post.image ? (
 										<img
 											src={post.image}
-											alt={post.title}
+											alt=""
 											loading="lazy"
 											decoding="async"
-											className="w-full h-full object-cover"
+											className={`${THUMB_IMG} object-cover`}
 										/>
-									</Link>
-									<Link
-										href={`/writing/${post.id}`}
-										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary md:col-start-5 md:col-span-6 md:row-start-1"
-									>
-										{post.title}
-									</Link>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/writing"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							記事一覧へ →
-						</Link>
-					</section>
-
-					{/* Recent: External posts */}
-					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-							<p className="text-sm font-medium text-ink-secondary">
-								外部の記事
-							</p>
-							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-								04 / {String(recentExternalPosts.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{recentExternalPosts.map((post, i) => (
-								<li key={`${post.source}-${post.id}`} className={ROW}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
+									) : (
+										<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
+											{post.source}
 										</span>
-										{/* 出典は年と同じセルに入れる。タイトルの幅を他のセクションと揃えるため */}
-										<span
-											className={`${YEAR} flex items-baseline justify-end gap-2`}
-										>
-											<span className="text-xs font-medium border border-line rounded-badge px-2 py-0.5">
-												{post.source}
-											</span>
-											{year(post.publishedAt)}
-										</span>
-									</div>
-									<a
-										href={post.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className={`${THUMB} aspect-[1200/630]`}
-									>
-										{post.image ? (
-											<img
-												src={post.image}
-												alt={post.title}
-												loading="lazy"
-												decoding="async"
-												className="w-full h-full object-cover"
-											/>
-										) : (
-											<span className="w-full h-full flex items-center justify-center text-sm font-semibold text-ink-secondary">
-												{post.source}
-											</span>
-										)}
-									</a>
-									<a
-										href={post.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline md:col-start-5 md:col-span-6 md:row-start-1"
-									>
-										{post.title}
-									</a>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/writing"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							Qiita・Zenn の記事一覧へ →
-						</Link>
-					</section>
+									)
+								}
+							/>
+						))}
+					</IndexSection>
 
-					{/* Recent: Talks */}
-					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-							<p className="text-sm font-medium text-ink-secondary">登壇</p>
-							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-								05 / {String(recentTalks.length).padStart(2, "0")}
-							</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{recentTalks.map((talk, i) => (
-								<li key={`${talk.date}-${talk.title}`} className={ROW}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
-										</span>
-										<span className={YEAR}>{year(talk.date)}</span>
-									</div>
-									<a
-										href={talk.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className={`${THUMB} aspect-video`}
-									>
-										<Image
-											src={talk.image.url}
-											alt={talk.title}
-											width={talk.image.width}
-											height={talk.image.height}
-											sizes={THUMB_SIZES}
-											className="w-full h-full object-cover"
-										/>
-									</a>
-									<div className="md:col-start-5 md:col-span-6 md:row-start-1">
-										<a
-											href={talk.url}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="link-draw jp-display text-lg md:text-xl font-medium text-ink-primary no-underline"
-										>
-											{talk.title}
-										</a>
-										<p className="text-sm font-medium text-ink-secondary mt-1">
-											{talk.event}
-										</p>
-									</div>
-								</li>
-							))}
-						</ul>
-						<Link
-							href="/talks"
-							className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium text-ink-primary link-draw mt-2"
-						>
-							登壇一覧へ →
-						</Link>
-					</section>
+					<IndexSection
+						number={5}
+						total={SECTION_COUNT}
+						label="登壇"
+						more={{ href: "/talks", label: "登壇一覧へ" }}
+					>
+						{recentTalks.map((talk, i) => (
+							<ThumbRow
+								key={`${talk.date}-${talk.title}`}
+								href={talk.url}
+								external
+								index={i + 1}
+								title={talk.title}
+								description={talk.event}
+								meta={date(talk.date)}
+								aspect="aspect-video"
+								thumb={
+									<Image
+										src={talk.image.url}
+										alt=""
+										width={talk.image.width}
+										height={talk.image.height}
+										sizes={THUMB_SIZES}
+										className={`${THUMB_IMG} object-cover`}
+									/>
+								}
+							/>
+						))}
+					</IndexSection>
 
-					{/* Awards */}
-					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
-						<header className="col-span-12 md:col-span-3">
-							<p className="text-sm font-medium text-ink-secondary">受賞</p>
-						</header>
-						<ul className="col-span-12 md:col-span-9">
-							{ACHIEVEMENTS.map((a, i) => (
-								<li key={a.title} className={`${ROW} md:items-baseline`}>
-									<div className={META}>
-										<span className={INDEX}>
-											{String(i + 1).padStart(2, "0")}
-										</span>
-										<span className={YEAR}>{a.year}</span>
-									</div>
-									<a
-										href={a.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="link-draw text-base md:text-lg font-medium text-ink-primary md:col-start-2 md:col-span-9 md:row-start-1"
-									>
-										{a.title}
-									</a>
-								</li>
-							))}
-						</ul>
-					</section>
+					<IndexSection number={6} total={SECTION_COUNT} label="受賞">
+						{ACHIEVEMENTS.map((a, i) => (
+							<IndexRow
+								key={a.title}
+								href={a.url}
+								external
+								index={i + 1}
+								title={a.title}
+								meta={a.year}
+							/>
+						))}
+					</IndexSection>
 
-					{/* SNS */}
-					<section className="pt-24 lg:pt-8">
-						<SNS />
-					</section>
+					<SNS number={7} total={SECTION_COUNT} />
 				</main>
 
 				<Footer />
@@ -443,19 +335,32 @@ export const getStaticProps = async () => {
 	const products = await getProducts();
 	const blogs = await getBlogs();
 
-	const ongoing = works.filter((w) => !w.toAt);
-	const closed = works.filter((w) => w.toAt);
-	const featuredWorks = [...ongoing, ...closed].slice(0, 4).map((w) => ({
-		slug: w.slug,
-		title: w.title,
-		fromAt: w.fromAt,
-		toAt: w.toAt,
-		logo: getWorkLogo(w.slug),
-	}));
+	const featuredWorks = FEATURED_WORK_SLUGS.map((slug) => {
+		const w = works.find((work) => work.slug === slug);
+		if (!w)
+			throw new Error(`トップに出す職歴 ${slug} が content/works にありません`);
+		return {
+			slug: w.slug,
+			title: w.title,
+			description: w.description ?? "",
+			fromAt: w.fromAt,
+			toAt: w.toAt,
+			logo: getWorkLogo(w.slug),
+		};
+	});
 
-	const featuredProducts = products.slice(0, 3).map((p) => ({
+	const pinned = products.find((p) => p.slug === PINNED_PRODUCT_SLUG);
+	if (!pinned)
+		throw new Error(
+			`トップに固定するプロダクト ${PINNED_PRODUCT_SLUG} が content/products にありません`,
+		);
+	const featuredProducts = [
+		...products.filter((p) => p.slug !== PINNED_PRODUCT_SLUG).slice(0, 2),
+		pinned,
+	].map((p) => ({
 		slug: p.slug,
 		title: p.title,
+		description: p.description ?? "",
 		publishedAt: p.publishedAt,
 		image: p.image,
 	}));
@@ -465,7 +370,7 @@ export const getStaticProps = async () => {
 		title: p.title,
 		createdAt: p.createdAt,
 		// ローカル記事のサムネイルは自前の OGP 生成 API
-		image: `/api/og?title=${encodeURIComponent(p.title)}&date=${p.createdAt.slice(0, 10)}`,
+		image: `/api/og?variant=thumb&title=${encodeURIComponent(p.title)}&date=${p.createdAt.slice(0, 10)}`,
 	}));
 
 	const recentExternalPosts = await getExternalPosts(3);

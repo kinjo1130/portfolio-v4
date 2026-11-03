@@ -312,3 +312,88 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* ---- Home: 名前が 1 字ずつ下からせり上がる ---- */
+@keyframes revealUp {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+.reveal-char {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.06em;
+}
+
+.reveal-char > span {
+  display: inline-block;
+  animation: revealUp var(--duration-slow) var(--ease-standard) backwards;
+  animation-delay: calc(var(--i, 0) * 30ms + 60ms);
+}
+
+/* 読み込み時に 8px 下から順に浮かぶ。--i で 45ms ずつずらす */
+.rise {
+  animation: fadeUp var(--duration-slow) var(--ease-standard) backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* ---- Home: 行全体がリンクのとき、行のホバーでタイトルの下線を引く (components/IndexList.tsx) ---- */
+.row-link:hover .link-draw::after,
+.row-link:focus-visible .link-draw::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ---- Home: プロフィール写真のカード。ホバーで Y 軸に 180° めくる (components/ProfileFlipCard.tsx) ---- */
+.flip-card {
+  display: block;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  perspective: 900px;
+  border-radius: var(--radius-card);
+}
+
+.flip-card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card[aria-pressed="true"] .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background-color: var(--surface-sunken);
+  box-shadow: var(--shadow-md);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* 遅延中に from の状態 (透明) で止まらないよう、アニメーションごと外す */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-char > span,
+  .rise {
+    animation: none;
+  }
+}
