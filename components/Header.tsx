@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+// Header はページごとにマウントし直される。ページを移るたびにロゴの演出が流れないよう、自動で流すのはタブを開いて最初の 1 回だけにする
+let logoFilled = false;
 
 const NAV = [
 	{ href: "/about", label: "自己紹介" },
@@ -12,6 +16,18 @@ const NAV = [
 
 export const Header: React.FC = () => {
 	const router = useRouter();
+	// 演出の途中かどうか。ホバーで再生するときは key を変えて塗り側を作り直し、CSS アニメーションを頭から流す
+	const [waving, setWaving] = useState(() => !logoFilled);
+	const [waveRun, setWaveRun] = useState(0);
+	const replayWave = () => {
+		if (waving) return;
+		setWaveRun((n) => n + 1);
+		setWaving(true);
+	};
+
+	useEffect(() => {
+		logoFilled = true;
+	}, []);
 
 	const isActive = (href: string) => {
 		if (href === "/") return router.pathname === "/";
@@ -24,8 +40,24 @@ export const Header: React.FC = () => {
 				<Link
 					href="/"
 					className="text-base font-semibold text-ink-primary no-underline link-draw self-start shrink-0"
+					onMouseEnter={replayWave}
+					onFocus={replayWave}
 				>
-					kinjo.me
+					<span
+						className="logo-wave"
+						data-animate={waving}
+						data-delayed={waveRun === 0}
+					>
+						<span className="logo-wave-line">kinjo.me</span>
+						<span
+							key={waveRun}
+							aria-hidden
+							className="logo-wave-fill"
+							onAnimationEnd={() => setWaving(false)}
+						>
+							kinjo.me
+						</span>
+					</span>
 				</Link>
 				{/* モバイルでは折り返さず横スクロールさせる (2行になるのを防ぐ) */}
 				<nav className="flex items-center gap-x-1 flex-nowrap overflow-x-auto scrollbar-none -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible md:justify-end md:gap-x-4">
