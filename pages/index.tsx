@@ -60,7 +60,7 @@ type Props = {
 // リスト行は SP で 1 カラムに積み、md 以上で 12 カラムの罫線グリッドに戻す。
 // 行番号と年は SP ではメタ行としてまとめ、md 以上は `contents` でグリッドへ流す。
 const ROW =
-	"grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-3 border-b border-line py-6 md:py-5";
+	"grid grid-cols-1 gap-3 md:grid-cols-12 md:gap-3 border-b border-line py-6 md:py-5 lg:py-4";
 const META = "flex items-baseline justify-between gap-3 md:contents";
 const INDEX =
 	"tnum small-caps text-sm font-medium text-ink-secondary md:col-start-1 md:col-span-1 md:row-start-1";
@@ -91,9 +91,9 @@ export default function Home({
 					<Header />
 				</div>
 
-				<main className="px-6 md:px-12 lg:px-20 pb-32 max-w-wide mx-auto w-full">
+				<main className="px-6 md:px-12 pb-32 lg:pb-8 max-w-wide mx-auto w-full">
 					{/* Cover */}
-					<section className="pt-16 md:pt-24 pb-16 lg:pb-20">
+					<section className="pt-16 md:pt-24 lg:pt-8 pb-16 lg:pb-8">
 						<p className="text-sm font-medium text-ink-secondary mb-6 ink-settle">
 							プロダクトエンジニアのポートフォリオ
 						</p>
@@ -126,7 +126,7 @@ export default function Home({
 					<span className="rule-line" />
 
 					{/* Featured: Products */}
-					<section className="pt-16 lg:pt-20 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-16 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								プロダクト
@@ -175,7 +175,7 @@ export default function Home({
 					</section>
 
 					{/* Featured: Work */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">職歴</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -232,7 +232,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: Blog */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">記事</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -278,7 +278,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: External posts */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">
 								外部の記事
@@ -344,7 +344,7 @@ export default function Home({
 					</section>
 
 					{/* Recent: Talks */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
 							<p className="text-sm font-medium text-ink-secondary">登壇</p>
 							<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
@@ -400,7 +400,7 @@ export default function Home({
 					</section>
 
 					{/* Awards */}
-					<section className="pt-20 lg:pt-24 grid grid-cols-12 gap-y-6 md:gap-6 lg:gap-8">
+					<section className="pt-20 lg:pt-8 grid grid-cols-12 gap-y-6 md:gap-6">
 						<header className="col-span-12 md:col-span-3">
 							<p className="text-sm font-medium text-ink-secondary">受賞</p>
 						</header>
@@ -427,7 +427,7 @@ export default function Home({
 					</section>
 
 					{/* SNS */}
-					<section className="pt-24 lg:pt-32">
+					<section className="pt-24 lg:pt-8">
 						<SNS />
 					</section>
 				</main>

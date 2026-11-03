@@ -36,7 +36,7 @@ export default function ToolsIndex() {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 lg:gap-8 pt-6 md:pt-8">
+			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
 				<header className="col-span-12 md:col-span-3">
 					<div className="flex items-baseline gap-3 md:block">
 						<p className="text-sm font-medium text-ink-secondary">一覧</p>
@@ -53,7 +53,7 @@ export default function ToolsIndex() {
 					{TOOLS.map((tool, i) => (
 						<li
 							key={tool.slug}
-							className="grid grid-cols-12 items-baseline gap-3 md:gap-4 border-b border-line py-6"
+							className="grid grid-cols-12 items-baseline gap-3 md:gap-4 border-b border-line py-6 lg:py-5"
 						>
 							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
 								{String(i + 1).padStart(2, "0")}

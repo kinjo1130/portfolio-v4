@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
 	const year = new Date().getFullYear();
 	return (
 		<footer className="w-full border-t border-line">
-			<div className="mx-auto max-w-screen-xl px-6 md:px-12 lg:px-20 py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+			<div className="mx-auto max-w-screen-xl px-6 md:px-12 py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 				<p className="text-sm font-medium text-ink-secondary">
 					&copy; {year} Shotaro Kinjo
 				</p>
