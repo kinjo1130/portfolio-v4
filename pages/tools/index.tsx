@@ -36,29 +36,26 @@ export default function ToolsIndex() {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
-				<header className="col-span-12 md:col-span-3">
-					<div className="flex items-baseline gap-3 md:block">
-						<p className="text-sm font-medium text-ink-secondary">一覧</p>
-						<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-							{TOOLS.length}件
-						</p>
-					</div>
-					<p className="text-base text-ink-secondary mt-4 leading-relaxed">
+			<section className="grid gap-4 pt-6 md:pt-8 lg:pt-6">
+				<header className="grid gap-2">
+					<p className="tnum text-sm font-medium text-ink-secondary">
+						{TOOLS.length}件
+					</p>
+					<p className="text-base text-ink-secondary leading-relaxed">
 						ブラウザ内で完結する自作の小ユーティリティ。サーバー送信なし。
 					</p>
 				</header>
 
-				<ul className="col-span-12 md:col-span-9">
+				<ul>
 					{TOOLS.map((tool, i) => (
 						<li
 							key={tool.slug}
-							className="grid grid-cols-12 items-baseline gap-3 md:gap-4 border-b border-line py-6 lg:py-5"
+							className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-3 md:gap-x-6 border-b border-line py-6 lg:py-5"
 						>
-							<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary">
+							<span className="tnum small-caps text-sm font-medium text-ink-secondary">
 								{String(i + 1).padStart(2, "0")}
 							</span>
-							<div className="col-span-12 md:col-span-8">
+							<div className="min-w-0">
 								<Link
 									href={`/tools/${tool.slug}`}
 									className="link-draw jp-display text-xl md:text-2xl font-medium text-ink-primary no-underline"
@@ -79,7 +76,7 @@ export default function ToolsIndex() {
 									))}
 								</p>
 							</div>
-							<div className="col-span-12 md:col-span-3 md:text-right mt-2 md:mt-0">
+							<div className="md:text-right mt-2 md:mt-0">
 								<Link
 									href={`/tools/${tool.slug}`}
 									className="text-sm font-medium text-ink-primary link-draw inline-block no-underline"

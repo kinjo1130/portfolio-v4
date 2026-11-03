@@ -33,30 +33,27 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 				imgUrl="/ogp.png"
 			/>
 
-			<section className="grid grid-cols-12 gap-y-4 md:gap-6 pt-6 md:pt-8 lg:pt-6">
-				<header className="col-span-12 md:col-span-3 flex items-baseline gap-3 md:block">
-					<p className="text-sm font-medium text-ink-secondary">一覧</p>
-					<p className="tnum text-sm font-medium text-ink-secondary md:mt-2">
-						{talks.length}件
-					</p>
-				</header>
+			<section className="grid gap-4 pt-6 md:pt-8 lg:pt-6">
+				<p className="tnum text-sm font-medium text-ink-secondary">
+					{talks.length}件
+				</p>
 
-				<ul className="col-span-12 md:col-span-9">
+				<ul>
 					{talks.map((talk, i) => {
 						const primary = talk.links[0];
 						return (
 							<li
 								key={`${talk.date}-${talk.title}`}
-								className="grid grid-cols-12 gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
+								className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[2.5rem_20rem_minmax(0,1fr)] gap-4 md:gap-6 border-b border-line py-6 lg:py-5"
 							>
-								<span className="col-span-12 md:col-span-1 tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
+								<span className="tnum small-caps text-sm font-medium text-ink-secondary md:pt-1">
 									{String(i + 1).padStart(2, "0")}
 								</span>
 								<a
 									href={primary.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="col-span-12 md:col-span-4 block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-video"
+									className="block border border-line rounded-card bg-surface-sunken overflow-hidden aspect-video"
 								>
 									<Image
 										src={talk.image.url}
@@ -66,7 +63,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 										className="w-full h-full object-contain"
 									/>
 								</a>
-								<div className="col-span-12 md:col-span-7">
+								<div className="min-w-0">
 									<div className="flex items-baseline justify-between gap-4">
 										<a
 											href={primary.url}
@@ -101,7 +98,7 @@ export default function Talks({ talks }: { talks: Talk[] }) {
 						);
 					})}
 				</ul>
-				<p className="col-span-12 md:col-start-4 md:col-span-9 text-sm font-medium mt-2">
+				<p className="text-sm font-medium mt-2">
 					<a
 						href="https://speakerdeck.com/kinjyo"
 						target="_blank"
