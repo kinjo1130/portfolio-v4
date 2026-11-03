@@ -397,3 +397,61 @@
     animation: none;
   }
 }
+
+/* ---- Header: ロゴ。線画から始まり、下から波打ちながら塗りつぶされる (components/Header.tsx) ----
+ * 線画の文字の上に塗りの文字を重ね、塗り側を波形のマスクで切り抜く。
+ * マスクは上が透明・下が不透明で境目が波になった画像を横に繰り返したもの。
+ * 縦位置を下から上へ動かすと塗りが満ち、横位置を同時にずらすと波が流れて見える。
+ * 塗り終わりまで 4s かかる。DESIGN.md のモーション上限 (320ms) を超えるが、ロゴだけの演出として例外にしている。
+ * 液面が満ちていくように見せたいので、速さは一定 (linear) にしている */
+.logo-wave {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-wave-line {
+  color: transparent;
+  -webkit-text-stroke: 0.5px var(--text-primary);
+}
+
+.logo-wave-fill {
+  position: absolute;
+  inset: 0;
+  color: var(--text-primary);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 120' preserveAspectRatio='none'%3E%3Cpath d='M0 60 Q8 50 16 60 T32 60 V120 H0 Z' fill='black'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 120' preserveAspectRatio='none'%3E%3Cpath d='M0 60 Q8 50 16 60 T32 60 V120 H0 Z' fill='black'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 32px 300%;
+  mask-size: 32px 300%;
+  /* 縦 72% で波の境目が文字の上端より上に出て、全体が塗られた状態になる */
+  -webkit-mask-position: 0 72%;
+  mask-position: 0 72%;
+}
+
+.logo-wave[data-animate="true"] .logo-wave-fill {
+  animation: logoWave 4000ms linear both;
+}
+
+/* ページを開いたときは線画を少し見せてから塗り始める。ホバーで流すときは待たせない */
+.logo-wave[data-delayed="true"] .logo-wave-fill {
+  animation-delay: 800ms;
+}
+
+/* 縦 30% では波の境目が文字の下端より下にあり、塗りは見えない */
+@keyframes logoWave {
+  from {
+    -webkit-mask-position: 0 30%;
+    mask-position: 0 30%;
+  }
+  to {
+    -webkit-mask-position: -192px 72%;
+    mask-position: -192px 72%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-wave[data-animate="true"] .logo-wave-fill {
+    animation: none;
+  }
+}
