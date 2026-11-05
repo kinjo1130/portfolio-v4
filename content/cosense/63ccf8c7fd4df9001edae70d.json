@@ -1,0 +1,26 @@
+{
+	"id": "63ccf8c7fd4df9001edae70d",
+	"title": "scrapboxのpublic.iconだけexportしてサイト作り",
+	"createdAt": "2022-12-16T16:54:07.000Z",
+	"updatedAt": "2022-12-17T00:52:51.000Z",
+	"lines": [
+		"scrapboxのpublic.iconだけexportしてサイト作り",
+		"　[heroku]と[AWS]が動かなくて、[public.icon]だけをexportができてないので、APIを作って、それをフロントから取得しようとしている",
+		"　　でも、一回で取得できるのが、100件までなので、一回で全てのpublic.iconのページをを取得するのが、無理そう",
+		"　　 [/scrapboxlab/api/pages/:projectname]",
+		"　　 最大は1000やった",
+		"　一回全て[Firestore]とかにexportして、そこから引っ張ってくる感じでも良さそう",
+		"　　何時間に一回すべてクロールするとか",
+		"　　[public.icon]をつけた瞬間にscript走らせて、他のDBに保存するのは割とあり説",
+		"[https://scrapbox.io/files/639ca875622961001d51f276.png]",
+		" なんとかpublic.iconのついた記事をフロントに返すことはできた",
+		" 　まだ1000記事内からいいけど、そうなった場合も考えないと",
+		"",
+		"　今日はここまで",
+		"",
+		"",
+		"こっちじゃない？",
+		"[/scrapboxlab/api/page-data/export/:projectname.json]",
+		""
+	]
+}

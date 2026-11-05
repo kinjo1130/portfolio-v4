@@ -1,6 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+	describeCosense,
+	normalizeTitle,
+	readCosenseSnapshots,
+	renderCosense,
+} from "@/libs/cosense";
+import {
 	listMarkdownFiles,
 	readMarkdownFile,
 	renderMarkdown,
@@ -15,22 +21,63 @@ const CONTENT_DIR = path.join(process.cwd(), "content");
 // draft はデフォルトで常に非表示。 SHOW_DRAFTS=true を渡したときだけ表示。
 const showDrafts = process.env.SHOW_DRAFTS === "true";
 
-type BlogFrontmatter = Omit<BlogPost, "id" | "body">;
+type BlogFrontmatter = Omit<BlogPost, "id" | "body" | "source">;
 
-export async function getBlogs(): Promise<BlogPosts> {
+// content/cosense は GitHub Actions が公開 Cosense から同期する (scripts/cosense/sync.mjs)
+function getCosensePosts(): BlogPosts {
+	const snapshots = readCosenseSnapshots();
+	const hrefByTitle = new Map(
+		snapshots.map((page) => [
+			normalizeTitle(page.title),
+			`/writing/${page.id}`,
+		]),
+	);
+	const resolve = (title: string) => hrefByTitle.get(normalizeTitle(title));
+	return snapshots.map((page) => ({
+		id: page.id,
+		source: "cosense",
+		title: page.title,
+		createdAt: page.createdAt,
+		updatedAt: page.updatedAt,
+		description: describeCosense(page.lines),
+		body: renderCosense(page.lines, resolve),
+	}));
+}
+
+// 記事ページは1件ごとに getBlog を呼ぶので、本番ビルドでは全件の変換を1回で済ませる。
+// 開発中は content の編集をすぐ反映したいので毎回読み直す
+let cachedBlogs: Promise<BlogPosts> | undefined;
+
+export function getBlogs(): Promise<BlogPosts> {
+	if (process.env.NODE_ENV !== "production") return loadBlogs();
+	cachedBlogs ??= loadBlogs();
+	return cachedBlogs;
+}
+
+async function loadBlogs(): Promise<BlogPosts> {
 	const dir = path.join(CONTENT_DIR, "blogs");
 	const files = listMarkdownFiles(dir);
-	const posts = await Promise.all(
+	const local = await Promise.all(
 		files.map(async (file) => {
 			const { data, content } = readMarkdownFile<BlogFrontmatter>(file);
 			const body = await renderMarkdown(content);
 			return {
 				id: slugFromPath(file),
+				source: "local",
 				...data,
 				body,
 			} satisfies BlogPost;
 		}),
 	);
+	const posts = [...local, ...getCosensePosts()];
+	const ids = new Set<string>();
+	for (const post of posts) {
+		if (ids.has(post.id))
+			throw new Error(
+				`記事の id ${post.id} が content/blogs と content/cosense で重複しています`,
+			);
+		ids.add(post.id);
+	}
 	const visible = !showDrafts ? posts.filter((p) => !p.draft) : posts;
 	return visible.sort(
 		(a, b) =>
