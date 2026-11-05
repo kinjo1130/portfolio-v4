@@ -41,4 +41,3 @@ pnpm dev
 
 - [DESIGN.md](DESIGN.md) — デザインシステムの Single Source of Truth。UI・トークン・コピーの変更時は必ず参照する
 - [docs/design-gap.md](docs/design-gap.md) — 既存コードと DESIGN.md の乖離の記録
-- [docs/admin.md](docs/admin.md) — 記事の書き方と管理画面のセットアップ
