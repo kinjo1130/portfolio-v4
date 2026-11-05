@@ -1,0 +1,23 @@
+{
+	"id": "66f4287607ea42001cea6c0c",
+	"title": "GitHub Actions",
+	"createdAt": "2024-09-17T14:38:07.000Z",
+	"updatedAt": "2024-09-17T14:41:26.000Z",
+	"lines": [
+		"GitHub Actions",
+		"[public.icon]",
+		"#tech",
+		"参考記事: https://qiita.com/shun198/items/14cdba2d8e58ab96cf95",
+		" [kinjyo.icon]かなり参考になる",
+		"",
+		"どういう風な仕組みになっているのか？",
+		">Workflow(ワークフロー)はJob(ジョブ)単位で分けられています",
+		"> JobはRunner(ランナー)という仮想マシンのインスタンス上で実行されます",
+		"> JobはさらにStep単位で分けられており、Step内にコマンドなどの処理が実行されます。",
+		"",
+		"",
+		"jobが一つの中の塊",
+		"",
+		""
+	]
+}

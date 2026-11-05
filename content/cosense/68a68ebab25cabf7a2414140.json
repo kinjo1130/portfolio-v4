@@ -1,0 +1,19 @@
+{
+	"id": "68a68ebab25cabf7a2414140",
+	"title": "CosmosDB",
+	"createdAt": "2025-08-21T00:33:38.000Z",
+	"updatedAt": "2025-08-21T00:42:49.000Z",
+	"lines": [
+		"CosmosDB",
+		"[public.icon]",
+		"[Azure]のベクトルDB",
+		"",
+		"SQLもあれば、ドキュメント型のNoSQLにすることができる",
+		"　FireStoreとか使ったことある人なら、全然簡単に使えると思う",
+		"",
+		"Azure Functionsとかでも連携できる",
+		"",
+		"Container Appとかからでもアクセスできる",
+		""
+	]
+}

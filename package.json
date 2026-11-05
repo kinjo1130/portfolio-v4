@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@next/third-parties": "^16.3.0",
+		"@progfay/scrapbox-parser": "10.1.1",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/og": "^0.6.2",
 		"gray-matter": "^4.0.3",
@@ -31,6 +32,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@tailwindcss/typography": "^0.5.13",
+		"@types/hast": "^3.0.4",
 		"@types/node": "^20",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.4",

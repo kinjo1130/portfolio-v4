@@ -61,7 +61,8 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 				</aside>
 
 				<article className="col-span-12 md:col-span-9">
-					{blog.description && (
+					{/* Cosense の説明文は本文の1行目から取るので、ここに出すと本文と重複する */}
+					{blog.source === "local" && blog.description && (
 						<p className="text-lg md:text-xl font-medium leading-relaxed mb-6">
 							{blog.description}
 						</p>
