@@ -29,11 +29,19 @@ pnpm dev
 `/writing` には次の2つを並べて出す。
 
 - `content/blogs/*.md` — このリポジトリで直接書いた記事
-- `content/cosense/*.json` — 公開 Cosense プロジェクト [kinjo1130](https://scrapbox.io/kinjo1130) のうち、`[public.icon]` が付いていて `[private.icon]` が付いていないページ
+- `content/cosense/*.json` — 非公開の Cosense プロジェクト kinjyo-secret のうち、`[public.icon]` が付いていて `[private.icon]` が付いていないページ
 
-`content/cosense` は手で編集しない。GitHub Actions (`.github/workflows/sync-cosense.yml`) が JST 6:00 と 18:00 に
-`scripts/cosense/sync.mjs` を実行し、差分があるときだけ main にコミットする。その push で Vercel が再デプロイする。
-すぐに反映したいときは Actions の画面から手動で実行する。手元では `node scripts/cosense/sync.mjs` で同じ取得ができる。
+`content/cosense` と `public/images/cosense` は手で編集しない。GitHub Actions (`.github/workflows/sync-cosense.yml`) が
+JST 6:00 と 18:00 に `scripts/cosense/sync.mjs` を実行し、差分があるときだけ main にコミットする。その push で Vercel が再デプロイする。
+すぐに反映したいときは Actions の画面から手動で実行する。
+
+Cosense の画像 (`scrapbox.io/files/...`) は非公開プロジェクトだとログインしないと見られないので、同期のときに
+`public/images/cosense` に保存して、そちらを表示する。Gyazo の画像はそのまま表示する。
+
+### トークン
+
+非公開プロジェクトを読むため、Cosense の Personal Access Token (https://scrapbox.io/settings/personal-access-tokens で発行) を
+repository secret の `COSENSE_PAT` に登録する。手元で同期するときは `COSENSE_PAT=<token> node scripts/cosense/sync.mjs`。
 
 記事の URL は Cosense のページ ID (`/writing/<pageId>`) を使う。タイトルを変えても URL は変わらない。
 

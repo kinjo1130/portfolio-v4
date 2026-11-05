@@ -1,0 +1,22 @@
+{
+	"id": "67823b6745c927eb8df51f53",
+	"title": "React 19のキャッチアップ",
+	"createdAt": "2025-01-11T09:35:37.000Z",
+	"updatedAt": "2025-01-11T09:45:28.000Z",
+	"lines": [
+		"React 19のキャッチアップ",
+		"[public.icon]",
+		"#tech",
+		"https://ja.react.dev/blog/2024/12/05/react-19",
+		"　use APIがあったりして、かなり書き方が変わるイメージ",
+		"",
+		"[https://gyazo.com/a1596dd985a48820aee5b66ec383e85e]",
+		"",
+		"APIリクストはfetch関数を定義して、Promise関数なので、useAPIで囲って、Suspenseでfallbakcするようにしたら、loadingとerror状態のハンドリングはできるようになった",
+		"",
+		"useStateやuseEffectがいらないようになったのはでかいな",
+		"",
+		"他にも色々APIでたけど、今キャッチアップしたところで忘れるので、一旦最低限の部分だけを知る",
+		""
+	]
+}

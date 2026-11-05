@@ -1,7 +1,10 @@
 name: Sync Cosense
 
-# 公開 Cosense (kinjo1130) の [public.icon] 付きページを content/cosense に取り込む。
-# 差分があるときだけ main にコミットし、その push で Vercel が再デプロイする。
+# 非公開の Cosense (kinjyo-secret) から [public.icon] 付きページを content/cosense に、
+# その画像を public/images/cosense に取り込む。差分があるときだけコミットし、
+# その push で Vercel が再デプロイする。
+# Cosense の Personal Access Token を repository secret の COSENSE_PAT に登録しておく。
+# トークンは同期のステップにだけ渡し、他のアクションからは見えないようにしている。
 on:
   schedule:
     # JST 6:00 / 18:00
@@ -34,10 +37,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: node scripts/cosense/sync.mjs
+        env:
+          COSENSE_PAT: ${{ secrets.COSENSE_PAT }}
 
       - name: Commit if changed
         run: |
-          git add content/cosense
+          git add content/cosense public/images/cosense
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0

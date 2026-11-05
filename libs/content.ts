@@ -23,7 +23,7 @@ const showDrafts = process.env.SHOW_DRAFTS === "true";
 
 type BlogFrontmatter = Omit<BlogPost, "id" | "body" | "source">;
 
-// content/cosense は GitHub Actions が公開 Cosense から同期する (scripts/cosense/sync.mjs)
+// content/cosense は GitHub Actions が非公開の Cosense から同期する (scripts/cosense/sync.mjs)
 function getCosensePosts(): BlogPosts {
 	const snapshots = readCosenseSnapshots();
 	const hrefByTitle = new Map(

@@ -1,0 +1,25 @@
+{
+	"id": "65af871050e02200251a99b0",
+	"title": "cloudflareとvercelでサブドメインの登録",
+	"createdAt": "2024-01-23T09:29:53.000Z",
+	"updatedAt": "2024-02-20T08:02:54.000Z",
+	"lines": [
+		"cloudflareとvercelでサブドメインの登録",
+		"[public.icon]",
+		"[ドメイン]",
+		"[Domain]",
+		"#tech",
+		"",
+		"前提: 何かしらドメインを持っている",
+		"",
+		"",
+		"verlceで欲しいサブメインを設定する",
+		"　app.hoge.comみたいな",
+		"　vercel側でDNS周りが発行されるのでそれは保存しておく",
+		"cloudflare側でサブドメインの登録",
+		"　持っているドメインのDNSで`app.hoge.com`を入力する",
+		"　先ほど保存したDNS周りの情報を入力する",
+		"",
+		""
+	]
+}

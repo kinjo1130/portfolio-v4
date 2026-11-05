@@ -1,0 +1,19 @@
+{
+	"id": "68b44f698b7e7835709ae4fb",
+	"title": "PLCE",
+	"createdAt": "2025-08-31T13:34:35.000Z",
+	"updatedAt": "2025-08-31T13:36:45.000Z",
+	"lines": [
+		"PLCE",
+		"[public.icon]",
+		"",
+		">[PKCE]とは、「Proof Key for Code Exchange by OAuth Public Clients」の略称で、認可コード横取り攻撃を対策するための、[OAuth2.0]の拡張仕様です。",
+		"> みんな大好き？RFCの7636に定義されています。",
+		"",
+		"",
+		"認証周りを実装していたら、このようなエラーに当たったので、メモ",
+		"",
+		"[CSRF]の対策の一つらしい",
+		""
+	]
+}

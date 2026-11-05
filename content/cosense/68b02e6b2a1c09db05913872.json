@@ -1,0 +1,17 @@
+{
+	"id": "68b02e6b2a1c09db05913872",
+	"title": "マカレル",
+	"createdAt": "2025-08-28T10:24:48.000Z",
+	"updatedAt": "2025-09-06T10:09:33.000Z",
+	"lines": [
+		"マカレル",
+		"[public.icon]",
+		"[mackerel]",
+		"https://ja.mackerel.io/",
+		"",
+		"[エラー監視]系のサービス",
+		"",
+		"[Sentry]や[New Relic]と同じようなやつ",
+		""
+	]
+}
