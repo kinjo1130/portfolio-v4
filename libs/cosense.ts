@@ -14,11 +14,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { unified } from "unified";
 
-export const COSENSE_PROJECT = "kinjo1130";
-
 const SNAPSHOT_DIR = path.join(process.cwd(), "content", "cosense");
 
-/** scripts/cosense/sync.mjs が書き出す1ページ分のスナップショット */
+/** scripts/cosense/sync.mjs が非公開プロジェクトから書き出す1ページ分のスナップショット */
 export type CosenseSnapshot = {
 	id: string;
 	title: string;
@@ -40,10 +38,6 @@ export function readCosenseSnapshots(): CosenseSnapshot[] {
 		);
 }
 
-export function cosensePageUrl(title: string): string {
-	return `https://scrapbox.io/${COSENSE_PROJECT}/${encodeURIComponent(title.replace(/ /g, "_"))}`;
-}
-
 /** Cosense のリンクは大文字小文字と空白・アンダースコアを区別しない */
 export function normalizeTitle(title: string): string {
 	return title.toLowerCase().replace(/ /g, "_");
@@ -63,9 +57,18 @@ const text = (value: string): ElementContent => ({ type: "text", value });
 const isHttpUrl = (url: string) => /^https?:\/\//.test(url);
 
 // Gyazo のページ URL は画像そのものではないので /raw を付ける
+const IMAGES_DIR = path.join(process.cwd(), "public", "images", "cosense");
+
 function imageSrc(src: string): string {
 	const gyazo = src.match(/^https:\/\/gyazo\.com\/([0-9a-f]+)$/);
-	return gyazo ? `https://gyazo.com/${gyazo[1]}/raw` : src;
+	if (gyazo) return `https://gyazo.com/${gyazo[1]}/raw`;
+	// 非公開プロジェクトの画像はログインしないと見られないので、同期で保存したものを使う
+	const file = src.match(
+		/^https:\/\/scrapbox\.io\/files\/([0-9a-f]+\.[a-z]+)$/,
+	);
+	if (file && fs.existsSync(path.join(IMAGES_DIR, file[1])))
+		return `/images/cosense/${file[1]}`;
+	return src;
 }
 
 function externalLink(href: string, children: ElementContent[]): Element {
@@ -111,7 +114,7 @@ function renderNode(node: Node, resolve: ResolveLink): ElementContent[] {
 		case "image":
 		case "strongImage": {
 			const src = imageSrc(node.src);
-			if (!isHttpUrl(src)) return [];
+			if (!isHttpUrl(src) && !src.startsWith("/images/cosense/")) return [];
 			const img = h(
 				"img",
 				{ src, alt: "", loading: "lazy", decoding: "async" },
