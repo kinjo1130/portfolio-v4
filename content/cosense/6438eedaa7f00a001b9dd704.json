@@ -1,0 +1,29 @@
+{
+	"id": "6438eedaa7f00a001b9dd704",
+	"title": "vscodeの自分の好きな設定",
+	"createdAt": "2023-04-14T06:12:52.000Z",
+	"updatedAt": "2023-04-14T06:17:33.000Z",
+	"lines": [
+		"vscodeの自分の好きな設定",
+		"[public.icon]",
+		"[tech]",
+		"　[禅モード]",
+		"　　必要最低限のUIでソースコードを表示してくれるモード",
+		"　　これも[vscode]の機能",
+		"　[screencast]",
+		"　 これは自分が打ったキーを表示してくれる[vscode]の機能",
+		"　上記を使うための、ショートカットキー",
+		"　ターミナル起動",
+		"　　`control`+`@`",
+		"　サイドバー表示",
+		"　　`command`+`b`",
+		"　コマンドパレット",
+		"　　`command`+`shift`+`p`",
+		"",
+		"",
+		"参考資料",
+		"　https://zenn.dev/ryuu/articles/what-zen-mode",
+		"　https://qiita.com/inoue2002/items/16bad3e623e852e765dd",
+		""
+	]
+}

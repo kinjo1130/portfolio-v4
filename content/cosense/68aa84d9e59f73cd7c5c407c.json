@@ -1,0 +1,21 @@
+{
+	"id": "68aa84d9e59f73cd7c5c407c",
+	"title": "full-calender React",
+	"createdAt": "2025-08-24T03:19:56.000Z",
+	"updatedAt": "2025-08-24T03:21:37.000Z",
+	"lines": [
+		"full-calender React",
+		"[public.icon]",
+		"[React]",
+		"[calender]",
+		"npm: https://www.npmjs.com/package/@fullcalendar/react",
+		"",
+		"Google CalenderみたいなUIを再現することができるカレンダーライブラリ",
+		"",
+		"D&Dで時間範囲を指定するとかができるので、個人的に気に入っている",
+		"[https://gyazo.com/505853890995f946f7c0d2e8aea023d0]",
+		"",
+		"",
+		""
+	]
+}

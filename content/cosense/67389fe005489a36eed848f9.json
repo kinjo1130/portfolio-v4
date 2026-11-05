@@ -1,0 +1,19 @@
+{
+	"id": "67389fe005489a36eed848f9",
+	"title": "TypeSpec",
+	"createdAt": "2024-11-16T13:36:34.000Z",
+	"updatedAt": "2024-11-16T13:48:51.000Z",
+	"lines": [
+		"TypeSpec",
+		"[public.icon]",
+		"#tech",
+		"",
+		"https://typespec.io/openapi/",
+		"",
+		"swagger.yamlで作ったファイルをprismaみたいにmodelのような形で見ることができるライブラリ",
+		"",
+		"[https://gyazo.com/e02ff624be899a01d79586fe5c74834f]",
+		"",
+		""
+	]
+}

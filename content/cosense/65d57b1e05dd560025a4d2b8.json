@@ -1,0 +1,29 @@
+{
+	"id": "65d57b1e05dd560025a4d2b8",
+	"title": "voltaで自分のnpmとnodeをupdateする時の方法",
+	"createdAt": "2024-02-21T04:25:05.000Z",
+	"updatedAt": "2024-02-21T06:32:15.000Z",
+	"lines": [
+		"voltaで自分のnpmとnodeをupdateする時の方法",
+		"[public.icon]",
+		"",
+		"https://chat.openai.com/share/bcf5bdbe-75d0-45d9-86ad-cccf2f2e48dc",
+		" 基本このリンクを見ればいい",
+		"",
+		"まずは、自分の中に入っているvoltaでインストールした、`node`と`npm`を確認する",
+		"",
+		"code:bash",
+		" npm -v",
+		" node -v",
+		"",
+		"code:bash",
+		" volta install npm@あげたいバージョン",
+		" volta install node@上げたいバージョン",
+		"",
+		"code:bash",
+		" npm -v",
+		" node -v ",
+		" // これでそれぞれversionの確認を行う",
+		""
+	]
+}

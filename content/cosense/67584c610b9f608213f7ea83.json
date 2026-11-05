@@ -1,0 +1,21 @@
+{
+	"id": "67584c610b9f608213f7ea83",
+	"title": "intercepting-routes",
+	"createdAt": "2024-12-10T14:12:49.000Z",
+	"updatedAt": "2024-12-11T01:17:45.000Z",
+	"lines": [
+		"intercepting-routes",
+		"[public.icon]",
+		"",
+		"#tech",
+		"https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes",
+		"",
+		"Modalを開いた時に、URLでそのページを共有できるよおおみたいなことができる",
+		"",
+		"ModalにURLが生えているイメージ",
+		"[https://gyazo.com/54f1b2c0828e2a87989cc232b68ef933]",
+		"",
+		"",
+		""
+	]
+}

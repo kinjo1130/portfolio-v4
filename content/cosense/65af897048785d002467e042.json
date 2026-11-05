@@ -1,0 +1,28 @@
+{
+	"id": "65af897048785d002467e042",
+	"title": "codeSnap",
+	"createdAt": "2024-01-23T09:40:01.000Z",
+	"updatedAt": "2024-01-23T09:41:51.000Z",
+	"lines": [
+		"codeSnap",
+		"[public.icon]",
+		"#tech",
+		"[Vscode]",
+		"",
+		"拡張機能でコードのスクショを綺麗にとってくれるやつ",
+		"",
+		"撮りたいコードを選択する",
+		"",
+		"[https://scrapbox.io/files/65af89ce80c9210024261f9d.png]",
+		"",
+		"",
+		"code:bash",
+		" command + Shift + p",
+		"",
+		"code:bash",
+		" >codeSnap　// CodeSnapを選択",
+		"",
+		"",
+		""
+	]
+}
