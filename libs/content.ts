@@ -108,11 +108,17 @@ export async function getWorks(): Promise<Works> {
 		}),
 	);
 	const visible = !showDrafts ? works.filter((w) => !w.draft) : works;
-	return visible.sort((a, b) => {
-		const aTo = a.toAt ? new Date(a.toAt).getTime() : Number.POSITIVE_INFINITY;
-		const bTo = b.toAt ? new Date(b.toAt).getTime() : Number.POSITIVE_INFINITY;
-		return bTo - aTo;
-	});
+	return sortByTenure(visible);
+}
+
+// 在籍期間が長い順に並べる。継続中の会社はビルド時点までを在籍期間として数える
+export function sortByTenure<T extends Pick<Work, "fromAt" | "toAt">>(
+	works: T[],
+): T[] {
+	const now = Date.now();
+	const tenure = (w: T) =>
+		(w.toAt ? new Date(w.toAt).getTime() : now) - new Date(w.fromAt).getTime();
+	return [...works].sort((a, b) => tenure(b) - tenure(a));
 }
 
 export async function getWork(slug: string): Promise<Work | undefined> {

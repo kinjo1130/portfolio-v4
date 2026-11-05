@@ -15,7 +15,13 @@ import {
 import { ProfileFlipCard } from "@/components/ProfileFlipCard";
 import SNS from "@/components/SNS";
 import { SeoHead } from "@/components/SeoHead";
-import { getBlogs, getProducts, getWorkLogo, getWorks } from "@/libs/content";
+import {
+	getBlogs,
+	getProducts,
+	getWorkLogo,
+	getWorks,
+	sortByTenure,
+} from "@/libs/content";
 import { type ExternalPost, getExternalPosts } from "@/libs/external-posts";
 import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
@@ -44,7 +50,7 @@ const NAME = "金城翔太郎";
 // プロダクト / 職歴 / 記事 / 外部の記事 / 登壇 / 受賞 / SNS
 const SECTION_COUNT = 7;
 
-// トップに出す職歴。この順に並べる
+// トップに出す職歴。並び順は職歴一覧と同じく在籍期間が長い順
 const FEATURED_WORK_SLUGS = ["moji", "helpfeel", "tavern"];
 // プロダクトは新しい順に 2 件、3 件目はこれに固定する
 const PINNED_PRODUCT_SLUG = "psynaut";
@@ -335,10 +341,13 @@ export const getStaticProps = async () => {
 	const products = await getProducts();
 	const blogs = await getBlogs();
 
-	const featuredWorks = FEATURED_WORK_SLUGS.map((slug) => {
+	const featured = FEATURED_WORK_SLUGS.map((slug) => {
 		const w = works.find((work) => work.slug === slug);
 		if (!w)
 			throw new Error(`トップに出す職歴 ${slug} が content/works にありません`);
+		return w;
+	});
+	const featuredWorks = sortByTenure(featured).map((w) => {
 		return {
 			slug: w.slug,
 			title: w.title,
