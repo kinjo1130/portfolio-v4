@@ -16,7 +16,7 @@ const monogram = (title: string) =>
 
 export default function Work({ works }: { works: WorkWithLogo[] }) {
 	return (
-		<Layout title="職歴">
+		<Layout title="職歴" back={{ href: "/", label: "トップ" }}>
 			<SeoHead
 				title="職歴"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

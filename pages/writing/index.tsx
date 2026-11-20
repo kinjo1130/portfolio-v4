@@ -58,7 +58,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 		.filter((post) => service === "すべて" || getSource(post) === service);
 
 	return (
-		<Layout title="記事">
+		<Layout title="記事" back={{ href: "/", label: "トップ" }}>
 			<SeoHead
 				title="記事"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
@@ -128,7 +128,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 								aria-pressed={service === s}
 								className={`text-xs font-medium border rounded-badge px-3 py-1 transition-colors ${
 									service === s
-										? "bg-ink-primary text-paper border-ink-primary"
+										? "bg-surface-inverse text-ink-on-inverse border-surface-inverse"
 										: "text-ink-secondary border-line hover:text-ink-primary hover:bg-surface-sunken"
 								}`}
 							>

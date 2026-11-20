@@ -10,7 +10,7 @@ import Layout from "../layout";
 export default function WorkDetail({ work }: { work: Work }) {
 	const toc = renderToc(work.body);
 	return (
-		<Layout title={work.title} eyebrow="職歴">
+		<Layout title={work.title} back={{ href: "/work", label: "職歴一覧" }}>
 			<SeoHead
 				title={work.title}
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

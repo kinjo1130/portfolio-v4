@@ -8,7 +8,10 @@ import Layout from "../layout";
 
 export default function ProductDetail({ product }: { product: Product }) {
 	return (
-		<Layout title={product.title} eyebrow="プロダクト">
+		<Layout
+			title={product.title}
+			back={{ href: "/products", label: "プロダクト一覧" }}
+		>
 			<SeoHead
 				title={product.title}
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

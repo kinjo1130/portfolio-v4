@@ -1,5 +1,4 @@
 import { IndexRow, IndexSection } from "@/components/IndexList";
-import Image from "next/image";
 
 const ICON_SIZE = 20;
 
@@ -21,48 +20,58 @@ const LINKS: {
 	handle: string;
 	url: string;
 	icon: string | null;
+	// 透明な背景に形だけを描いたアイコン。形をマスクにして文字色で塗れる。
+	// 円の中に白いロゴを描いた画像は、マスクにすると中のロゴが消えるので false にする
+	shapeOnly: boolean;
 }[] = [
 	{
 		name: "X",
 		handle: "@kinjyo1130",
 		url: "https://twitter.com/kinjyo1130",
 		icon: "/sns/x.svg",
+		shapeOnly: true,
 	},
 	{
 		name: "GitHub",
 		handle: "kinjo1130",
 		url: "https://github.com/kinjo1130",
 		icon: "/sns/github.png",
+		shapeOnly: true,
 	},
 	{
 		name: "Instagram",
 		handle: "kinjyo1130",
 		url: "https://www.instagram.com/kinjyo1130/",
 		icon: "/sns/instagram.svg",
+		shapeOnly: true,
 	},
 	{
 		name: "Qiita",
 		handle: "abcshotaro616",
 		url: "https://qiita.com/abcshotaro616",
 		icon: "/sns/qiita.png",
+		shapeOnly: false,
 	},
 	{
 		name: "Zenn",
 		handle: "kinjyo",
 		url: "https://zenn.dev/kinjyo",
 		icon: "/sns/zenn.svg",
+		shapeOnly: true,
 	},
 	{
 		name: "Speaker Deck",
 		handle: "kinjyo",
 		url: "https://speakerdeck.com/kinjyo",
 		icon: null,
+		shapeOnly: false,
 	},
 	{
 		name: "Scrapbox",
 		handle: "kinjo1130",
 		url: "https://scrapbox.io/kinjo1130/",
 		icon: "/sns/scrapbox.png",
+		shapeOnly: false,
 	},
 ];
 
@@ -84,15 +93,31 @@ export default function SNS({
 					title={link.name}
 					meta={link.handle}
 					icon={
-						// ブランド色のロゴはモノクロームに揃える (DESIGN.md §2.5)
-						<span className="w-[20px] h-[20px] shrink-0 grayscale text-ink-heading">
-							{link.icon ? (
-								<Image
+						// ブランド色のロゴはモノクロームに揃える (DESIGN.md §2.5)。
+						// 画像の塗り色はテーマで反転しないので、形だけのアイコンはマスクにして文字色で塗る
+						<span className="w-[20px] h-[20px] shrink-0 text-ink-heading">
+							{link.icon && !link.shapeOnly ? (
+								<img
 									src={link.icon}
 									alt=""
-									unoptimized={link.icon.endsWith(".svg")}
 									width={ICON_SIZE}
 									height={ICON_SIZE}
+									className="w-full h-full grayscale"
+								/>
+							) : link.icon ? (
+								<span
+									aria-hidden
+									className="block w-full h-full bg-current"
+									style={{
+										maskImage: `url(${link.icon})`,
+										WebkitMaskImage: `url(${link.icon})`,
+										maskSize: "contain",
+										WebkitMaskSize: "contain",
+										maskRepeat: "no-repeat",
+										WebkitMaskRepeat: "no-repeat",
+										maskPosition: "center",
+										WebkitMaskPosition: "center",
+									}}
 								/>
 							) : (
 								<SpeakerDeckIcon />

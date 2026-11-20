@@ -18,7 +18,7 @@ export default function BlogId({ blog }: { blog: BlogPost }) {
 	const shareUrl = `${isDev}/writing/${blog.id}`;
 
 	return (
-		<Layout title={blog.title} eyebrow="記事">
+		<Layout title={blog.title} back={{ href: "/writing", label: "記事一覧" }}>
 			<SeoHead
 				title={blog.title}
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

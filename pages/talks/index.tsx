@@ -25,7 +25,7 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 export default function Talks({ talks }: { talks: Talk[] }) {
 	return (
-		<Layout title="登壇">
+		<Layout title="登壇" back={{ href: "/", label: "トップ" }}>
 			<SeoHead
 				title="登壇"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

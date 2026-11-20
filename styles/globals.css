@@ -142,6 +142,25 @@
   font-family: var(--font-body);
   font-size: var(--size-md);
   line-height: 1.8;
+  /* @tailwindcss/typography は見出し・太字・引用などの色を自前の変数で持ち、既定値は cool gray 系。
+   * warm tint のトークンにつないで、DESIGN.md のランプに揃える */
+  --tw-prose-body: var(--text-primary);
+  --tw-prose-headings: var(--text-heading);
+  --tw-prose-lead: var(--text-secondary);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--text-heading);
+  --tw-prose-counters: var(--text-tertiary);
+  --tw-prose-bullets: var(--text-tertiary);
+  --tw-prose-hr: var(--border-default);
+  --tw-prose-quotes: var(--text-secondary);
+  --tw-prose-quote-borders: var(--border-strong);
+  --tw-prose-captions: var(--text-secondary);
+  --tw-prose-kbd: var(--text-heading);
+  --tw-prose-code: var(--text-heading);
+  --tw-prose-pre-code: var(--text-on-inverse);
+  --tw-prose-pre-bg: var(--surface-inverse);
+  --tw-prose-th-borders: var(--border-strong);
+  --tw-prose-td-borders: var(--border-default);
 }
 
 .prose p {
@@ -303,16 +322,6 @@
   transform-origin: left center;
 }
 
-/* 横スクロールするナビでスクロールバーを隠す */
-.scrollbar-none {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-
 /* ---- Home: 名前が 1 字ずつ下からせり上がる ---- */
 @keyframes revealUp {
   from {
@@ -429,13 +438,9 @@
   mask-position: 0 72%;
 }
 
+/* 線画を少し見せてから塗り始める */
 .logo-wave[data-animate="true"] .logo-wave-fill {
-  animation: logoWave 4000ms linear both;
-}
-
-/* ページを開いたときは線画を少し見せてから塗り始める。ホバーで流すときは待たせない */
-.logo-wave[data-delayed="true"] .logo-wave-fill {
-  animation-delay: 800ms;
+  animation: logoWave 4000ms linear 800ms both;
 }
 
 /* 縦 30% では波の境目が文字の下端より下にあり、塗りは見えない */
