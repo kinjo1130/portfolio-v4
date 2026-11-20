@@ -8,17 +8,28 @@ import {
 	Monitor,
 	SquareTerminal,
 } from "lucide-react";
+import Image from "next/image";
 import Layout from "../layout";
 
 type UseItem = {
 	name: string;
 	note: string;
 	url?: string;
+	icon?: string;
+};
+
+type UsePhoto = {
+	src: string;
+	alt: string;
+	width: number;
+	height: number;
+	caption?: string;
 };
 
 type UseSection = {
 	id: string;
 	title: string;
+	photo?: UsePhoto;
 	items: UseItem[];
 };
 
@@ -70,6 +81,8 @@ export default function Uses({ sections }: { sections: UseSection[] }) {
 			<div className="grid gap-16 pt-16">
 				{sections.map((section) => {
 					const Icon = SECTION_ICONS[section.id];
+					// アイコンを持つ項目が 1 つでもあるカテゴリだけ、全行にアイコン枠を出して名前の頭をそろえる
+					const showItemIcons = section.items.some((item) => item.icon);
 					return (
 						<section
 							key={section.id}
@@ -92,13 +105,48 @@ export default function Uses({ sections }: { sections: UseSection[] }) {
 								{section.title}
 							</h2>
 
+							{section.photo && (
+								<figure className="pt-6 pb-2">
+									<Image
+										src={section.photo.src}
+										alt={section.photo.alt}
+										width={section.photo.width}
+										height={section.photo.height}
+										sizes="(min-width: 768px) 48rem, 100vw"
+										className="w-full max-w-3xl h-auto rounded-card border border-line"
+									/>
+									{section.photo.caption && (
+										<figcaption className="text-sm text-ink-secondary mt-2">
+											{section.photo.caption}
+										</figcaption>
+									)}
+								</figure>
+							)}
+
 							<ul>
 								{section.items.map((item) => (
 									<li
 										key={item.name}
-										className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[18rem_minmax(0,1fr)] gap-1 md:gap-6 border-b border-line py-5"
+										className={`grid grid-cols-[minmax(0,1fr)] md:grid-cols-[18rem_minmax(0,1fr)] gap-1 md:gap-6 border-b border-line py-5 ${showItemIcons ? "md:items-center" : ""}`}
 									>
-										<p className="text-base font-medium text-ink-primary">
+										<p className="flex items-center gap-3 min-w-0 text-base font-medium text-ink-primary">
+											{showItemIcons &&
+												(item.icon ? (
+													<img
+														src={item.icon}
+														alt=""
+														width={28}
+														height={28}
+														className="w-7 h-7 rounded-md object-contain shrink-0"
+													/>
+												) : (
+													<span
+														aria-hidden
+														className="w-7 h-7 rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0"
+													>
+														{item.name.charAt(0)}
+													</span>
+												))}
 											{item.url ? (
 												<a
 													href={item.url}
