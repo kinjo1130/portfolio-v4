@@ -14,16 +14,7 @@ export default function Document() {
 	return (
 		<Html lang="ja">
 			<Head>
-				{/* 検索結果の favicon は 48px の倍数が必要。ico に 16/32/48 を同梱し、大きい画面向けに PNG も出す */}
-				<link rel="icon" href="/favicon.ico" sizes="48x48" />
-				<link
-					rel="icon"
-					type="image/png"
-					sizes="192x192"
-					href="/icon-192.png"
-				/>
-				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				<link rel="manifest" href="/site.webmanifest" />
+				<link rel="icon" href="/favicon.ico" />
 				{/* meta には CSS 変数が使えないので、ページ背景 (--neutral-50) の値をそのまま書く */}
 				<meta name="theme-color" content="#fafafa" />
 				<script
