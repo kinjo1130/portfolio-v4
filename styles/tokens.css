@@ -34,28 +34,29 @@
   --signal-critical: #a0736f;
   --signal-info: #61859f;
 
-  /* ---- Semantic aliases (テーマで反転する) ---- */
-  --surface-page: var(--neutral-50);
-  --surface-raised: var(--neutral-100);
-  --surface-sunken: var(--neutral-100);
-  --surface-card: var(--neutral-50);
-  --surface-inverse: var(--neutral-900);
+  /* ---- Semantic aliases (ダークが基本 — DESIGN.md §2.4 / §11 A5) ----
+   * ランプは共通のまま役割を反転する: 背景 950、面 900、ボーダー 800、本文 200、強調 50 */
+  --surface-page: var(--neutral-950);
+  --surface-raised: var(--neutral-900);
+  --surface-sunken: var(--neutral-900);
+  --surface-card: var(--neutral-900);
+  --surface-inverse: var(--neutral-50);
 
-  --text-primary: var(--neutral-800);
-  --text-heading: var(--neutral-900);
-  --text-secondary: var(--neutral-600);
+  --text-primary: var(--neutral-200);
+  --text-heading: var(--neutral-50);
+  --text-secondary: var(--neutral-400);
   --text-tertiary: var(--neutral-500);
-  --text-disabled: var(--neutral-400);
-  --text-on-inverse: var(--neutral-50);
+  --text-disabled: var(--neutral-600);
+  --text-on-inverse: var(--neutral-900);
 
-  --border-strong: var(--neutral-300);
-  --border-default: var(--neutral-200);
-  --border-subtle: var(--neutral-100);
-  --divider: var(--neutral-200);
+  --border-strong: var(--neutral-700);
+  --border-default: var(--neutral-800);
+  --border-subtle: var(--neutral-900);
+  --divider: var(--neutral-800);
 
-  /* リンク: primary-700 + 下線 (DESIGN.md §11 A2)。hover は明度 −5% 相当をランプで近似 */
-  --link: var(--neutral-700);
-  --link-hover: var(--neutral-800);
+  /* リンク: ライトの primary-700 + 下線 (DESIGN.md §11 A2) をダークで反転して 300。hover は 1 段明るく */
+  --link: var(--neutral-300);
+  --link-hover: var(--neutral-200);
 
   /* アクション: primary を使い hover→600 / active→700 (DESIGN.md §9) */
   --action-primary-bg: var(--primary);
@@ -153,8 +154,8 @@
   /* ---- Prose rule color ---- */
   --rule-color: var(--border-default);
 
-  /* ライトモード固定 — OS のダークモード設定に追従しない */
-  color-scheme: light;
+  /* ダーク固定 — OS の設定に追従しない。フォーム部品やスクロールバーもダークで描かせる */
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -128,7 +128,7 @@ export default function Blog({ blog }: { blog: Post[] }) {
 								aria-pressed={service === s}
 								className={`text-xs font-medium border rounded-badge px-3 py-1 transition-colors ${
 									service === s
-										? "bg-ink-primary text-paper border-ink-primary"
+										? "bg-surface-inverse text-ink-on-inverse border-surface-inverse"
 										: "text-ink-secondary border-line hover:text-ink-primary hover:bg-surface-sunken"
 								}`}
 							>

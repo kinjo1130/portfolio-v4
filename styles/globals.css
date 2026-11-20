@@ -142,6 +142,25 @@
   font-family: var(--font-body);
   font-size: var(--size-md);
   line-height: 1.8;
+  /* @tailwindcss/typography は見出し・太字・引用などの色を自前の変数で持ち、既定値はライト向けの濃い色。
+   * テーマで反転するトークンにつないで、ダークでも読めるようにする */
+  --tw-prose-body: var(--text-primary);
+  --tw-prose-headings: var(--text-heading);
+  --tw-prose-lead: var(--text-secondary);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--text-heading);
+  --tw-prose-counters: var(--text-tertiary);
+  --tw-prose-bullets: var(--text-tertiary);
+  --tw-prose-hr: var(--border-default);
+  --tw-prose-quotes: var(--text-secondary);
+  --tw-prose-quote-borders: var(--border-strong);
+  --tw-prose-captions: var(--text-secondary);
+  --tw-prose-kbd: var(--text-heading);
+  --tw-prose-code: var(--text-heading);
+  --tw-prose-pre-code: var(--text-primary);
+  --tw-prose-pre-bg: var(--surface-raised);
+  --tw-prose-th-borders: var(--border-strong);
+  --tw-prose-td-borders: var(--border-default);
 }
 
 .prose p {
@@ -228,8 +247,9 @@
 }
 
 .prose pre {
-  background: var(--surface-inverse);
-  color: var(--text-on-inverse);
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
   padding: 1.2em 1.4em;
   overflow-x: auto;
   font-family: var(--font-mono);
@@ -429,13 +449,9 @@
   mask-position: 0 72%;
 }
 
+/* 線画を少し見せてから塗り始める */
 .logo-wave[data-animate="true"] .logo-wave-fill {
-  animation: logoWave 4000ms linear both;
-}
-
-/* ページを開いたときは線画を少し見せてから塗り始める。ホバーで流すときは待たせない */
-.logo-wave[data-delayed="true"] .logo-wave-fill {
-  animation-delay: 800ms;
+  animation: logoWave 4000ms linear 800ms both;
 }
 
 /* 縦 30% では波の境目が文字の下端より下にあり、塗りは見えない */

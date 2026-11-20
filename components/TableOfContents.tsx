@@ -59,7 +59,7 @@ export const TableOfContents = ({ toc, className }: Props) => {
 								style={{ paddingLeft: `${12 + indent}px` }}
 								className={`block -ml-px border-l-2 py-1 pr-2 text-sm no-underline transition-colors duration-fast ${
 									isActive
-										? "border-asphalt text-ink-primary"
+										? "border-ink-primary text-ink-primary"
 										: "border-transparent text-ink-secondary hover:text-ink-primary"
 								}`}
 							>
