@@ -21,7 +21,7 @@
 | 4 | 角丸 | 0–6px（v1）と `rounded-2xl` 等の直書き混在 | トークン（4/8/12/16px + full）+ コンポーネントロール（input=sm / button=md / card=lg / badge=full） | 全コンポーネント |
 | 5 | インタラクション状態 | 個別クラスで hover 色をハードコード | 導出ルール（hover −5% / active −10% / focus ring / disabled 40%）を仕組みで適用 | tokens + 共通コンポーネント |
 | 6 | リンク色 | v1 hazard `#BB6A35` 前提 + 一部 `text-blue-*` | `primary-700` + 下線（DESIGN.md §11 A2） | グローバル CSS, products/[id] |
-| 7 | ダークモード | 対応済み（2026-11）。ダーク固定で、ライトへの切り替えは持たない（DESIGN.md §11 A5） | ランプ役割反転による対応必須（DESIGN.md §2.4） | tokens, layout |
+| 7 | ダークモード | 未対応（v1 の Asphalt 文脈も未実装） | ランプ役割反転による対応必須（DESIGN.md §2.4） | tokens, layout |
 | 8 | スペーシング | 個別 margin（`my-3` 等）が散在 | 8px リニアスケール。セクション間 `3xl`、スタック `md` | layout, pages |
 
 ## v1 から引き続き有効な指摘

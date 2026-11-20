@@ -24,8 +24,8 @@ export default function Document() {
 				/>
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<link rel="manifest" href="/site.webmanifest" />
-				{/* meta には CSS 変数が使えないので、--neutral-950 の値をそのまま書く */}
-				<meta name="theme-color" content="#0b0b0b" />
+				{/* meta には CSS 変数が使えないので、ページ背景 (--neutral-50) の値をそのまま書く */}
+				<meta name="theme-color" content="#fafafa" />
 				<script
 					type="application/ld+json"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: 自前の定数を JSON にしたものだけを埋め込む
