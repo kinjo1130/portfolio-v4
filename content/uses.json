@@ -1,0 +1,103 @@
+[
+	{
+		"id": "desk",
+		"title": "デスク",
+		"items": [
+			{
+				"name": "MacBook Pro (M1 Pro / 16GB)",
+				"note": "仕事も個人開発もこれ 1 台。外部ディスプレイは 2 枚までなので、次は 3 枚出せる Max を選ぶつもり。"
+			},
+			{
+				"name": "FlexiSpot 昇降デスク",
+				"note": "幅 120 × 奥行 60、黒い脚にメイプルの天板。座りっぱなしを避けたくて、気分で高さを変えている。",
+				"url": "https://www.amazon.co.jp/dp/B08QCP1WC3"
+			},
+			{
+				"name": "モニターアーム",
+				"note": "天板の上から台座が消えて、机がすっきりした。"
+			},
+			{
+				"name": "cofo Chair Pro",
+				"note": "値段、フットレスト、メッシュの 3 点で決めた。ときどき足を伸ばして休める。",
+				"url": "https://www.amazon.co.jp/dp/B09STMWLT3"
+			},
+			{
+				"name": "MOFT",
+				"note": "貼るタイプの PC スタンド。画面を目線に近づけると作業が楽になる。"
+			}
+		]
+	},
+	{
+		"id": "software",
+		"title": "ソフトウェア",
+		"items": [
+			{
+				"name": "Claude Code",
+				"note": "実装の大半をここから進めている。",
+				"url": "https://github.com/anthropics/claude-code"
+			},
+			{
+				"name": "Codex CLI",
+				"note": "実装の委譲先とレビュー相手。",
+				"url": "https://github.com/openai/codex"
+			},
+			{
+				"name": "Visual Studio Code",
+				"note": "エディタ。",
+				"url": "https://code.visualstudio.com"
+			},
+			{
+				"name": "Warp",
+				"note": "ターミナル。",
+				"url": "https://www.warp.dev"
+			},
+			{
+				"name": "Raycast",
+				"note": "ランチャー。",
+				"url": "https://www.raycast.com"
+			},
+			{
+				"name": "Cosense",
+				"note": "メモ、日報、調べたことは全部ここに書く。",
+				"url": "https://scrapbox.io"
+			},
+			{
+				"name": "Gyazo / CleanShot X",
+				"note": "スクリーンショットと画面録画。",
+				"url": "https://gyazo.com"
+			},
+			{
+				"name": "Screen Studio",
+				"note": "プロダクトのデモ動画を撮る。",
+				"url": "https://www.screen.studio"
+			},
+			{
+				"name": "Tailscale",
+				"note": "手元の端末どうしをつなぐ。",
+				"url": "https://tailscale.com"
+			}
+		]
+	},
+	{
+		"id": "carry",
+		"title": "持ち歩くもの",
+		"items": [
+			{
+				"name": "MacBook を充電できるモバイルバッテリー",
+				"note": "電源のない場所でも MacBook を充電できる。"
+			},
+			{
+				"name": "stojo",
+				"note": "折りたためる水筒。給水機で汲むために買った。ゴムの匂いが水に移るので、こまめに熱湯で洗っている。"
+			},
+			{
+				"name": "カラビナ",
+				"note": "stojo をカバンの中に入れたくないので、リュックに吊るしている。"
+			},
+			{
+				"name": "rig リカバリーサンダル",
+				"note": "足の疲れを抜くためのサンダル。"
+			}
+		]
+	}
+]
