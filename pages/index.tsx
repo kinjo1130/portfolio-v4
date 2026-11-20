@@ -26,7 +26,9 @@ import { type ExternalPost, getExternalPosts } from "@/libs/external-posts";
 import type { BlogPost } from "@/types/blog";
 import type { Product } from "@/types/product";
 import type { Work } from "@/types/work";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ACHIEVEMENTS = [
 	{
@@ -139,9 +141,24 @@ export default function Home({
 								className="rise col-span-2 mt-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-4"
 								style={order(2)}
 							>
-								<p className="text-lg font-medium leading-relaxed max-w-[30em]">
-									ソフトウェアで少しの役立つものをつくるために、コードを書くということをしています。
-								</p>
+								<div>
+									<p className="text-lg font-medium leading-relaxed max-w-[30em]">
+										ソフトウェアで少しの役立つものをつくるために、コードを書くということをしています。
+									</p>
+									{/* ヘッダーにナビが無いので、自己紹介へはここから入る */}
+									<Link
+										href="/about"
+										className="link-draw mt-3 text-sm font-medium text-ink-primary no-underline"
+									>
+										自己紹介へ
+										<ArrowRight
+											aria-hidden
+											size={14}
+											strokeWidth={1.5}
+											className="inline-block ml-1 align-[-2px]"
+										/>
+									</Link>
+								</div>
 								<div className="flex flex-wrap gap-2">
 									<span className="inline-block text-sm font-medium text-ink-secondary border border-line rounded-badge px-3 py-1">
 										Product Engineer

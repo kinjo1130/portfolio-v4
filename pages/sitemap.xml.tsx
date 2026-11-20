@@ -11,7 +11,6 @@ const STATIC_PATHS = [
 	"/products",
 	"/writing",
 	"/talks",
-	"/uses",
 ];
 
 const toDate = (iso: string) => new Date(iso).toISOString().slice(0, 10);

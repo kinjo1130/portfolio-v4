@@ -9,7 +9,7 @@ const year = (iso: string) => new Date(iso).getFullYear();
 
 export default function Product({ products }: { products: Products }) {
 	return (
-		<Layout title="プロダクト">
+		<Layout title="プロダクト" back={{ href: "/", label: "トップ" }}>
 			<SeoHead
 				title="プロダクト"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"

@@ -1,13 +1,15 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Rss } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 type Props = {
 	children: React.ReactNode;
 	title?: string;
-	eyebrow?: string;
+	// タイトルの上に出す戻り先。ヘッダーにナビを置かないので、詳細から一覧、一覧からトップへはここから戻る
+	back?: { href: string; label: string };
 	className?: string;
 	hideTitleBlock?: boolean;
 };
@@ -15,7 +17,7 @@ type Props = {
 export default function Layout({
 	children,
 	title,
-	eyebrow,
+	back,
 	className,
 	hideTitleBlock = false,
 }: Props) {
@@ -42,10 +44,13 @@ export default function Layout({
 					<section className="pt-7 md:pt-8 lg:pt-7 pb-6 border-b border-line">
 						<div className="flex items-start justify-between gap-6">
 							<div>
-								{eyebrow && (
-									<p className="text-sm font-medium text-ink-secondary mb-3 ink-settle">
-										{eyebrow}
-									</p>
+								{back && (
+									<Link
+										href={back.href}
+										className="link-draw inline-block text-sm font-medium text-ink-secondary hover:text-ink-primary no-underline mb-3 ink-settle"
+									>
+										← {back.label}
+									</Link>
 								)}
 								<h1 className="jp-display text-4xl md:text-5xl font-bold leading-tight tracking-tight ink-settle">
 									{title}

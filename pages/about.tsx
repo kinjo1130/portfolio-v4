@@ -14,7 +14,7 @@ export default function AboutPage({ about }: { about: About }) {
 	];
 
 	return (
-		<Layout title="自己紹介">
+		<Layout title="自己紹介" back={{ href: "/", label: "トップ" }}>
 			<SeoHead
 				title="自己紹介"
 				titleTemplate="金城翔太郎 / Shotaro Kinjo"
