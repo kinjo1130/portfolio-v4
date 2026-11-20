@@ -12,7 +12,6 @@ const NAV = [
 	{ href: "/writing", label: "記事" },
 	{ href: "/talks", label: "登壇" },
 	{ href: "/uses", label: "持ち物" },
-	{ href: "/tools", label: "ツール" },
 ];
 
 export const Header: React.FC = () => {
