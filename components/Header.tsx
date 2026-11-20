@@ -11,7 +11,6 @@ const NAV = [
 	{ href: "/products", label: "プロダクト" },
 	{ href: "/writing", label: "記事" },
 	{ href: "/talks", label: "登壇" },
-	{ href: "/tools", label: "ツール" },
 ];
 
 export const Header: React.FC = () => {
