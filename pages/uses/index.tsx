@@ -15,7 +15,10 @@ type UseItem = {
 	name: string;
 	note: string;
 	url?: string;
+	// ソフトウェアのアプリアイコン。28px で出す
 	icon?: string;
+	// 物の写真。64px の正方形で出す
+	image?: string;
 };
 
 type UsePhoto = {
@@ -31,6 +34,45 @@ type UseSection = {
 	title: string;
 	photo?: UsePhoto;
 	items: UseItem[];
+};
+
+type ThumbKind = "image" | "icon" | null;
+
+// 写真かアイコンを持つ項目が 1 つでもあるカテゴリだけ、全行に同じ大きさの枠を出して名前の頭をそろえる
+const thumbKindOf = (items: UseItem[]): ThumbKind => {
+	if (items.some((item) => item.image)) return "image";
+	if (items.some((item) => item.icon)) return "icon";
+	return null;
+};
+
+const THUMB_CLASS = {
+	image: "w-16 h-16 rounded-md",
+	icon: "w-7 h-7 rounded-md",
+} as const;
+
+const Thumb = ({ item, kind }: { item: UseItem; kind: "image" | "icon" }) => {
+	const src = kind === "image" ? item.image : item.icon;
+	const size = kind === "image" ? 64 : 28;
+	if (src) {
+		return (
+			<img
+				src={src}
+				alt=""
+				width={size}
+				height={size}
+				loading="lazy"
+				className={`${THUMB_CLASS[kind]} object-contain shrink-0 ${kind === "image" ? "border border-line bg-surface-card" : ""}`}
+			/>
+		);
+	}
+	return (
+		<span
+			aria-hidden
+			className={`${THUMB_CLASS[kind]} border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0`}
+		>
+			{item.name.charAt(0)}
+		</span>
+	);
 };
 
 // JSON はデータだけを持つので、見出しのアイコンはここで id に結び付ける
@@ -81,8 +123,7 @@ export default function Uses({ sections }: { sections: UseSection[] }) {
 			<div className="grid gap-16 pt-16">
 				{sections.map((section) => {
 					const Icon = SECTION_ICONS[section.id];
-					// アイコンを持つ項目が 1 つでもあるカテゴリだけ、全行にアイコン枠を出して名前の頭をそろえる
-					const showItemIcons = section.items.some((item) => item.icon);
+					const thumbKind = thumbKindOf(section.items);
 					return (
 						<section
 							key={section.id}
@@ -127,27 +168,10 @@ export default function Uses({ sections }: { sections: UseSection[] }) {
 								{section.items.map((item) => (
 									<li
 										key={item.name}
-										className={`grid grid-cols-[minmax(0,1fr)] md:grid-cols-[18rem_minmax(0,1fr)] gap-1 md:gap-6 border-b border-line py-5 ${showItemIcons ? "md:items-center" : ""}`}
+										className={`grid grid-cols-[minmax(0,1fr)] md:grid-cols-[18rem_minmax(0,1fr)] gap-1 md:gap-6 border-b border-line py-5 ${thumbKind ? "md:items-center" : ""}`}
 									>
 										<p className="flex items-center gap-3 min-w-0 text-base font-medium text-ink-primary">
-											{showItemIcons &&
-												(item.icon ? (
-													<img
-														src={item.icon}
-														alt=""
-														width={28}
-														height={28}
-														loading="lazy"
-														className="w-7 h-7 rounded-md object-contain shrink-0"
-													/>
-												) : (
-													<span
-														aria-hidden
-														className="w-7 h-7 rounded-md border border-line bg-surface-sunken text-xs font-semibold text-ink-secondary flex items-center justify-center shrink-0"
-													>
-														{item.name.charAt(0)}
-													</span>
-												))}
+											{thumbKind && <Thumb item={item} kind={thumbKind} />}
 											{item.url ? (
 												<a
 													href={item.url}

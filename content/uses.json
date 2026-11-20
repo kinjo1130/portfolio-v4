@@ -4,13 +4,15 @@
 		"title": "デスク",
 		"items": [
 			{
-				"name": "MacBook Pro (M1 Pro / 16GB)",
-				"note": "仕事も個人開発もこれ 1 台。外部ディスプレイは 2 枚までなので、次は 3 枚出せる Max を選ぶつもり。"
+				"name": "MacBook Pro 14 インチ (M1 Pro / 16GB)",
+				"note": "仕事も個人開発もこれ 1 台。外部ディスプレイは 2 枚までなので、次は 3 枚出せる Max を選ぶつもり。",
+				"image": "/images/uses/items/macbook-pro-14.jpg"
 			},
 			{
-				"name": "FlexiSpot 昇降デスク",
-				"note": "幅 120 × 奥行 60、黒い脚にメイプルの天板。座りっぱなしを避けたくて、気分で高さを変えている。",
-				"url": "https://www.amazon.co.jp/dp/B08QCP1WC3"
+				"name": "FlexiSpot EF1",
+				"note": "電動の昇降デスク。天板は幅 120 × 奥行 60 で、脚も天板も黒。座りっぱなしを避けたくて、気分で高さを変えている。",
+				"url": "https://www.amazon.co.jp/dp/B08QCP1WC3",
+				"image": "/images/uses/items/flexispot-ef1.jpg"
 			},
 			{
 				"name": "モニターアーム",
@@ -19,11 +21,13 @@
 			{
 				"name": "cofo Chair Pro",
 				"note": "値段、フットレスト、メッシュの 3 点で決めた。ときどき足を伸ばして休める。",
-				"url": "https://www.amazon.co.jp/dp/B09STMWLT3"
+				"url": "https://www.amazon.co.jp/dp/B09STMWLT3",
+				"image": "/images/uses/items/cofo-chair-pro.jpg"
 			},
 			{
 				"name": "MOFT",
-				"note": "貼るタイプの PC スタンド。画面を目線に近づけると作業が楽になる。"
+				"note": "貼るタイプの PC スタンド。画面を目線に近づけると作業が楽になる。",
+				"image": "/images/uses/items/moft.jpg"
 			}
 		],
 		"photo": {
